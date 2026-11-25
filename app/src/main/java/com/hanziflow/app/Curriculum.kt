@@ -8,7 +8,9 @@ import java.util.Locale
 
 data class SyllabusWord(val serial:Int,val band:Int,val label:String,val levelName:String,val word:Word)
 data class SyllabusHanzi(val band:Int,val hanzi:String,val writingBand:Int?,val readings:String)
-data class SyllabusGrammar(val serial:Int,val band:Int,val content:String,val type:String,val category:String,val detail:String)
+data class SyllabusGrammar(val serial:Int,val band:Int,val content:String,val type:String,val category:String,val detail:String){
+    val title get()=content.ifBlank{detail.ifBlank{category.ifBlank{type}}}
+}
 class Curriculum(val entries:List<SyllabusWord>,val hanzi:List<SyllabusHanzi>,val grammar:List<SyllabusGrammar>,val englishById:Map<String,String>,starter:List<Word>){
     val byId=entries.associateBy{it.word.id}
     val byHanzi=hanzi.associateBy{it.hanzi}
