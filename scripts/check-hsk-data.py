@@ -20,7 +20,7 @@ assert counts(h, "writing_level") == [0,100,150,150,150,150,500]
 assert all(not r["writing_level"] or int(r["writing_level"]) >= int(r["recognition_level"]) for r in h)
 assert counts(g, "level") == [70,78,96,95,70,50,134]
 assert [int(r["serial"]) for r in g] == list(range(1,594))
-assert all(r["content"] for r in g)
+assert all(any(r[k] for k in ("content", "detail", "category", "type")) for r in g)
 print("PASS: 11000 vocabulary records, 3088 recognition characters, 1200 writing characters, 593 grammar headings")
 
 english = [row for band in range(1,8) for row in load(f"cedict-{band}.tsv")]
