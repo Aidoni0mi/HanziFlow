@@ -183,14 +183,24 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
         val level=vm.level
         val scoped=remember(data,level,cumulative){data.entries.filter{inScope(it.band,level,cumulative)}}
         val query=q.trim()
-        val found by produceState(emptyList<SyllabusWord>(),scoped,query){
-            value=withContext(Dispatchers.Default){
-                if(query.isBlank())scoped else{
+        // Each query gets its own state. Changing query or level cancels the old search.
+        var searchResult by remember(data,scoped,query){
+            mutableStateOf<List<SyllabusWord>?>(if(query.isBlank())scoped else null)
+        }
+        LaunchedEffect(data,scoped,query){
+            if(query.isNotBlank()){
+                val result=withContext(Dispatchers.Default){
                     val key=searchKey(query)
-                    scoped.filter{e->val w=e.word;e.label.contains(query,true)||w.simplified.contains(query,true)||w.traditional.contains(query,true)||w.russian.contains(query,true)||(data.englishById[w.id]?.contains(query,true)==true)||(key.isNotEmpty()&&searchKey(w.pinyin).contains(key))}
+                    scoped.filter{e->
+                        ensureActive()
+                        val w=e.word
+                        e.label.contains(query,true)||w.simplified.contains(query,true)||w.traditional.contains(query,true)||w.russian.contains(query,true)||(data.englishById[w.id]?.contains(query,true)==true)||(key.isNotEmpty()&&searchKey(w.pinyin).contains(key))
+                    }
                 }
+                searchResult=result
             }
         }
+        val found=searchResult.orEmpty()
         Text("${scoped.size} слов · найдено ${found.size} · RU: ${scoped.count{it.word.russian.isNotBlank()}}",style=MaterialTheme.typography.labelMedium)
         Text("Русские переводы частичные · EN: ${scoped.count{data.englishById.containsKey(it.word.id)}}",style=MaterialTheme.typography.bodySmall)
         LazyColumn(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(7.dp)){
@@ -200,7 +210,7 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
                     Text(e.word.pinyin);Text(e.word.russian.ifBlank{data.englishById[e.word.id]?.let{"EN: "+it.substringBefore(" / ")}?:"Перевод не добавлен"},style=MaterialTheme.typography.bodySmall)
                 }
             }}
-            if(found.isEmpty())item{Text("Нет результатов.")}
+            if(searchResult==null)item{LinearProgressIndicator(Modifier.fillMaxWidth());Text("Поиск…")}else if(found.isEmpty())item{Text("Нет результатов.")}
         }
     }
     chosen?.let{WordDetails(vm,it){chosen=null}}
