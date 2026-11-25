@@ -66,10 +66,10 @@ class HanziViewModel(app:Application):AndroidViewModel(app) {
     var pitch by mutableStateOf<PitchResult?>(null); private set
     private var audioJob:Job?=null
     init { refresh() }
-    fun setLevel(n:Int){level=n; prefs.edit().putInt("level",n).apply()}
+    fun updateLevel(n:Int){level=n; prefs.edit().putInt("level",n).apply()}
     fun saveDate(value:String){ if(value.isNotBlank() && runCatching{LocalDate.parse(value)}.isFailure){notice="Введите дату в формате ГГГГ-ММ-ДД";return}; date=value;prefs.edit().putString("date",value).apply();notice="Дата сохранена" }
-    fun setMinutes(n:Int){minutes=n; prefs.edit().putInt("minutes",n).apply()}
-    fun setTheme(value:String){theme=value;prefs.edit().putString("theme",value).apply()}
+    fun updateMinutes(n:Int){minutes=n; prefs.edit().putInt("minutes",n).apply()}
+    fun updateTheme(value:String){theme=value;prefs.edit().putString("theme",value).apply()}
     fun message(text:String){notice=text}
     private fun refresh()=viewModelScope.launch { try { val data=withContext(Dispatchers.IO){Triple(db.reviews(),db.books(),db.lastQuiz())}; reviews=data.first;books=data.second;lastQuiz=data.third } catch(e:Exception){notice="Ошибка базы данных"} }
     private fun mutate(block:()->Unit)=viewModelScope.launch { try { withContext(Dispatchers.IO){block()};refresh() } catch(e:Exception){notice="Не удалось сохранить данные"} }
@@ -116,7 +116,7 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
 }
 @Composable private fun Learn(vm:HanziViewModel,sub:String,choose:(String)->Unit){
     if(sub=="Меню")Page("Учебные материалы"){
-        Panel("Уровни") { for(group in (1..9).chunked(3)) Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){group.forEach{n->FilterChip(selected=vm.level==n,onClick={vm.setLevel(n)},label={Text("HSK $n")},modifier=Modifier.weight(1f))}};Text("HSK 7–9: объединённый формат экзамена. Уровни доступны как личные цели, учебная база ещё не распределена.") }
+        Panel("Уровни") { for(group in (1..9).chunked(3)) Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){group.forEach{n->FilterChip(selected=vm.level==n,onClick={vm.updateLevel(n)},label={Text("HSK $n")},modifier=Modifier.weight(1f))}};Text("HSK 7–9: объединённый формат экзамена. Уровни доступны как личные цели, учебная база ещё не распределена.") }
         listOf("Словарь","Чтение","Грамматика","Повторение","Библиотека").forEach{label->WideButton(label){choose(label)}}
     }else Column(Modifier.fillMaxSize()){TextButton({choose("Меню")}){Text("‹ Учёба")};Box(Modifier.weight(1f)){when(sub){"Словарь"->Dictionary(vm);"Чтение"->Reader(vm);"Грамматика"->GrammarScreen(vm);"Повторение"->ReviewScreen(vm);"Библиотека"->Library(vm);else->Text("Раздел недоступен")}}}
 }
@@ -158,5 +158,5 @@ for(i in 0..4){val y=i*size.height/4;drawLine(grid,Offset(0f,y),Offset(size.widt
     Text("Официальные форматы: chinesetest.cn · HSK 3.0, запуск объявлен на 13.12.2026. Локальный центр необходимо уточнить.")
 }
 @Composable private fun Profile(vm:HanziViewModel)=Page("Профиль и настройки"){
-    var date by rememberSaveable{mutableStateOf(vm.date)};Panel("Цель") {OutlinedTextField(date,{date=it},label={Text("Дата ГГГГ-ММ-ДД")},singleLine=true,modifier=Modifier.fillMaxWidth());WideButton("Сохранить дату"){vm.saveDate(date)};Text("Время в день: ${vm.minutes} мин");Slider(value=vm.minutes.toFloat(),onValueChange={vm.setMinutes(it.toInt())},valueRange=15f..180f,steps=10);Text("30-дневный план: ${sprint(vm.words.size,30).first()} стартовое слово в день (не полная программа HSK)")};Panel("Внешний вид"){listOf("system" to "Системная","light" to "Светлая","dark" to "Тёмная").forEach{(id,label)->Row{RadioButton(vm.theme==id,{vm.setTheme(id)});Text(label,Modifier.padding(top=12.dp))}};Text("Интерфейс: русский. Английская и китайская локализации запланированы.")};Panel("Статистика") {Text("Карточек: ${vm.reviews.size}");Text("Текущие успешные серии (сумма): ${vm.reviews.values.sumOf{it.repetitions}}");Text("Ошибок повторения: ${vm.reviews.values.sumOf{it.lapses}}");Text("Последний тест: ${vm.lastQuiz}");Text("Импортированных файлов: ${vm.books.size}")};Panel("Конфиденциальность") {Text("Нет сетевого разрешения. Голос хранится в памяти до удаления или закрытия приложения. Книги сохраняются в приватной директории Android.");WideButton("Удалить голосовую запись"){vm.erase()};Text("HanziFlow 0.1.0-alpha · сборка Android не проверена в текущей среде.")}
+    var date by rememberSaveable{mutableStateOf(vm.date)};Panel("Цель") {OutlinedTextField(date,{date=it},label={Text("Дата ГГГГ-ММ-ДД")},singleLine=true,modifier=Modifier.fillMaxWidth());WideButton("Сохранить дату"){vm.saveDate(date)};Text("Время в день: ${vm.minutes} мин");Slider(value=vm.minutes.toFloat(),onValueChange={vm.updateMinutes(it.toInt())},valueRange=15f..180f,steps=10);Text("30-дневный план: ${sprint(vm.words.size,30).first()} стартовое слово в день (не полная программа HSK)")};Panel("Внешний вид"){listOf("system" to "Системная","light" to "Светлая","dark" to "Тёмная").forEach{(id,label)->Row{RadioButton(vm.theme==id,{vm.updateTheme(id)});Text(label,Modifier.padding(top=12.dp))}};Text("Интерфейс: русский. Английская и китайская локализации запланированы.")};Panel("Статистика") {Text("Карточек: ${vm.reviews.size}");Text("Текущие успешные серии (сумма): ${vm.reviews.values.sumOf{it.repetitions}}");Text("Ошибок повторения: ${vm.reviews.values.sumOf{it.lapses}}");Text("Последний тест: ${vm.lastQuiz}");Text("Импортированных файлов: ${vm.books.size}")};Panel("Конфиденциальность") {Text("Нет сетевого разрешения. Голос хранится в памяти до удаления или закрытия приложения. Книги сохраняются в приватной директории Android.");WideButton("Удалить голосовую запись"){vm.erase()};Text("HanziFlow 0.1.0-alpha · сборка Android не проверена в текущей среде.")}
 }
