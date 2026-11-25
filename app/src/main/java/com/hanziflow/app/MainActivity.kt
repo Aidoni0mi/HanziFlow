@@ -270,11 +270,11 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
         Text("${scoped.size} тем · найдено ${shown.size}",style=MaterialTheme.typography.labelMedium)
         Text("Полный указатель программы; развёрнутые объяснения и упражнения ещё не для всех тем.",style=MaterialTheme.typography.bodySmall)
         LazyColumn(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(6.dp)){
-            items(shown,key={it.serial}){g->Card(onClick={selected=g},modifier=Modifier.fillMaxWidth()){Column(Modifier.padding(12.dp)){Text(g.content,fontSize=19.sp);Text(listOf(hskLabel(g.band),grammarCategoryLabel(g.type),grammarCategoryLabel(g.category),g.detail).filter{it.isNotBlank()}.joinToString(" · "),style=MaterialTheme.typography.bodySmall)}}}
+            items(shown,key={it.serial}){g->Card(onClick={selected=g},modifier=Modifier.fillMaxWidth()){Column(Modifier.padding(12.dp)){Text(g.title,fontSize=19.sp);Text(listOf(hskLabel(g.band),grammarCategoryLabel(g.type),grammarCategoryLabel(g.category),g.detail).filter{it.isNotBlank()}.joinToString(" · "),style=MaterialTheme.typography.bodySmall)}}}
             if(shown.isEmpty())item{Text("Нет результатов.")}
         }
     }
-    selected?.let{g->AlertDialog(onDismissRequest={selected=null},title={Text(g.content)},text={Column(Modifier.verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(8.dp)){
+    selected?.let{g->AlertDialog(onDismissRequest={selected=null},title={Text(g.title)},text={Column(Modifier.verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(8.dp)){
         Text(hskLabel(g.band));Text(listOf(grammarCategoryLabel(g.type),grammarCategoryLabel(g.category),g.detail).filter{it.isNotBlank()}.joinToString(" / "))
         Text("Тема № ${g.serial} · HSK 考试大纲, 2025.")
         Text("Развёрнутое объяснение на русском и упражнения для этого пункта ещё не добавлены. Авторские объяснения доступны отдельно.")
