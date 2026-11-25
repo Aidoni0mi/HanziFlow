@@ -3,6 +3,7 @@
 ## 0.2.0-alpha — 2026-11-25
 - Import 11,000 syllabus word records, 3,088 hanzi with pinyin, 1,200 writing flags, 593 grammar headings; verify all band counts.
 - Add new/cumulative filters, dictionary search, recognition/writing lists and grammar index.
+- Add 10,734 English CC-CEDICT definitions as a separate CC BY-SA data layer; Russian grammar category labels.
 - Keep original Russian practice entries; incomplete translations and grammar explanations explicitly labeled.
 - Load compact syllabus on background thread; preserve old review IDs. CI and device verification pending.
 

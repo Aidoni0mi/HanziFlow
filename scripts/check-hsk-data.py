@@ -5,7 +5,7 @@ from pathlib import Path
 root = Path(__file__).resolve().parents[1] / "app/src/main/assets/hsk2025"
 def load(name):
     with (root / name).open(encoding="utf-8", newline="") as f:
-        return list(csv.DictReader(f, delimiter="\t"))
+        return list(csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE))
 def counts(rows, key):
     c = Counter(int(r[key]) for r in rows if r[key])
     return [c[i] for i in range(1, 8)]
@@ -22,3 +22,9 @@ assert counts(g, "level") == [70,78,96,95,70,50,134]
 assert [int(r["serial"]) for r in g] == list(range(1,594))
 assert all(r["content"] for r in g)
 print("PASS: 11000 vocabulary records, 3088 recognition characters, 1200 writing characters, 593 grammar headings")
+
+english = [row for band in range(1,8) for row in load(f"cedict-{band}.tsv")]
+assert len(english) == 10734
+assert len({int(r["serial"]) for r in english}) == 10734
+assert all(1 <= int(r["serial"]) <= 11000 and r["english"] for r in english)
+print("PASS: 10734 independently licensed English gloss records")

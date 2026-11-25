@@ -42,3 +42,5 @@ As of 2026-11-25 CTI announces worldwide launch on 2026-12-13; second trial took
 - https://github.com/chelsea6502/hsk-2025-data — independent cross-check, not redistributed: 11,000 word records and 4,288 hanzi rows identical; 592 grammar rows match, one multiline heading has field delimiter difference. Both subheadings retained from primary source.
 - https://github.com/mozillazg/pinyin-data — v0.16.0, MIT; subset for 3,088 characters. License included in APK. No claim that all readings are contextually valid.
 - Russian dictionary research: LiudmilaLV/json_hsk has old HSK translations from another project, no clear redistribution license; not imported. Kaikki Russian Wiktionary Chinese dictionary is a candidate for separately licensed enrichment, not imported in this release.
+
+- https://github.com/marpalo/hsk-vocabulary-dataset (chinese-typing-practice.com/data) — CC-CEDICT full_definitions, CC BY-SA 4.0. All seven source bands read; word order differs, therefore match by unnumbered headword and exact normalized tone-marked pinyin, not ordinal. 10,734 entries matched; see CEDICT_NOTICE.txt. No Russian translation claims for these glosses.

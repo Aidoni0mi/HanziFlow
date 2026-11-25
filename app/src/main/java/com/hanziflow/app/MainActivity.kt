@@ -138,6 +138,8 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
         Column(Modifier.verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(8.dp)){
             Text(w.pinyin,style=MaterialTheme.typography.titleLarge)
             Text(w.russian.ifBlank{"Перевод на русский пока не добавлен."})
+            val en=vm.curriculum?.englishById?.get(w.id)
+            if(!en.isNullOrBlank()){Text("EN · CC-CEDICT",style=MaterialTheme.typography.labelMedium);Text(en);Text("Возможные значения данного чтения, не точное определение экзаменационного значения.",style=MaterialTheme.typography.labelSmall)}
             Text("Часть речи: "+w.pos.ifBlank{"не указана"})
             if(w.traditional.isNotBlank())Text("Традиционный: ${w.traditional}")
             Text(if(entry!=null)"${hskLabel(entry.band)} · № ${entry.serial} · ${entry.levelName} · программа 2025" else "Авторская практика · уровень не сверён",style=MaterialTheme.typography.labelMedium)
@@ -181,21 +183,21 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
         val level=vm.level
         val scoped=remember(data,level,cumulative){data.entries.filter{inScope(it.band,level,cumulative)}}
         val query=q.trim()
-        val found by produceState(initialValue=emptyList<SyllabusWord>(),scoped,query){
+        val found by produceState(emptyList<SyllabusWord>(),scoped,query){
             value=withContext(Dispatchers.Default){
                 if(query.isBlank())scoped else{
                     val key=searchKey(query)
-                    scoped.filter{e->val w=e.word;e.label.contains(query,true)||w.simplified.contains(query,true)||w.traditional.contains(query,true)||w.russian.contains(query,true)||(key.isNotEmpty()&&searchKey(w.pinyin).contains(key))}
+                    scoped.filter{e->val w=e.word;e.label.contains(query,true)||w.simplified.contains(query,true)||w.traditional.contains(query,true)||w.russian.contains(query,true)||(data.englishById[w.id]?.contains(query,true)==true)||(key.isNotEmpty()&&searchKey(w.pinyin).contains(key))}
                 }
             }
         }
         Text("${scoped.size} слов · найдено ${found.size} · RU: ${scoped.count{it.word.russian.isNotBlank()}}",style=MaterialTheme.typography.labelMedium)
-        Text("Список 2025; русские переводы пока частичные.",style=MaterialTheme.typography.bodySmall)
+        Text("Русские переводы частичные · EN: ${scoped.count{data.englishById.containsKey(it.word.id)}}",style=MaterialTheme.typography.bodySmall)
         LazyColumn(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(7.dp)){
             items(found,key={it.serial}){e->Card(onClick={chosen=e.word},modifier=Modifier.fillMaxWidth()){
                 Column(Modifier.padding(12.dp)){
                     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Text(e.label,fontSize=25.sp);Text(hskLabel(e.band),style=MaterialTheme.typography.labelMedium)}
-                    Text(e.word.pinyin);Text(e.word.russian.ifBlank{"Перевод не добавлен"},style=MaterialTheme.typography.bodySmall)
+                    Text(e.word.pinyin);Text(e.word.russian.ifBlank{data.englishById[e.word.id]?.let{"EN: "+it.substringBefore(" / ")}?:"Перевод не добавлен"},style=MaterialTheme.typography.bodySmall)
                 }
             }}
             if(found.isEmpty())item{Text("Нет результатов.")}
@@ -264,16 +266,16 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
         OutlinedTextField(query,{query=it},label={Text("Поиск конструкции или категории")},singleLine=true,modifier=Modifier.fillMaxWidth())
         val level=vm.level
         val scoped=remember(data,level,cumulative){data.grammar.filter{inScope(it.band,level,cumulative)}}
-        val shown=remember(scoped,query){scoped.filter{g->listOf(g.content,g.type,g.category,g.detail).any{it.contains(query.trim(),true)}}}
+        val shown=remember(scoped,query){scoped.filter{g->listOf(g.content,g.type,g.category,g.detail,grammarCategoryRu(g.type),grammarCategoryRu(g.category)).any{it.contains(query.trim(),true)}}}
         Text("${scoped.size} тем · найдено ${shown.size}",style=MaterialTheme.typography.labelMedium)
         Text("Полный указатель программы; развёрнутые объяснения и упражнения ещё не для всех тем.",style=MaterialTheme.typography.bodySmall)
         LazyColumn(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(6.dp)){
-            items(shown,key={it.serial}){g->Card(onClick={selected=g},modifier=Modifier.fillMaxWidth()){Column(Modifier.padding(12.dp)){Text(g.content,fontSize=19.sp);Text(listOf(hskLabel(g.band),g.type,g.category,g.detail).filter{it.isNotBlank()}.joinToString(" · "),style=MaterialTheme.typography.bodySmall)}}}
+            items(shown,key={it.serial}){g->Card(onClick={selected=g},modifier=Modifier.fillMaxWidth()){Column(Modifier.padding(12.dp)){Text(g.content,fontSize=19.sp);Text(listOf(hskLabel(g.band),grammarCategoryLabel(g.type),grammarCategoryLabel(g.category),g.detail).filter{it.isNotBlank()}.joinToString(" · "),style=MaterialTheme.typography.bodySmall)}}}
             if(shown.isEmpty())item{Text("Нет результатов.")}
         }
     }
     selected?.let{g->AlertDialog(onDismissRequest={selected=null},title={Text(g.content)},text={Column(Modifier.verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(8.dp)){
-        Text(hskLabel(g.band));Text(listOf(g.type,g.category,g.detail).filter{it.isNotBlank()}.joinToString(" / "))
+        Text(hskLabel(g.band));Text(listOf(grammarCategoryLabel(g.type),grammarCategoryLabel(g.category),g.detail).filter{it.isNotBlank()}.joinToString(" / "))
         Text("Тема № ${g.serial} · HSK 考试大纲, 2025.")
         Text("Развёрнутое объяснение на русском и упражнения для этого пункта ещё не добавлены. Авторские объяснения доступны отдельно.")
     }},confirmButton={TextButton({selected=null}){Text("Закрыть")}})}
@@ -326,7 +328,7 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
 }
 
 @Composable private fun ReviewScreen(vm:HanziViewModel)=Page("Повторение"){
-    var reveal by rememberSaveable{mutableStateOf(false)};var lastRated by rememberSaveable{mutableStateOf("")};val due=vm.words.filter{w->vm.reviews[w.id]?.due?.let{!it.isAfter(LocalDate.now())}==true};val w=due.firstOrNull();Text("${due.size} карточек на сегодня · SM-2-inspired");if(w==null){Text("Нет карточек к повторению. Добавьте слово из словаря.");Text("Открой словарь выбранного уровня и добавь нужные карточки вручную.")}else{LaunchedEffect(w.id){reveal=false;lastRated=""};Panel("Карточка"){Text(w.simplified,fontSize=44.sp);TextButton({vm.speak(w.simplified)}){Text("Прослушать")};if(!reveal)Button({reveal=true}){Text("Показать ответ")}else{Text(w.pinyin);Text(w.russian.ifBlank{"Русский перевод не добавлен; повторяй чтение pinyin."});for(pair in listOf(listOf(Grade.AGAIN to "Не знаю",Grade.HARD to "Трудно"),listOf(Grade.GOOD to "Хорошо",Grade.EASY to "Легко")))Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){pair.forEach{(g,label)->OutlinedButton(onClick={lastRated=w.id;vm.rate(w,g)},enabled=lastRated!=w.id,modifier=Modifier.weight(1f)){Text(label)}}}}}}
+    var reveal by rememberSaveable{mutableStateOf(false)};var lastRated by rememberSaveable{mutableStateOf("")};val due=vm.words.filter{w->vm.reviews[w.id]?.due?.let{!it.isAfter(LocalDate.now())}==true};val w=due.firstOrNull();Text("${due.size} карточек на сегодня · SM-2-inspired");if(w==null){Text("Нет карточек к повторению. Добавьте слово из словаря.");Text("Открой словарь выбранного уровня и добавь нужные карточки вручную.")}else{LaunchedEffect(w.id){reveal=false;lastRated=""};Panel("Карточка"){Text(w.simplified,fontSize=44.sp);TextButton({vm.speak(w.simplified)}){Text("Прослушать")};if(!reveal)Button({reveal=true}){Text("Показать ответ")}else{Text(w.pinyin);Text(w.russian.ifBlank{vm.curriculum?.englishById?.get(w.id)?.let{"EN: $it"}?:"Русский перевод не добавлен; повторяй чтение pinyin."});for(pair in listOf(listOf(Grade.AGAIN to "Не знаю",Grade.HARD to "Трудно"),listOf(Grade.GOOD to "Хорошо",Grade.EASY to "Легко")))Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){pair.forEach{(g,label)->OutlinedButton(onClick={lastRated=w.id;vm.rate(w,g)},enabled=lastRated!=w.id,modifier=Modifier.weight(1f)){Text(label)}}}}}}
 }
 @Composable private fun Library(vm:HanziViewModel){
     var current by rememberSaveable{mutableStateOf<String?>(null)};val book=vm.books.firstOrNull{it.id==current};val picker=rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()){it?.let(vm::importBook)}
@@ -415,5 +417,5 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
     Text("Официальные форматы: chinesetest.cn · HSK 3.0, запуск объявлен на 13.12.2026. Локальный центр необходимо уточнить.")
 }
 @Composable private fun Profile(vm:HanziViewModel)=Page("Профиль и настройки"){
-    var date by rememberSaveable{mutableStateOf(vm.date)};Panel("Цель") {OutlinedTextField(date,{date=it},label={Text("Дата ГГГГ-ММ-ДД")},singleLine=true,modifier=Modifier.fillMaxWidth());WideButton("Сохранить дату"){vm.saveDate(date)};Text("Время в день: ${vm.minutes} мин");Slider(value=vm.minutes.toFloat(),onValueChange={vm.updateMinutes(it.toInt())},valueRange=15f..180f,steps=10);Text("30-дневная оценка нагрузки: ${sprint(vm.curriculum?.entries?.count{inScope(it.band,vm.level,false)}?:0,30).first()} новых слов в день. Не адаптивный план.")};Panel("Внешний вид"){listOf("system" to "Системная","light" to "Светлая","dark" to "Тёмная").forEach{(id,label)->Row{RadioButton(vm.theme==id,{vm.updateTheme(id)});Text(label,Modifier.padding(top=12.dp))}};Text("Интерфейс: русский. Английская и китайская локализации запланированы.")};Panel("Статистика") {Text("Карточек: ${vm.reviews.size}");Text("Текущие успешные серии (сумма): ${vm.reviews.values.sumOf{it.repetitions}}");Text("Ошибок повторения: ${vm.reviews.values.sumOf{it.lapses}}");Text("Последний тест: ${vm.lastQuiz}");Text("Импортированных файлов: ${vm.books.size}")};Panel("Конфиденциальность") {Text("Нет сетевого разрешения. Голос хранится в памяти до удаления или закрытия приложения. Книги сохраняются в приватной директории Android.");WideButton("Удалить голосовую запись"){vm.erase()};Text("HanziFlow 0.2.0-alpha · списки программы HSK 2025.");Text("Источники: ChineseTest / profesorm/hsk30 (CC BY 4.0); mozillazg/pinyin-data (MIT). Полные атрибуции включены в APK: hsk2025/NOTICE.txt и PINYIN_LICENSE.txt.")}
+    var date by rememberSaveable{mutableStateOf(vm.date)};Panel("Цель") {OutlinedTextField(date,{date=it},label={Text("Дата ГГГГ-ММ-ДД")},singleLine=true,modifier=Modifier.fillMaxWidth());WideButton("Сохранить дату"){vm.saveDate(date)};Text("Время в день: ${vm.minutes} мин");Slider(value=vm.minutes.toFloat(),onValueChange={vm.updateMinutes(it.toInt())},valueRange=15f..180f,steps=10);Text("30-дневная оценка нагрузки: ${sprint(vm.curriculum?.entries?.count{inScope(it.band,vm.level,false)}?:0,30).first()} новых слов в день. Не адаптивный план.")};Panel("Внешний вид"){listOf("system" to "Системная","light" to "Светлая","dark" to "Тёмная").forEach{(id,label)->Row{RadioButton(vm.theme==id,{vm.updateTheme(id)});Text(label,Modifier.padding(top=12.dp))}};Text("Интерфейс: русский. Английская и китайская локализации запланированы.")};Panel("Статистика") {Text("Карточек: ${vm.reviews.size}");Text("Текущие успешные серии (сумма): ${vm.reviews.values.sumOf{it.repetitions}}");Text("Ошибок повторения: ${vm.reviews.values.sumOf{it.lapses}}");Text("Последний тест: ${vm.lastQuiz}");Text("Импортированных файлов: ${vm.books.size}")};Panel("Конфиденциальность") {Text("Нет сетевого разрешения. Голос хранится в памяти до удаления или закрытия приложения. Книги сохраняются в приватной директории Android.");WideButton("Удалить голосовую запись"){vm.erase()};Text("HanziFlow 0.2.0-alpha · списки программы HSK 2025.");Text("Источники: ChineseTest / profesorm/hsk30 (CC BY 4.0); mozillazg/pinyin-data (MIT). Английские значения: CC-CEDICT (CC BY-SA 4.0), через chinese-typing-practice.com/data. Полные атрибуции: hsk2025/NOTICE.txt, PINYIN_LICENSE.txt и CEDICT_NOTICE.txt.")}
 }

@@ -5,3 +5,5 @@ Gradle dependencies declared (not retrieved or redistributed here): Kotlin/Corou
 ## Curriculum assets
 - profesorm/hsk30 structured compilation, CC BY 4.0: https://github.com/profesorm/hsk30 and https://creativecommons.org/licenses/by/4.0/. Original CLEC/CTI rights reserved. Factual syllabus index only, transformed to TSV; no source examples or textbook content.
 - mozillazg/pinyin-data v0.16.0 MIT, https://github.com/mozillazg/pinyin-data. Subset and license in app/src/main/assets/hsk2025.
+
+- CC-CEDICT (https://cc-cedict.org), via https://chinese-typing-practice.com/data/ and https://github.com/marpalo/hsk-vocabulary-dataset. English gloss subset under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/); separate asset files cedict-1.tsv through cedict-7.tsv, attribution and changes in CEDICT_NOTICE.txt. This license applies to derived glosses, not app source code.

@@ -15,7 +15,7 @@ Lists follow the November 2025 examination syllabus, not GF0025-2021. Cross-chec
 - All 11,000 word records contain syllabus headword, level, pinyin, POS when provided. Numbered homographs remain separate; suffix numerals excluded from pronunciation.
 - All 3,088 characters have pinyin reading lists from pinyin-data, and writing-level annotation where required.
 - All 593 grammar headings/categories are available, not 593 full Russian lessons. Source examples deliberately excluded; ten original explanations are separate.
-- Russian glosses are incomplete: only matched existing starter articles are attached. No machine-translated or invented mass translations. Traditional variants and examples are available only for matched articles.
+- Russian glosses are incomplete: 49 of 11,000 entries have matched existing starter articles; these are not editorially validated. No machine-translated or invented mass translations. Traditional variants and examples are available only for matched articles. 10,734 of 11,000 entries have English CC-CEDICT meanings matched by headword and tone-marked pinyin (not verified sense-level matches). 266 lack matched English glosses. Grammar category labels have Russian translations; detailed explanations are separate.
 - 50 existing original seed articles remain separately accessible for review history; five reading passages, 16 original character cards, ten grammar explanations, five quiz items and 16 tone examples remain.
 - No official textbooks, workbook files, official past papers, native audio or full mocks are bundled; local PDF/TXT import stays separate.
 - Content files and license notices in app/src/main/assets/hsk2025. Counts verified at import and by scripts/check-hsk-data.py.
