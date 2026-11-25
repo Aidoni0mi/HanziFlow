@@ -4,7 +4,7 @@ permissions:
   contents: read
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -14,8 +14,20 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
-      - run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
-      - run: gradle --no-daemon :core-domain:test :app:lintDebug :app:assembleDebug
+      - name: Set up Android SDK command-line tools
+        uses: android-actions/setup-android@v4
+        with:
+          packages: ''
+      - name: Install Android API 35 and build tools
+        run: |
+          sdkmanager --version
+          sdkmanager 'platform-tools' 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Run Kotlin unit tests
+        run: gradle --no-daemon --stacktrace :core-domain:test
+      - name: Build debug APK
+        run: gradle --no-daemon --stacktrace :app:assembleDebug
+      - name: Run Android Lint
+        run: gradle --no-daemon --stacktrace :app:lintDebug
       - uses: actions/upload-artifact@v4
         with:
           name: HanziFlow-debug
