@@ -1,0 +1,13 @@
+PASS F0 90.0 Hz
+PASS F0 140.0 Hz
+PASS F0 220.0 Hz
+PASS F0 360.0 Hz
+PASS F0 480.0 Hz
+PASS silence
+PASS empty
+PASS rise
+PASS fall
+PASS segmentation/Unicode
+PASS basic sandhi
+PASS SRS
+PASS sprint

@@ -1,0 +1,5 @@
+# Privacy — alpha
+
+No app INTERNET permission, accounts, analytics SDK, advertising, cloud sync or API keys. Android external TTS engine is a separate process; only voices advertised as non-network Mandarin CN/SG are selected, but the engine's own behavior is outside this app's control. If unavailable, app does not intentionally choose network TTS.
+
+Microphone permission requested only on record button. Three-second mono PCM retained in memory; delete button and app-process termination discard references, not guaranteed forensic zeroization. Recording job canceled on leaving speech tab or activity stopping. Playback local. Books copied to app-private storage, names/reading position in local SQLite. Delete book removes private copy, not source. Android backup disabled. Local progress retained until uninstall/clear storage. No cloud transmission implemented. No claim of formal privacy compliance or penetration testing. Future cloud processing requires explicit separate consent and retention controls.
