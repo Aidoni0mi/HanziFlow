@@ -32,10 +32,13 @@ private fun fields(ctx:Context,name:String,size:Int):List<List<String>> = ctx.as
 }
 fun readCurriculum(ctx:Context,starter:List<Word>):Curriculum{
     val local=starter.groupBy{it.simplified}
+    val russian=fields(ctx,"ru-hsk1",3).associate{it[0].toInt() to (it[1] to it[2])}
+    require(russian.size==300)
     val v=fields(ctx,"vocabulary",7).map{f->
         val serial=f[0].toInt();val band=f[1].toInt();val han=f[3];val py=f[4]
         val original=local[han]?.firstOrNull{readingKey(it.pinyin)==readingKey(py)}
-        val w=Word("hsk25-$serial",han,original?.traditional.orEmpty(),py,original?.russian.orEmpty(),original?.example.orEmpty(),original?.examplePinyin.orEmpty(),original?.exampleRu.orEmpty(),posRu(f[5]),band,if(original!=null)"hsk2025 + original-unreviewed" else "hsk2025")
+        val ru=russian[serial]?.let{require(it.first==f[2]);it.second}?:original?.russian.orEmpty()
+        val w=Word("hsk25-$serial",han,original?.traditional.orEmpty(),py,ru,original?.example.orEmpty(),original?.examplePinyin.orEmpty(),original?.exampleRu.orEmpty(),posRu(f[5]),band,if(ru.isNotBlank())"hsk2025 + original-unreviewed" else "hsk2025")
         SyllabusWord(serial,band,f[2],f[6],w)
     }
     val h=fields(ctx,"hanzi",4).map{f->SyllabusHanzi(f[0].toInt(),f[1],f[2].toIntOrNull(),f[3])}

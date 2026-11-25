@@ -16,6 +16,7 @@ class Store(context: Context): SQLiteOpenHelper(context,"hanziflow.db",null,1) {
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) { error("Migration $oldVersion -> $newVersion required") }
     fun reviews(): Map<String,Review> = readableDatabase.rawQuery("SELECT id,reps,lapses,interval,ease,due FROM review",null).use { c -> buildMap { while(c.moveToNext()) put(c.getString(0),Review(c.getInt(1),c.getInt(2),c.getLong(3),c.getDouble(4),LocalDate.parse(c.getString(5)))) } }
     fun add(id:String) { writableDatabase.execSQL("INSERT OR IGNORE INTO review VALUES(?,0,0,0,2.5,?)",arrayOf(id,LocalDate.now().toString())) }
+    fun addAll(ids:List<String>){val d=writableDatabase;d.beginTransaction();try{ids.forEach{add(it)};d.setTransactionSuccessful()}finally{d.endTransaction()}}
     fun grade(id:String, grade:Grade) {
         val db=writableDatabase; db.beginTransaction(); try { val r=schedule(reviews()[id]?:Review(),grade,LocalDate.now()); db.execSQL("INSERT OR REPLACE INTO review VALUES(?,?,?,?,?,?)",arrayOf(id,r.repetitions,r.lapses,r.interval,r.ease,r.due.toString())); db.execSQL("INSERT INTO history(word,grade,day) VALUES(?,?,?)",arrayOf(id,grade.name,LocalDate.now().toString())); db.setTransactionSuccessful() } finally { db.endTransaction() }
     }
