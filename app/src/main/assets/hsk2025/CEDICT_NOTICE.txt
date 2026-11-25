@@ -1,0 +1,12 @@
+English glossary derived from CC-CEDICT (https://cc-cedict.org), via https://github.com/marpalo/hsk-vocabulary-dataset (https://chinese-typing-practice.com/data/), CC BY-SA 4.0.
+https://creativecommons.org/licenses/by-sa/4.0/
+Changes: match unnumbered headword and normalized tone-marked pinyin, not source ordinal (the source's ordinal order differs). Retain English meanings for matching readings, deduplicate, use single-character constituent definitions when applicable. No claim of exact sense or part-of-speech alignment. Split into seven TSV files; first column uses HanziFlow syllabus IDs, not source IDs. All derived English glosses here are licensed CC BY-SA 4.0. Other app code and data are separate. No endorsement.
+Source blob IDs and data notices:
+1: 0087ad8e660e09f78aa343b0481e90ff24e6a17d — CC-CEDICT (https://cc-cedict.org), CC BY-SA 4.0 — derived fields: full_definitions
+2: 8b6c56c0b1229f15286f83bd5f03437c7166e3b9 — CC-CEDICT (https://cc-cedict.org), CC BY-SA 4.0 — derived fields: full_definitions
+3: 9f590c26c9c3c48e57009f5a64c8b293379e5546 — CC-CEDICT (https://cc-cedict.org), CC BY-SA 4.0 — derived fields: full_definitions
+4: 934a21cfc4111609ed2d3cf16e88ebf86f5e07bd — CC-CEDICT (https://cc-cedict.org), CC BY-SA 4.0 — derived fields: full_definitions
+5: dea842faebc08e03ac8be6ea9ba58bc5c91848e3 — CC-CEDICT (https://cc-cedict.org), CC BY-SA 4.0 — derived fields: full_definitions
+6: 80c217bab05a610ed52aaeb61c57ac3187ed5b44 — CC-CEDICT (https://cc-cedict.org), CC BY-SA 4.0 — derived fields: full_definitions
+7-9: 20d1acc2cce40604cb5d9e5d97cc45d0aea1d733 — CC-CEDICT (https://cc-cedict.org), CC BY-SA 4.0 — derived fields: full_definitions
+Matched 10734 of 11,000 syllabus entries. Remaining meanings unavailable, not invented.
