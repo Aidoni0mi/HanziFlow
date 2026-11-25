@@ -35,3 +35,10 @@ As of 2026-11-25 CTI announces worldwide launch on 2026-12-13; second trial took
 
 ## Additional phonetics reference (0.1.1)
 - Education University of Hong Kong, Corpus-based Mandarin Pronunciation Learning System, Mandarin Phonology, https://corpus.eduhk.hk/mandarin_pronunciation/?page_id=33 — checked 2026-11-25. Chao-style five-point tone and contextual neutral tone teaching reference. Only factual descriptions used; no copied diagrams/audio. Original schematic illustrations in app, not measured reference data.
+
+## HSK 2025 syllabus index (0.2.0)
+- Official: Center for Language Education and Cooperation / Chinese Testing International, HSK 考试大纲, November 2025, https://download.chinesetest.cn/newhsk-site/Syllabus/H_DG_1110.pdf. Checked 2026-11-25. Source for exam level scope; original examples and protected materials not redistributed.
+- https://github.com/profesorm/hsk30 — structured CSV compilation, CC BY 4.0 for compilation; original rights reserved. Imported factual entries/classifications and grammar headings only. See assets/hsk2025/NOTICE.txt for blob IDs and normalization.
+- https://github.com/chelsea6502/hsk-2025-data — independent cross-check, not redistributed: 11,000 word records and 4,288 hanzi rows identical; 592 grammar rows match, one multiline heading has field delimiter difference. Both subheadings retained from primary source.
+- https://github.com/mozillazg/pinyin-data — v0.16.0, MIT; subset for 3,088 characters. License included in APK. No claim that all readings are contextually valid.
+- Russian dictionary research: LiudmilaLV/json_hsk has old HSK translations from another project, no clear redistribution license; not imported. Kaikki Russian Wiktionary Chinese dictionary is a candidate for separately licensed enrichment, not imported in this release.

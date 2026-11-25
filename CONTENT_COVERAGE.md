@@ -1,30 +1,22 @@
-# Content coverage — 2026-11-25
+# HSK 2025 content coverage — 0.2.0-alpha
 
-No official vocabulary/character/grammar list has been imported or individually checked. Official coverage = **not measured** for every level; 0 official mapped entries in the shipped seed. All level selectors are personal goals; they do not filter by a verified syllabus.
+Lists follow the November 2025 examination syllabus, not GF0025-2021. Cross-checked two independent machine-readable compilations; not manually checked line by line against official PDF. Seven bands, with HSK 7–9 combined. All counts cumulative except new words.
 
-| HSK 3.0 | Verified vocabulary | Verified characters | Verified grammar | Licensed textbook/WB | Official mocks | Status |
-|---|---:|---:|---:|---|---|---|
-| 1 | 0 | 0 | 0 | 0 | 0 | Pending |
-| 2 | 0 | 0 | 0 | 0 | 0 | Pending |
-| 3 | 0 | 0 | 0 | 0 | 0 | Pending |
-| 4 | 0 | 0 | 0 | 0 | 0 | Priority; starter practice available, unaligned |
-| 5 | 0 | 0 | 0 | 0 | 0 | Pending |
-| 6 | 0 | 0 | 0 | 0 | 0 | Pending |
-| 7 | 0 | 0 | 0 | 0 | 0 | Combined 7–9 exam pending |
-| 8 | 0 | 0 | 0 | 0 | 0 | Combined 7–9 exam pending |
-| 9 | 0 | 0 | 0 | 0 | 0 | Combined 7–9 exam pending |
+| Band | New words | Total words | Recognition | Writing | Grammar topics |
+|---|---:|---:|---:|---:|---:|
+| 1 | 300 | 300 | 246 | 0 | 70 |
+| 2 | 200 | 500 | 371 | 100 | 148 |
+| 3 | 500 | 1000 | 655 | 250 | 244 |
+| 4 | 1000 | 2000 | 1096 | 400 | 339 |
+| 5 | 1600 | 3600 | 1527 | 550 | 409 |
+| 6 | 1800 | 5400 | 1940 | 700 | 459 |
+| 7–9 | 5600 | 11000 | 3088 | 1200 | 593 |
 
-| Original practice (not verified official HSK) | Count |
-|---|---:|
-| Chinese–Russian starter entries | 50 |
-| Grammar explanations | 10 |
-| Reading passages | 5 |
-| Character practice cards | 16 |
-| Quiz questions | 5 |
-| Tone targets (including neutral) | 5 |
-| TTS practice examples across tones | 16 |
-| Standalone HSKK-style self-practice prompts | 1 |
-| Human reference recordings | 0 |
-| Full HSK/HSKK mocks | 0 |
-
-PDF local page viewing / TXT local interactive reading implemented in Android source, not device-tested. No automatic edition detection, OCR, audio, EPUB, DOCX, CSV/JSON import, stroke animation, handwriting assessment or complete course. Content not asserted to be peer/editor reviewed. TTS synthetic, offline device voice required. No copyrighted uploads in repository.
+- All 11,000 word records contain syllabus headword, level, pinyin, POS when provided. Numbered homographs remain separate; suffix numerals excluded from pronunciation.
+- All 3,088 characters have pinyin reading lists from pinyin-data, and writing-level annotation where required.
+- All 593 grammar headings/categories are available, not 593 full Russian lessons. Source examples deliberately excluded; ten original explanations are separate.
+- Russian glosses are incomplete: only matched existing starter articles are attached. No machine-translated or invented mass translations. Traditional variants and examples are available only for matched articles.
+- 50 existing original seed articles remain separately accessible for review history; five reading passages, 16 original character cards, ten grammar explanations, five quiz items and 16 tone examples remain.
+- No official textbooks, workbook files, official past papers, native audio or full mocks are bundled; local PDF/TXT import stays separate.
+- Content files and license notices in app/src/main/assets/hsk2025. Counts verified at import and by scripts/check-hsk-data.py.
+- 0.2.0 Android build, Lint and device QA pending.

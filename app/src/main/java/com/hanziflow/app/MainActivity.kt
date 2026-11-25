@@ -50,7 +50,12 @@ class MainActivity: ComponentActivity() {
 class HanziViewModel(app:Application):AndroidViewModel(app) {
     private val db=Store(app); val files=LibraryFiles(app); val speech=Speech(app)
     private val prefs=app.getSharedPreferences("settings",0)
-    val words=readWords(app); val segmenter=Segmenter(words)
+    val starterWords=readWords(app)
+    var curriculum by mutableStateOf<Curriculum?>(null); private set
+    var curriculumError by mutableStateOf(""); private set
+    private val starterSegmenter=Segmenter(starterWords)
+    val words get()=curriculum?.reviewWords?:starterWords
+    val segmenter get()=curriculum?.segmenter?:starterSegmenter
     var level by mutableIntStateOf(prefs.getInt("level",4).coerceIn(1,9)); private set
     var date by mutableStateOf(prefs.getString("date","")?:""); private set
     var minutes by mutableIntStateOf(prefs.getInt("minutes",60)); private set
@@ -65,7 +70,13 @@ class HanziViewModel(app:Application):AndroidViewModel(app) {
     var samples by mutableStateOf<ShortArray?>(null); private set
     var pitch by mutableStateOf<PitchResult?>(null); private set
     private var audioJob:Job?=null
-    init { refresh() }
+    init { refresh(); loadCurriculum() }
+    fun loadCurriculum(){if(curriculum!=null)return;viewModelScope.launch {
+        curriculumError=""
+        try{curriculum=withContext(Dispatchers.IO){readCurriculum(getApplication<Application>(),starterWords)}}
+        catch(e:CancellationException){throw e}
+        catch(e:Exception){curriculumError="Не удалось загрузить учебную базу: "+(e.message?:"ошибка данных")}
+    }}
     fun updateLevel(n:Int){level=n; prefs.edit().putInt("level",n).apply()}
     fun saveDate(value:String){ if(value.isNotBlank() && runCatching{LocalDate.parse(value)}.isFailure){notice="Введите дату в формате ГГГГ-ММ-ДД";return}; date=value;prefs.edit().putString("date",value).apply();notice="Дата сохранена" }
     fun updateMinutes(n:Int){minutes=n; prefs.edit().putInt("minutes",n).apply()}
@@ -109,20 +120,91 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
 @Composable private fun Panel(title:String,content:@Composable ColumnScope.()->Unit){Card(Modifier.fillMaxWidth()){Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(8.dp)){Text(title,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.SemiBold);content()}}}
 @Composable private fun WideButton(text:String,onClick:()->Unit){OutlinedButton(onClick,Modifier.fillMaxWidth()){Text(text)}}
 @Composable private fun Home(vm:HanziViewModel,go:(String,String)->Unit)=Page("Сегодня"){
-    Panel("HSK ${vm.level} · личная цель") { Text(if(vm.date.isBlank()) "Дата экзамена не установлена" else "${vm.date} · ${ChronoUnit.DAYS.between(LocalDate.now(),LocalDate.parse(vm.date)).coerceAtLeast(0)} дн. до экзамена");Text("${vm.reviews.values.count{it.repetitions>=3}} карточек с 3+ успешными повторениями из ${vm.reviews.size}");Text("Покрытие официальной программы пока не рассчитано.");Button({go("Учёба","Чтение")},Modifier.fillMaxWidth()){Text("Продолжить практику")} }
+    Panel("HSK ${vm.level} · личная цель") { Text(if(vm.date.isBlank()) "Дата экзамена не установлена" else "${vm.date} · ${ChronoUnit.DAYS.between(LocalDate.now(),LocalDate.parse(vm.date)).coerceAtLeast(0)} дн. до экзамена");Text("${vm.reviews.values.count{it.repetitions>=3}} карточек с 3+ успешными повторениями из ${vm.reviews.size}");Text(vm.curriculum?.let{d->"${d.entries.count{inScope(it.band,vm.level,true)}} слов · ${d.hanzi.count{inScope(it.band,vm.level,true)}} иероглифов · ${d.grammar.count{inScope(it.band,vm.level,true)}} тем"}?: "Загрузка учебной базы…");Text("Список программы 2025; переводы и объяснения пока неполные.");Button({go("Учёба","Чтение")},Modifier.fillMaxWidth()){Text("Продолжить практику")} }
     Panel("План на сегодня · ${vm.minutes} мин") { Text("Лексика ${vm.minutes*35/100} мин · грамматика ${vm.minutes*20/100} мин · речь ${vm.minutes*25/100} мин · чтение/тест ${vm.minutes-vm.minutes*35/100-vm.minutes*20/100-vm.minutes*25/100} мин");Text("Воскресенье: тренировочный тест (короткий, не пробник HSK).") }
     WideButton("Повторить · ${vm.reviews.values.count{!it.due.isAfter(LocalDate.now())}} к повторению"){go("Учёба","Повторение")};WideButton("Тренировка тонов"){go("Речь","")};WideButton("Грамматика"){go("Учёба","Грамматика")};WideButton("Открыть библиотеку"){go("Учёба","Библиотека")};WideButton("Тренировочный тест"){go("Экзамены","")}
     Text("Последний тест: ${vm.lastQuiz}",style=MaterialTheme.typography.bodyMedium)
 }
 @Composable private fun Learn(vm:HanziViewModel,sub:String,choose:(String)->Unit){
     if(sub=="Меню")Page("Учебные материалы"){
-        Panel("Уровни") { for(group in (1..9).chunked(3)) Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){group.forEach{n->FilterChip(selected=vm.level==n,onClick={vm.updateLevel(n)},label={Text("HSK $n")},modifier=Modifier.weight(1f))}};Text("HSK 7–9: объединённый формат экзамена. Уровни доступны как личные цели, учебная база ещё не распределена.") }
+        Panel("Уровни") { for(group in (1..9).chunked(3)) Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){group.forEach{n->FilterChip(selected=vm.level==n,onClick={vm.updateLevel(n)},label={Text("HSK $n")},modifier=Modifier.weight(1f))}};Text("HSK 7–9 используют общий список. Словарь, иероглифы и грамматика фильтруются по цели; можно включить предыдущие уровни.") }
         listOf("Словарь","Чтение","Грамматика","Иероглифы","Повторение","Библиотека").forEach{label->WideButton(label){choose(label)}}
     }else Column(Modifier.fillMaxSize()){TextButton({choose("Меню")}){Text("‹ Учёба")};Box(Modifier.weight(1f)){when(sub){"Словарь"->Dictionary(vm);"Чтение"->Reader(vm);"Грамматика"->GrammarScreen(vm);"Иероглифы"->HanziScreen(vm);"Повторение"->ReviewScreen(vm);"Библиотека"->Library(vm);else->Text("Раздел недоступен")}}}
 }
-@Composable private fun WordDetails(vm:HanziViewModel,w:Word,onClose:()->Unit){AlertDialog(onDismissRequest=onClose,title={Text(w.simplified,fontSize=32.sp)},text={Column(Modifier.verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(8.dp)){Text(w.pinyin,style=MaterialTheme.typography.titleLarge);Text(w.russian);Text(w.pos);Text("Традиционный: ${w.traditional}");Text("HSK: не сверено · авторская статья, редакторская проверка требуется",style=MaterialTheme.typography.labelSmall);Text(w.example,fontSize=21.sp);Text(w.examplePinyin);Text(w.exampleRu);Row{TextButton({vm.speak(w.simplified)}){Text("Озвучить")};TextButton({vm.speak(w.example,.7f)}){Text("Пример 0.7×")}}}},confirmButton={TextButton({vm.add(w);onClose()}){Text("В повторение")}},dismissButton={TextButton(onClose){Text("Закрыть")}})}
-@Composable private fun Dictionary(vm:HanziViewModel){var q by rememberSaveable{mutableStateOf("")};var chosen by remember{mutableStateOf<Word?>(null)};Column(Modifier.fillMaxSize(),verticalArrangement=Arrangement.spacedBy(8.dp)){Text("Словарь",style=MaterialTheme.typography.headlineSmall);OutlinedTextField(q,{q=it},label={Text("汉字 / pinyin / русский")},singleLine=true,modifier=Modifier.fillMaxWidth());Text("${vm.words.size} стартовых слов · без подтверждённых уровней",style=MaterialTheme.typography.labelMedium);val found=vm.words.filter{w->listOf(w.simplified,w.traditional,w.pinyin,w.russian,java.text.Normalizer.normalize(w.pinyin,java.text.Normalizer.Form.NFD).replace(Regex("\\p{M}"),"")).any{it.contains(q.trim(),true)}};LazyColumn(verticalArrangement=Arrangement.spacedBy(8.dp)){items(found,key={it.id}){w->Card(onClick={chosen=w},modifier=Modifier.fillMaxWidth()){Column(Modifier.padding(12.dp)){Text(w.simplified,fontSize=25.sp);Text(w.pinyin);Text(w.russian)}}};if(found.isEmpty())item{Text("Ничего не найдено")}}};chosen?.let{WordDetails(vm,it){chosen=null}}}
-@Composable private fun Interactive(vm:HanziViewModel,text:String){var chosen by remember{mutableStateOf<Word?>(null)};var unknown by remember{mutableStateOf<String?>(null)};val color=MaterialTheme.colorScheme.primary;val plain=MaterialTheme.colorScheme.onSurface;val tokens=remember(text){vm.segmenter.segment(text)};val annotated=remember(tokens,color,plain){buildAnnotatedString{tokens.forEachIndexed{i,t->pushStringAnnotation("token",i.toString());withStyle(SpanStyle(color=if(t.word!=null)color else plain)){append(t.text)};pop()}}};ClickableText(annotated,style=MaterialTheme.typography.bodyLarge.copy(fontSize=27.sp,lineHeight=42.sp),onClick={offset->annotated.getStringAnnotations("token",offset,offset).firstOrNull()?.item?.toIntOrNull()?.let{idx->tokens.getOrNull(idx)?.let{if(it.word!=null)chosen=it.word else unknown=it.text}}});chosen?.let{WordDetails(vm,it){chosen=null}};unknown?.let{s->AlertDialog(onDismissRequest={unknown=null},title={Text(s)},text={Text("Нет проверенной словарной статьи для этого фрагмента.")},confirmButton={TextButton({vm.speak(s)}){Text("Озвучить")}},dismissButton={TextButton({unknown=null}){Text("Закрыть")}})}}
+
+@Composable private fun WordDetails(vm:HanziViewModel,w:Word,onClose:()->Unit){
+    val entry=vm.curriculum?.byId?.get(w.id)
+    AlertDialog(onDismissRequest=onClose,title={Text(entry?.label?:w.simplified,fontSize=32.sp)},text={
+        Column(Modifier.verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(8.dp)){
+            Text(w.pinyin,style=MaterialTheme.typography.titleLarge)
+            Text(w.russian.ifBlank{"Перевод на русский пока не добавлен."})
+            Text("Часть речи: "+w.pos.ifBlank{"не указана"})
+            if(w.traditional.isNotBlank())Text("Традиционный: ${w.traditional}")
+            Text(if(entry!=null)"${hskLabel(entry.band)} · № ${entry.serial} · ${entry.levelName} · программа 2025" else "Авторская практика · уровень не сверён",style=MaterialTheme.typography.labelMedium)
+            if(entry!=null&&entry.label!=w.simplified)Text("Цифра в исходной записи различает словарные статьи, она не произносится.")
+            if(w.russian.isNotBlank())Text("Русский перевод: авторская статья, редакторская проверка требуется.",style=MaterialTheme.typography.labelSmall)
+            if(w.example.isNotBlank()){Text(w.example,fontSize=21.sp);Text(w.examplePinyin);Text(w.exampleRu)}
+            Row{TextButton({vm.speak(w.simplified)}){Text("Озвучить")};TextButton({vm.speak(w.simplified,.7f)}){Text("0.7×")}}
+            if(w.example.isNotBlank())TextButton({vm.speak(w.example)}){Text("Пример TTS")}
+            Text("Произношение TTS синтетическое.",style=MaterialTheme.typography.labelSmall)
+            val others=remember(w,vm.curriculum){vm.curriculum?.entries?.filter{it.word.simplified==w.simplified&&it.word.id!=w.id}.orEmpty()}
+            if(others.isNotEmpty()){Text("Другие статьи этого написания:");others.forEach{Text("${it.label} · ${it.word.pinyin} · ${hskLabel(it.band)}")}}
+        }
+    },confirmButton={TextButton({vm.add(w);onClose()}){Text("В повторение")}},dismissButton={TextButton(onClose){Text("Закрыть")}})
+}
+@Composable private fun LevelScope(vm:HanziViewModel,cumulative:Boolean,onScope:(Boolean)->Unit){
+    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){
+        TextButton({vm.updateLevel((hskBand(vm.level)-1).coerceAtLeast(1))},enabled=hskBand(vm.level)>1){Text("‹ Уровень")}
+        Text(hskLabel(vm.level),modifier=Modifier.padding(top=12.dp),fontWeight=FontWeight.Bold)
+        TextButton({vm.updateLevel((hskBand(vm.level)+1).coerceAtMost(7))},enabled=hskBand(vm.level)<7){Text("Уровень ›")}
+    }
+    Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
+        FilterChip(selected=!cumulative,onClick={onScope(false)},label={Text("Новые")})
+        FilterChip(selected=cumulative,onClick={onScope(true)},label={Text("Все до уровня")})
+    }
+}
+@Composable private fun CurriculumLoading(vm:HanziViewModel){
+    Column(Modifier.fillMaxWidth().padding(16.dp)){
+        if(vm.curriculumError.isBlank()){LinearProgressIndicator(Modifier.fillMaxWidth());Text("Загрузка HSK…")}
+        else{Text(vm.curriculumError);WideButton("Повторить загрузку"){vm.loadCurriculum()}}
+    }
+}
+@Composable private fun Dictionary(vm:HanziViewModel){
+    var q by rememberSaveable{mutableStateOf("")};var cumulative by rememberSaveable{mutableStateOf(true)}
+    var chosen by remember{mutableStateOf<Word?>(null)}
+    val data=vm.curriculum
+    Column(Modifier.fillMaxSize(),verticalArrangement=Arrangement.spacedBy(6.dp)){
+        Text("Словарь HSK 3.0",style=MaterialTheme.typography.headlineSmall)
+        LevelScope(vm,cumulative){cumulative=it}
+        if(data==null){CurriculumLoading(vm);return@Column}
+        OutlinedTextField(q,{q=it},label={Text("汉字 / pinyin / русский")},singleLine=true,modifier=Modifier.fillMaxWidth())
+        val level=vm.level
+        val scoped=remember(data,level,cumulative){data.entries.filter{inScope(it.band,level,cumulative)}}
+        val query=q.trim()
+        val found by produceState(initialValue=emptyList<SyllabusWord>(),scoped,query){
+            value=withContext(Dispatchers.Default){
+                if(query.isBlank())scoped else{
+                    val key=searchKey(query)
+                    scoped.filter{e->val w=e.word;e.label.contains(query,true)||w.simplified.contains(query,true)||w.traditional.contains(query,true)||w.russian.contains(query,true)||(key.isNotEmpty()&&searchKey(w.pinyin).contains(key))}
+                }
+            }
+        }
+        Text("${scoped.size} слов · найдено ${found.size} · RU: ${scoped.count{it.word.russian.isNotBlank()}}",style=MaterialTheme.typography.labelMedium)
+        Text("Список 2025; русские переводы пока частичные.",style=MaterialTheme.typography.bodySmall)
+        LazyColumn(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(7.dp)){
+            items(found,key={it.serial}){e->Card(onClick={chosen=e.word},modifier=Modifier.fillMaxWidth()){
+                Column(Modifier.padding(12.dp)){
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Text(e.label,fontSize=25.sp);Text(hskLabel(e.band),style=MaterialTheme.typography.labelMedium)}
+                    Text(e.word.pinyin);Text(e.word.russian.ifBlank{"Перевод не добавлен"},style=MaterialTheme.typography.bodySmall)
+                }
+            }}
+            if(found.isEmpty())item{Text("Нет результатов.")}
+        }
+    }
+    chosen?.let{WordDetails(vm,it){chosen=null}}
+}
+
+@Composable private fun Interactive(vm:HanziViewModel,text:String){var chosen by remember{mutableStateOf<Word?>(null)};var unknown by remember{mutableStateOf<String?>(null)};val color=MaterialTheme.colorScheme.primary;val plain=MaterialTheme.colorScheme.onSurface;val tokens=remember(text,vm.segmenter){vm.segmenter.segment(text)};val annotated=remember(tokens,color,plain){buildAnnotatedString{tokens.forEachIndexed{i,t->pushStringAnnotation("token",i.toString());withStyle(SpanStyle(color=if(t.word!=null)color else plain)){append(t.text)};pop()}}};ClickableText(annotated,style=MaterialTheme.typography.bodyLarge.copy(fontSize=27.sp,lineHeight=42.sp),onClick={offset->annotated.getStringAnnotations("token",offset,offset).firstOrNull()?.item?.toIntOrNull()?.let{idx->tokens.getOrNull(idx)?.let{if(it.word!=null)chosen=it.word else unknown=it.text}}});chosen?.let{WordDetails(vm,it){chosen=null}};unknown?.let{s->AlertDialog(onDismissRequest={unknown=null},title={Text(s)},text={Text("Нет проверенной словарной статьи для этого фрагмента.")},confirmButton={TextButton({vm.speak(s)}){Text("Озвучить")}},dismissButton={TextButton({unknown=null}){Text("Закрыть")}})}}
 
 @Composable private fun Reader(vm:HanziViewModel)=Page("Интерактивное чтение"){
     var index by rememberSaveable{mutableIntStateOf(Math.floorMod(LocalDate.now().toEpochDay(),readings.size.toLong()).toInt())}
@@ -149,7 +231,7 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
     WideButton(if(custom)"Вернуться к уроку" else "Вставить собственный текст"){custom=!custom}
     if(custom){OutlinedTextField(ownText,{if(it.length<=4000)ownText=it},label={Text("Китайский текст · до 4000 символов")},modifier=Modifier.fillMaxWidth(),minLines=3);Text("Для своего текста доступны словарные статьи; полный pinyin и перевод не генерируются.")}
 }
-@Composable private fun GrammarScreen(vm:HanziViewModel)=Page("Грамматика"){
+@Composable private fun GrammarPracticeScreen(vm:HanziViewModel)=Page("Авторская грамматическая практика"){
     var index by rememberSaveable{mutableIntStateOf(Math.floorMod(LocalDate.now().toEpochDay(),allGrammar.size.toLong()).toInt())}
     val g=allGrammar[index.coerceIn(0,allGrammar.lastIndex)]
     Text("${allGrammar.size} авторских конструкций · ежедневная смена по кругу · без подтверждённого уровня")
@@ -157,7 +239,7 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
     Panel("${g.chinese} · ${g.name}"){Text(g.formula,fontWeight=FontWeight.Bold);Text(g.explanation);Interactive(vm,g.example);Text(g.pinyin);Text(g.ru);WideButton("Прослушать пример"){vm.speak(g.example)}}
     Panel("Все конструкции"){allGrammar.forEachIndexed{i,item->TextButton({index=i}){Text("${i+1}. ${item.chinese} · ${item.name}")}}}
 }
-@Composable private fun HanziScreen(vm:HanziViewModel)=Page("Иероглифы"){
+@Composable private fun HanziPracticeScreen(vm:HanziViewModel)=Page("Авторские карточки иероглифов"){
     var index by rememberSaveable{mutableIntStateOf(Math.floorMod(LocalDate.now().toEpochDay(),characterPractice.size.toLong()).toInt())}
     val h=characterPractice[index.coerceIn(0,characterPractice.lastIndex)]
     Text("${characterPractice.size} авторских карточек · не полный иероглифический справочник")
@@ -166,8 +248,85 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
     Panel("Все карточки"){characterPractice.chunked(4).forEachIndexed{row,items->Row(horizontalArrangement=Arrangement.spacedBy(4.dp)){items.forEachIndexed{col,item->FilterChip(selected=index==row*4+col,onClick={index=row*4+col},label={Text(item.han,fontSize=20.sp)},modifier=Modifier.weight(1f))}}}}
     Text("Порядок черт и проверка рукописного ввода пока не реализованы.")
 }
+
+@Composable private fun GrammarScreen(vm:HanziViewModel){
+    var practice by rememberSaveable{mutableStateOf(false)}
+    var cumulative by rememberSaveable{mutableStateOf(true)}
+    var query by rememberSaveable{mutableStateOf("")}
+    var selected by remember{mutableStateOf<SyllabusGrammar?>(null)}
+    val data=vm.curriculum
+    Column(Modifier.fillMaxSize(),verticalArrangement=Arrangement.spacedBy(6.dp)){
+        TextButton({practice=!practice}){Text(if(practice)"‹ Список программы HSK" else "10 авторских объяснений ›")}
+        if(practice){Box(Modifier.weight(1f)){GrammarPracticeScreen(vm)};return@Column}
+        Text("Грамматика HSK 3.0",style=MaterialTheme.typography.headlineSmall)
+        LevelScope(vm,cumulative){cumulative=it}
+        if(data==null){CurriculumLoading(vm);return@Column}
+        OutlinedTextField(query,{query=it},label={Text("Поиск конструкции или категории")},singleLine=true,modifier=Modifier.fillMaxWidth())
+        val level=vm.level
+        val scoped=remember(data,level,cumulative){data.grammar.filter{inScope(it.band,level,cumulative)}}
+        val shown=remember(scoped,query){scoped.filter{g->listOf(g.content,g.type,g.category,g.detail).any{it.contains(query.trim(),true)}}}
+        Text("${scoped.size} тем · найдено ${shown.size}",style=MaterialTheme.typography.labelMedium)
+        Text("Полный указатель программы; развёрнутые объяснения и упражнения ещё не для всех тем.",style=MaterialTheme.typography.bodySmall)
+        LazyColumn(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(6.dp)){
+            items(shown,key={it.serial}){g->Card(onClick={selected=g},modifier=Modifier.fillMaxWidth()){Column(Modifier.padding(12.dp)){Text(g.content,fontSize=19.sp);Text(listOf(hskLabel(g.band),g.type,g.category,g.detail).filter{it.isNotBlank()}.joinToString(" · "),style=MaterialTheme.typography.bodySmall)}}}
+            if(shown.isEmpty())item{Text("Нет результатов.")}
+        }
+    }
+    selected?.let{g->AlertDialog(onDismissRequest={selected=null},title={Text(g.content)},text={Column(Modifier.verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(8.dp)){
+        Text(hskLabel(g.band));Text(listOf(g.type,g.category,g.detail).filter{it.isNotBlank()}.joinToString(" / "))
+        Text("Тема № ${g.serial} · HSK 考试大纲, 2025.")
+        Text("Развёрнутое объяснение на русском и упражнения для этого пункта ещё не добавлены. Авторские объяснения доступны отдельно.")
+    }},confirmButton={TextButton({selected=null}){Text("Закрыть")}})}
+}
+@Composable private fun HanziScreen(vm:HanziViewModel){
+    var practice by rememberSaveable{mutableStateOf(false)}
+    var cumulative by rememberSaveable{mutableStateOf(true)}
+    var writing by rememberSaveable{mutableStateOf(false)}
+    var query by rememberSaveable{mutableStateOf("")}
+    var selected by remember{mutableStateOf<SyllabusHanzi?>(null)}
+    var chosenWord by remember{mutableStateOf<Word?>(null)}
+    val data=vm.curriculum
+    Column(Modifier.fillMaxSize(),verticalArrangement=Arrangement.spacedBy(6.dp)){
+        TextButton({practice=!practice}){Text(if(practice)"‹ Список программы HSK" else "16 авторских карточек ›")}
+        if(practice){Box(Modifier.weight(1f)){HanziPracticeScreen(vm)};return@Column}
+        Text("Иероглифы HSK 3.0",style=MaterialTheme.typography.headlineSmall)
+        LevelScope(vm,cumulative){cumulative=it}
+        Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
+            FilterChip(selected=!writing,onClick={writing=false},label={Text("Чтение")})
+            FilterChip(selected=writing,onClick={writing=true},label={Text("Письмо")})
+        }
+        if(data==null){CurriculumLoading(vm);return@Column}
+        OutlinedTextField(query,{query=it},label={Text("Иероглиф / pinyin")},singleLine=true,modifier=Modifier.fillMaxWidth())
+        val level=vm.level
+        val scoped=remember(data,level,cumulative,writing){data.hanzi.filter{h->if(writing)h.writingBand?.let{inScope(it,level,cumulative)}==true else inScope(h.band,level,cumulative)}}
+        val shown=remember(scoped,query){val key=searchKey(query);scoped.filter{h->query.isBlank()||h.hanzi.contains(query.trim())||(key.isNotBlank()&&searchKey(h.readings).contains(key))}}
+        Text("${scoped.size} иероглифов · найдено ${shown.size}",style=MaterialTheme.typography.labelMedium)
+        LazyColumn(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(6.dp)){
+            items(shown.chunked(4),key={it.first().hanzi}){row->Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.spacedBy(4.dp)){
+                row.forEach{h->Card(onClick={selected=h},modifier=Modifier.weight(1f)){Column(Modifier.padding(7.dp)){Text(h.hanzi,fontSize=29.sp);Text(h.readings.substringBefore(','),fontSize=11.sp)}}}
+                repeat(4-row.size){Spacer(Modifier.weight(1f))}
+            }}
+            if(shown.isEmpty())item{Text(if(writing&&vm.level==1)"Для HSK 1 список обязательного письма пуст." else "Нет результатов.")}
+        }
+    }
+    selected?.let{h->
+        val related=remember(h,data){data?.entries?.asSequence()?.filter{it.word.simplified.contains(h.hanzi)}?.take(12)?.toList().orEmpty()}
+        val authored=remember(h){characterPractice.firstOrNull{it.han==h.hanzi}}
+        AlertDialog(onDismissRequest={selected=null},title={Text(h.hanzi,fontSize=64.sp)},text={Column(Modifier.verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(8.dp)){
+            Text(h.readings,fontSize=23.sp);Text("Чтение: "+hskLabel(h.band));Text("Письмо: "+(h.writingBand?.let(::hskLabel)?:"не входит в обязательный список письма"))
+            Text(authored?.ru?:"Значение на русском пока не добавлено.")
+            Text("Чтения из pinyin-data. Правильный вариант зависит от слова.")
+            TextButton({vm.speak(h.hanzi)}){Text("Озвучить TTS")}
+            Text("Слова из программы:")
+            related.forEach{e->TextButton({selected=null;chosenWord=e.word}){Text("${e.label} · ${e.word.pinyin} · ${hskLabel(e.band)}")}}
+            Text("Анимация и проверка черт пока не реализованы.",style=MaterialTheme.typography.bodySmall)
+        }},confirmButton={TextButton({selected=null}){Text("Закрыть")}})
+    }
+    chosenWord?.let{WordDetails(vm,it){chosenWord=null}}
+}
+
 @Composable private fun ReviewScreen(vm:HanziViewModel)=Page("Повторение"){
-    var reveal by rememberSaveable{mutableStateOf(false)};var lastRated by rememberSaveable{mutableStateOf("")};val due=vm.words.filter{w->vm.reviews[w.id]?.due?.let{!it.isAfter(LocalDate.now())}==true};val w=due.firstOrNull();Text("${due.size} карточек на сегодня · SM-2-inspired");if(w==null){Text("Нет карточек к повторению. Добавьте слово из словаря.");WideButton("Добавить все ${vm.words.size} стартовых слов"){vm.words.forEach{vm.add(it)}}}else{LaunchedEffect(w.id){reveal=false;lastRated=""};Panel("Карточка"){Text(w.simplified,fontSize=44.sp);TextButton({vm.speak(w.simplified)}){Text("Прослушать")};if(!reveal)Button({reveal=true}){Text("Показать ответ")}else{Text(w.pinyin);Text(w.russian);for(pair in listOf(listOf(Grade.AGAIN to "Не знаю",Grade.HARD to "Трудно"),listOf(Grade.GOOD to "Хорошо",Grade.EASY to "Легко")))Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){pair.forEach{(g,label)->OutlinedButton(onClick={lastRated=w.id;vm.rate(w,g)},enabled=lastRated!=w.id,modifier=Modifier.weight(1f)){Text(label)}}}}}}
+    var reveal by rememberSaveable{mutableStateOf(false)};var lastRated by rememberSaveable{mutableStateOf("")};val due=vm.words.filter{w->vm.reviews[w.id]?.due?.let{!it.isAfter(LocalDate.now())}==true};val w=due.firstOrNull();Text("${due.size} карточек на сегодня · SM-2-inspired");if(w==null){Text("Нет карточек к повторению. Добавьте слово из словаря.");Text("Открой словарь выбранного уровня и добавь нужные карточки вручную.")}else{LaunchedEffect(w.id){reveal=false;lastRated=""};Panel("Карточка"){Text(w.simplified,fontSize=44.sp);TextButton({vm.speak(w.simplified)}){Text("Прослушать")};if(!reveal)Button({reveal=true}){Text("Показать ответ")}else{Text(w.pinyin);Text(w.russian.ifBlank{"Русский перевод не добавлен; повторяй чтение pinyin."});for(pair in listOf(listOf(Grade.AGAIN to "Не знаю",Grade.HARD to "Трудно"),listOf(Grade.GOOD to "Хорошо",Grade.EASY to "Легко")))Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){pair.forEach{(g,label)->OutlinedButton(onClick={lastRated=w.id;vm.rate(w,g)},enabled=lastRated!=w.id,modifier=Modifier.weight(1f)){Text(label)}}}}}}
 }
 @Composable private fun Library(vm:HanziViewModel){
     var current by rememberSaveable{mutableStateOf<String?>(null)};val book=vm.books.firstOrNull{it.id==current};val picker=rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()){it?.let(vm::importBook)}
@@ -256,5 +415,5 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
     Text("Официальные форматы: chinesetest.cn · HSK 3.0, запуск объявлен на 13.12.2026. Локальный центр необходимо уточнить.")
 }
 @Composable private fun Profile(vm:HanziViewModel)=Page("Профиль и настройки"){
-    var date by rememberSaveable{mutableStateOf(vm.date)};Panel("Цель") {OutlinedTextField(date,{date=it},label={Text("Дата ГГГГ-ММ-ДД")},singleLine=true,modifier=Modifier.fillMaxWidth());WideButton("Сохранить дату"){vm.saveDate(date)};Text("Время в день: ${vm.minutes} мин");Slider(value=vm.minutes.toFloat(),onValueChange={vm.updateMinutes(it.toInt())},valueRange=15f..180f,steps=10);Text("30-дневный план: ${sprint(vm.words.size,30).first()} стартовое слово в день (не полная программа HSK)")};Panel("Внешний вид"){listOf("system" to "Системная","light" to "Светлая","dark" to "Тёмная").forEach{(id,label)->Row{RadioButton(vm.theme==id,{vm.updateTheme(id)});Text(label,Modifier.padding(top=12.dp))}};Text("Интерфейс: русский. Английская и китайская локализации запланированы.")};Panel("Статистика") {Text("Карточек: ${vm.reviews.size}");Text("Текущие успешные серии (сумма): ${vm.reviews.values.sumOf{it.repetitions}}");Text("Ошибок повторения: ${vm.reviews.values.sumOf{it.lapses}}");Text("Последний тест: ${vm.lastQuiz}");Text("Импортированных файлов: ${vm.books.size}")};Panel("Конфиденциальность") {Text("Нет сетевого разрешения. Голос хранится в памяти до удаления или закрытия приложения. Книги сохраняются в приватной директории Android.");WideButton("Удалить голосовую запись"){vm.erase()};Text("HanziFlow 0.1.1-alpha · экспериментальный учебный контент.")}
+    var date by rememberSaveable{mutableStateOf(vm.date)};Panel("Цель") {OutlinedTextField(date,{date=it},label={Text("Дата ГГГГ-ММ-ДД")},singleLine=true,modifier=Modifier.fillMaxWidth());WideButton("Сохранить дату"){vm.saveDate(date)};Text("Время в день: ${vm.minutes} мин");Slider(value=vm.minutes.toFloat(),onValueChange={vm.updateMinutes(it.toInt())},valueRange=15f..180f,steps=10);Text("30-дневная оценка нагрузки: ${sprint(vm.curriculum?.entries?.count{inScope(it.band,vm.level,false)}?:0,30).first()} новых слов в день. Не адаптивный план.")};Panel("Внешний вид"){listOf("system" to "Системная","light" to "Светлая","dark" to "Тёмная").forEach{(id,label)->Row{RadioButton(vm.theme==id,{vm.updateTheme(id)});Text(label,Modifier.padding(top=12.dp))}};Text("Интерфейс: русский. Английская и китайская локализации запланированы.")};Panel("Статистика") {Text("Карточек: ${vm.reviews.size}");Text("Текущие успешные серии (сумма): ${vm.reviews.values.sumOf{it.repetitions}}");Text("Ошибок повторения: ${vm.reviews.values.sumOf{it.lapses}}");Text("Последний тест: ${vm.lastQuiz}");Text("Импортированных файлов: ${vm.books.size}")};Panel("Конфиденциальность") {Text("Нет сетевого разрешения. Голос хранится в памяти до удаления или закрытия приложения. Книги сохраняются в приватной директории Android.");WideButton("Удалить голосовую запись"){vm.erase()};Text("HanziFlow 0.2.0-alpha · списки программы HSK 2025.");Text("Источники: ChineseTest / profesorm/hsk30 (CC BY 4.0); mozillazg/pinyin-data (MIT). Полные атрибуции включены в APK: hsk2025/NOTICE.txt и PINYIN_LICENSE.txt.")}
 }

@@ -1,13 +1,8 @@
-# Project status — 0.1.1-alpha, 2026-11-25
+# Project status — 0.2.0-alpha, 2026-11-25
 
-**0.1.0-alpha CI passed** (run 45625738536, Kotlin tests, APK, Lint, dependency report). APK installed and user reported 22 of 55 checks working. Remaining 33 checks are unconfirmed, not automatically defects.
-
-## User QA findings
-- User reports missing fourth/neutral tone visualization/examples and repetitive reading/grammar/characters.
-- Existing fourth-tone numeric template was present; neutral template intentionally empty; cause of fourth-tone display issue not reproduced on device.
-- 0.1.1 adds independent padded pedagogical diagrams for four lexical tones plus context-specific neutral tone; 16 TTS targets; short-syllable F0 gate and regression tests.
-- 50 original dictionary records, 5 selectable readings, 10 grammar entries, 16 character cards; daily rotation and manual browsing. No verified HSK mapping, no official textbook copying, no OCR or handwriting.
-- CI and device test for 0.1.1 pending. No claim of phonetic accuracy or native recordings.
-
-## Remaining
-Confirm levels, dictionary search and SRS, playback and measured F0, library, statistics, persistence, offline mode. No complete HSK course or full mocks. No human accuracy validation. See CONTENT_COVERAGE.md and ROADMAP.md. Public repository, no redistribution license selected.
+- 0.1.0-alpha CI passed (run 45625738536); installed and tested by user, 22/55 checks confirmed. 0.1.1 fixes committed, device/CI status not confirmed here.
+- 0.2.0 imports full HSK 2025 vocabulary (11000), recognition characters (3088), writing subset (1200) and grammar index (593), verified counts and cross-source comparisons; 3088 pinyin lists.
+- New/cumulative scope selection, dictionary search, hanzi reading/writing filters, grammar index and source labels; original practice preserved. Data parsed and indexed off main thread; LazyColumn renders visible rows. In-memory compact syllabus index, not a complete paginated SQLite dictionary.
+- Existing review IDs preserved; new records have stable hsk25-N IDs. Existing database schema unchanged.
+- Russian translations and detailed grammar lessons incomplete; no licensed full textbook or workbook bundle, no copied official example sentences.
+- Data checks added to CI. 0.2.0 build and real-device QA pending. See CONTENT_COVERAGE.md.
