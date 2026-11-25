@@ -45,7 +45,7 @@ fun readCurriculum(ctx:Context,starter:List<Word>):Curriculum{
     require(g.size==593 && counts(g.map{it.band})==listOf(70,78,96,95,70,50,134))
     val english = (1..7).flatMap{n->fields(ctx,"cedict-$n",2)}.associate{f->"hsk25-"+f[0] to f[1]}
     require(english.size==10734 && english.values.all{it.isNotBlank()})
-    require(english.keys.all{it.removePrefix("hsk25-").toIntOrNull() in 1..11000})
+    require(english.keys.all{it.removePrefix("hsk25-").toIntOrNull()?.let{n->n in 1..11000}==true})
     return Curriculum(v,h,g,english,starter)
 }
 
