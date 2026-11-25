@@ -12,7 +12,7 @@
 
 ## GitHub
 
-Canonical repository: https://github.com/Aidoni0mi/HanziFlow. Public visibility explicitly confirmed by owner. Do not commit personal books, recordings or secrets. Initial import is in progress; Android CI and APK are not yet verified. No public redistribution license has been selected.
+Canonical repository: https://github.com/Aidoni0mi/HanziFlow. Public visibility explicitly confirmed by owner. Do not commit personal books, recordings or secrets. Initial source import completed; Android CI and APK are not yet verified. Visit Actions → Android verification → successful run → Artifacts to download HanziFlow-debug. No public redistribution license has been selected.
 
 ## Verified in this environment
 

@@ -1,6 +1,6 @@
 # Project status — 0.1.0-alpha, 2026-11-25
 
-**Not release-ready.** Source snapshot and local Git history created. GitHub account Aidoni0mi lookup successful; no create-repository API exposed, remote now exists; initial source import in progress. Environment: Java 21.0.12, Kotlin CLI 1.9.0, Git 2.47.3; no Gradle, Android SDK, adb, emulator; network DNS failure. No APK, no executed GitHub Actions. Android/Compose type checking and runtime behavior unverified. Kotlin-only syntax scan without Android dependencies is not a build.
+**Not release-ready.** Source snapshot and local Git history created. GitHub account Aidoni0mi lookup successful; no create-repository API exposed, remote created by owner; source published to Aidoni0mi/HanziFlow via GitHub API. Environment: Java 21.0.12, Kotlin CLI 1.9.0, Git 2.47.3; no Gradle, Android SDK, adb, emulator; network DNS failure. No APK, GitHub Actions result not yet verified. Android/Compose type checking and runtime behavior unverified. Kotlin-only syntax scan without Android dependencies is not a build.
 
 ## Implemented in source
 - Compose Russian UI, five tabs, light/dark/system, HSK 1–9 goal selectors (default 4), date/time plan and summary.
