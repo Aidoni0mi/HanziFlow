@@ -1,0 +1,9 @@
+HSK 2025 examination syllabus data (retrieved 2026-11-25).
+Official publisher: Center for Language Education and Cooperation / Chinese Testing International.
+https://download.chinesetest.cn/newhsk-site/Syllabus/H_DG_1110.pdf
+Compilation: https://github.com/profesorm/hsk30 (CC BY 4.0, https://creativecommons.org/licenses/by/4.0/).
+Only factual lexical entries, readings, classifications, level mappings and grammar headings/patterns retained; no original examples, exercises, task text or textbook pages reproduced. Original source rights remain with respective owners; no endorsement.
+Source blobs: vocabulary cee791f0bdff928538b25c17e08f54ba41c023ca; hanzi e5ddfdbb161a5f127f2de89ddfd8353b2664c7bc; grammar ff3a1f7a0c68fe5276d68ab473d36af9033598d2.
+Cross-check: https://github.com/chelsea6502/hsk-2025-data. Exact 11,000 vocabulary records and 4,288 recognition/writing rows match; 592 grammar records match exactly, one HSK1 multi-line heading has a delimiter difference (both subheadings retained). No claim of manual verification of each entry against the official PDF.
+Character readings: mozillazg/pinyin-data v0.16.0, MIT, source blob 3a3fd4dd1df3004e15c488c657afdf4aa9b9d890. All 3,088 recognition characters have a reading list. Readings are not a contextual pronunciation assessment.
+Changes: normalize level IDs 1–7, retain source numbered headword labels, strip suffix numbers for search and audio, merge writing-level metadata, omit grammar examples and normalize literal newline separators. UTF-8 TSV.

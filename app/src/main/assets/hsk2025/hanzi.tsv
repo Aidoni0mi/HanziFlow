@@ -1,0 +1,3089 @@
+recognition_level	hanzi	writing_level	readings
+1	爱	2	ài
+1	八	2	bā,bá
+1	爸	2	bà
+1	吧		ba,bā,pā
+1	白		bái,bó
+1	百	2	bǎi,bó,mò
+1	班		bān
+1	半	2	bàn,pàn
+1	包		bāo,páo,fú
+1	杯		bēi
+1	本		běn,bēn
+1	边	2	biān,bian
+1	便		biàn,pián,biān
+1	病		bìng
+1	不	2	bù,fǒu,fōu,fū,bú
+1	菜		cài
+1	茶	2	chá
+1	常		cháng
+1	唱		chàng
+1	超		chāo,chǎo,chào,tiào
+1	车		chē,jū
+1	吃		chī,qī
+1	出		chū
+1	穿		chuān,chuàn,yuān
+1	床		chuáng
+1	打	2	dǎ,dá
+1	大	2	dà,dài,tài
+1	蛋		dàn
+1	到		dào
+1	道		dào,dǎo
+1	得		dé,de,děi
+1	的	2	de,dī,dí,dì
+1	弟		dì,tì,tuí
+1	第		dì
+1	点	2	diǎn
+1	电		diàn
+1	东		dōng
+1	都		dōu,dū
+1	读		dú,dòu
+1	对	2	duì
+1	多	2	duō
+1	儿	2	ér,er,rén
+1	二	2	èr
+1	饭		fàn
+1	房		fáng,páng
+1	飞		fēi
+1	非		fēi,fěi
+1	分	2	fēn,fèn,fén
+1	服		fú,fù,bì,bó
+1	高		gāo,gào
+1	哥	2	gē
+1	歌		gē
+1	个	2	gè,gě,gàn
+1	给		gěi,jǐ
+1	工	2	gōng
+1	公		gōng
+1	狗		gǒu
+1	关		guān
+1	贵		guì
+1	国	2	guó
+1	果		guǒ,luǒ,guàn
+1	还	2	hái,huán,fú
+1	孩		hái
+1	汉	2	hàn
+1	好	2	hǎo,hào
+1	号		hào,háo,xiāo
+1	喝		hē,hè,yè,kài
+1	和	2	hé,hè,hú,huó,huò,huo
+1	很	2	hěn
+1	后	2	hòu
+1	候		hòu
+1	话		huà
+1	欢		huān
+1	回		huí
+1	会	2	huì,kuài
+1	火		huǒ,huō
+1	机		jī,wèi
+1	鸡		jī
+1	几	2	jǐ,jī
+1	家	2	jiā,jia,jià,jie,gū
+1	间	2	jiān,jiàn
+1	见		jiàn,xiàn
+1	件		jiàn,móu
+1	叫	2	jiào
+1	姐	2	jiě,jù,xù,zū
+1	今	2	jīn
+1	九	2	jiǔ,jiū
+1	觉		jué,jiào
+1	开		kāi
+1	看		kàn,kān
+1	可	2	kě,kè,gē
+1	客		kè,qià
+1	课		kè
+1	口	2	kǒu
+1	块		kuài,yué
+1	来	2	lái
+1	老		lǎo
+1	了	2	le,liǎo,liào
+1	冷		lěng,líng,lǐng
+1	里		lǐ,li
+1	两	2	liǎng
+1	亮		liàng,liáng
+1	零		líng,lián
+1	六	2	liù,lù
+1	妈	2	mā
+1	吗	2	ma,má,mǎ
+1	买		mǎi
+1	卖		mài
+1	忙		máng
+1	猫		māo,miáo,máo
+1	么	2	me,yāo,mó,ma
+1	没	2	méi,mò,me
+1	妹		mèi
+1	们	2	men,mén
+1	米		mǐ
+1	面		miàn
+1	名	2	míng,mìng
+1	明		míng,mèng
+1	哪		nǎ,na,né,nuó,nǎi,nà,niè,něi
+1	那	2	nà,nā,nuó,nuò,nèi,nǎ,něi,né,nǎi,nè
+1	奶		nǎi
+1	男	2	nán
+1	脑		nǎo
+1	呢		ne,ní,nǐ,nī
+1	能		néng,tái,nái,nài,xióng
+1	你	2	nǐ
+1	年	2	nián,nìng
+1	您		nín
+1	牛		niú
+1	女	2	nǚ,nǜ,rǔ
+1	朋		péng
+1	漂		piāo,piào,piǎo,biāo
+1	苹		píng,pēng
+1	七	2	qī,qí
+1	期		qī,jī
+1	起		qǐ
+1	气		qì,qǐ
+1	千		qiān
+1	前		qián,jiǎn
+1	钱		qián
+1	请		qǐng
+1	去	2	qù,qū
+1	热		rè
+1	人	2	rén
+1	认		rèn
+1	日	2	rì
+1	三	2	sān
+1	商		shāng
+1	上	2	shàng,shǎng
+1	少	2	shǎo,shào
+1	谁		shuí,shéi
+1	什	2	shén,shí
+1	生	2	shēng
+1	师		shī
+1	十	2	shí
+1	时	2	shí
+1	识		shí,shì,zhì
+1	士		shì
+1	市		shì,fú
+1	事		shì,zì
+1	视		shì
+1	是	2	shì,tí
+1	手		shǒu
+1	书	2	shū
+1	水		shuǐ
+1	睡		shuì
+1	说	2	shuō,shuì,yuè
+1	司		sī,cí,sì
+1	四	2	sì
+1	岁	2	suì
+1	他	2	tā,tuó
+1	它		tā,tuó,yí
+1	她	2	tā,jiě,chí
+1	太		tài,tā
+1	题		tí
+1	天	2	tiān
+1	条		tiáo
+1	听		tīng,yǐn,yí
+1	同	2	tóng,tòng
+1	外		wài
+1	玩		wán
+1	晚		wǎn
+1	喂		wèi
+1	文	2	wén
+1	问		wèn
+1	我	2	wǒ
+1	五	2	wǔ
+1	午	2	wǔ
+1	西		xī
+1	息		xī
+1	习	2	xí
+1	喜		xǐ,xī,chì
+1	系		xì,jì
+1	下	2	xià
+1	先		xiān
+1	现	2	xiàn
+1	想		xiǎng
+1	小	2	xiǎo
+1	校		xiào,jiào,jiǎo,qiāo
+1	些		xiē,suò,suō
+1	写	2	xiě,xiè
+1	谢		xiè
+1	新		xīn
+1	星		xīng
+1	兴		xīng,xìng
+1	休		xiū,xù
+1	学	2	xué
+1	雪		xuě
+1	样		yàng,yáng
+1	要	2	yào,yāo,yǎo
+1	也	2	yě,yí
+1	一	2	yī,yí,yì
+1	衣		yī,yì
+1	医		yī,yì
+1	宜		yí
+1	以	2	yǐ,sì
+1	椅		yǐ,yī
+1	影		yǐng
+1	友		yǒu
+1	有	2	yǒu,yòu,wěi
+1	雨		yǔ,yù
+1	语	2	yǔ,yù
+1	元		yuán
+1	院		yuàn
+1	月	2	yuè,rù
+1	再		zài
+1	在	2	zài
+1	早		zǎo
+1	怎		zěn
+1	找		zhǎo,huá
+1	这	2	zhè,zhèi
+1	真		zhēn
+1	正		zhèng,zhēng
+1	知		zhī,zhì
+1	只		zhǐ,zhī
+1	中	2	zhōng,zhòng
+1	钟		zhōng
+1	住		zhù
+1	桌		zhuō
+1	子	2	zi,zǐ
+1	字	2	zì
+1	租		zū,jū
+1	昨		zuó
+1	作	2	zuò,zuō,zuó
+1	坐		zuò
+1	做		zuò
+2	啊		a,ā,á,ǎ,à,è
+2	帮		bāng
+2	备		bèi
+2	比	2	bǐ,bì,pí,pǐ
+2	笔		bǐ
+2	表		biǎo
+2	别		bié,biè
+2	步		bù
+2	场		chǎng,cháng
+2	词		cí
+2	次		cì,zī,cí
+2	从		cóng,zòng
+2	错		cuò
+2	但		dàn,tǎn,yàn
+2	地	2	dì,de
+2	等		děng
+2	店		diàn
+2	懂		dǒng
+2	动		dòng
+2	啡		fēi,pèi,pái,pēi,bài
+2	夫		fū,fú
+2	告		gào,jū,gù
+2	跟		gēn
+2	馆		guǎn
+2	过	2	guò,guō
+2	黑		hēi
+2	红		hóng,gōng
+2	花		huā
+2	画		huà
+2	坏		huài,pī,péi
+2	己		jǐ,qǐ
+2	记		jì
+2	交		jiāo
+2	教		jiào,jiāo
+2	介		jiè,gè
+2	进		jìn
+2	近		jìn
+2	经		jīng,jìng
+2	睛		jīng,jǐng
+2	酒		jiǔ
+2	就		jiù
+2	咖		kā,gā,jiā
+2	考		kǎo
+2	裤		kù
+2	快		kuài
+2	篮		lán
+2	乐		lè,yuè
+2	累		lèi,léi,lěi,lǜ,liè
+2	离		lí,chī
+2	留		liú,liù,liǔ
+2	楼		lóu
+2	路		lù,luò
+2	旅		lǚ
+2	绿		lǜ,lù
+2	慢		màn,mán
+2	每		měi
+2	门		mén
+2	拿		ná
+2	鸟		niǎo,diǎo
+2	旁		páng,pēng,bēng,bàng
+2	跑		pǎo,páo,bó
+2	票		piào,piāo
+2	妻		qī,qì
+2	情		qíng
+2	晴		qíng
+2	球		qiú
+2	然		rán
+2	让		ràng
+2	肉		ròu,rù
+2	色		sè,shǎi
+2	绍		shào
+2	身		shēn,juān
+2	始		shǐ
+2	试		shì
+2	室		shì
+2	舒		shū,yù
+2	思		sī,sāi
+2	送		sòng
+2	诉		sù
+2	虽		suī
+2	所		suǒ
+2	疼		téng
+2	踢		tī,dié
+2	体		tǐ,tī,bèn,cuì
+2	跳		tiào,diào,táo
+2	铁		tiě
+2	头		tóu,tou
+2	完		wán,kuān
+2	万		wàn,mò
+2	网		wǎng
+2	往		wǎng,wàng
+2	忘		wàng,wáng
+2	望		wàng
+2	为	2	wèi,wéi
+2	位		wèi,lì
+2	舞		wǔ
+2	希		xī
+2	洗		xǐ,xiǎn
+2	笑		xiào
+2	姓		xìng,shēng
+2	颜		yán
+2	眼		yǎn,wěn
+2	药		yào
+2	爷		yé
+2	已		yǐ,sì
+2	意		yì,yī
+2	因		yīn
+2	阴		yīn
+2	泳		yǒng
+2	游		yóu,liú
+2	右		yòu
+2	鱼		yú
+2	远		yuǎn
+2	运		yùn,yǔn
+2	站		zhàn,zhān
+2	长	2	zhǎng,cháng
+2	丈		zhàng
+2	周		zhōu
+2	着		zhe,zhāo,zháo,zhuó
+2	准		zhǔn
+2	自		zì
+2	走		zǒu
+2	足		zú,jù
+2	最		zuì,cuō
+2	左		zuǒ
+3	阿		ā,ē,ě,ǎ,à,a
+3	矮		ǎi
+3	安	3	ān
+3	把	3	bǎ,bà,pá
+3	般	3	bān,pán,bǎn,bō
+3	搬		bān,sù
+3	板	3	bǎn
+3	办	3	bàn
+3	饱	3	bǎo
+3	报	3	bào
+3	北	3	běi,bèi
+3	被	3	bèi,bì,pī,pì
+3	必	3	bì
+3	变	3	biàn
+3	遍		biàn
+3	宾		bīn
+3	冰	3	bīng,níng
+3	才	3	cái,zāi
+3	参	3	cān,cēn,shēn
+3	草	3	cǎo,zào
+3	层	3	céng
+3	查	3	chá,zhā,chái
+3	差	3	chà,chā,chāi,cī,chài,cuō,jiē
+3	尝		cháng
+3	衬		chèn
+3	成	3	chéng
+3	城	3	chéng
+3	迟		chí
+3	持		chí
+3	初		chū
+3	除	3	chú,zhù,shū
+3	楚		chǔ
+3	处	3	chù,chǔ
+3	船		chuán
+3	春	3	chūn,chǔn
+3	聪		cōng
+3	答	3	dá,dā
+3	带	3	dài
+3	担		dān,dàn,dǎn,jiē
+3	单	3	dān,chán,shàn
+3	当	3	dāng,dàng
+3	灯	3	dēng,dīng
+3	典	3	diǎn,tiǎn
+3	调	3	diào,tiáo
+3	定	3	dìng
+3	丢	3	diū
+3	冬	3	dōng
+3	短		duǎn
+3	段	3	duàn
+3	锻		duàn
+3	朵		duǒ
+3	饿		è
+3	而	3	ér,néng
+3	耳	3	ěr,réng
+3	发	3	fā,fà
+3	法	3	fǎ
+3	方	3	fāng,fáng,fǎng,páng,wǎng,fēng
+3	放	3	fàng,fǎng,fāng
+3	风	3	fēng
+3	封		fēng,biǎn
+3	附		fù,bù,fū
+3	复	3	fù
+3	该	3	gāi
+3	概		gài,guì,jié
+3	感		gǎn,hàn
+3	干	3	gàn,gān,àn
+3	刚	3	gāng
+3	糕		gāo
+3	根		gēn
+3	更	3	gèng,gēng
+3	共	3	gòng,gōng,gǒng,hóng
+3	故	3	gù
+3	顾		gù
+3	瓜	3	guā
+3	刮		guā
+3	怪		guài
+3	惯		guàn
+3	海	3	hǎi
+3	害		hài,hé
+3	合	3	hé,gě
+3	河	3	hé
+3	乎		hū
+3	护	3	hù
+3	化	3	huà,huā,huò
+3	环		huán
+3	换	3	huàn
+3	黄		huáng
+3	婚		hūn
+3	活	3	huó,guō
+3	或	3	huò,yù
+3	激		jī,jiào,jiāo
+3	级	3	jí
+3	极		jí
+3	急	3	jí
+3	季		jì
+3	绩		jì,jī
+3	加	3	jiā
+3	假	3	jiǎ,jià,jie,xià,xiá,gé
+3	坚		jiān
+3	检		jiǎn
+3	简		jiǎn
+3	健		jiàn
+3	讲	3	jiǎng
+3	蕉		jiāo,qiáo,qiāo
+3	角	3	jiǎo,jué,lù,gǔ
+3	饺	3	jiǎo
+3	脚		jiǎo,jué
+3	较		jiào
+3	接		jiē,xié,shà,chā
+3	街		jiē
+3	节	3	jié,jiē
+3	结	3	jié,jiē
+3	解		jiě,jiè,xiè
+3	界		jiè
+3	借	3	jiè
+3	斤	3	jīn
+3	净	3	jìng,chēng
+3	静		jìng
+3	境		jìng
+3	久	3	jiǔ
+3	旧		jiù
+3	居		jū,jī
+3	句	3	jù,gōu,gòu,qú
+3	据		jù,jū
+3	决		jué
+3	卡	3	kǎ,qiǎ
+3	康		kāng,kàng
+3	渴	3	kě,jié,kài,hé
+3	刻	3	kè,kēi
+3	空	3	kōng,kòng,kǒng
+3	哭	3	kū
+3	筷		kuài
+3	矿		kuàng
+3	蓝		lán,la
+3	礼	3	lǐ
+3	李	3	lǐ
+3	理		lǐ
+3	力	3	lì
+3	历		lì
+3	脸		liǎn
+3	练	3	liàn
+3	炼		liàn
+3	凉	3	liáng,liàng
+3	辆		liàng
+3	聊		liáo,liú
+3	料		liào,liáo
+3	邻		lín
+3	凌		líng,lìng
+3	马	3	mǎ
+3	码		mǎ
+3	满		mǎn
+3	毛	3	máo,mào
+3	冒		mào,mò
+3	末		mò,me
+3	目	3	mù
+3	南	3	nán,nā
+3	难	3	nán,nàn
+3	努	3	nǔ
+3	爬		pá
+3	怕	3	pà,bó
+3	拍		pāi,bó
+3	盘		pán
+3	胖	3	pàng,pán,pàn
+3	啤		pí
+3	片	3	piàn,piān,pàn
+3	平	3	píng,pián,bìng,bēng
+3	瓶	3	píng
+3	其	3	qí,jī,jì
+3	奇		qí,jī,ǎi,yǐ
+3	骑		qí
+3	汽	3	qì,gài,yǐ
+3	铅		qiān,yán
+3	且	3	qiě,jū,cú
+3	轻	3	qīng
+3	清		qīng,qìng
+3	秋	3	qiū
+3	求	3	qiú
+3	区	3	qū,ōu
+3	趣		qù,cù,qū,cǒu,zōu
+3	全	3	quán
+3	泉		quán
+3	裙		qún
+3	容		róng,yǒng
+3	如	3	rú
+3	赛		sài
+3	伞	3	sǎn
+3	扫		sǎo,sào
+3	沙		shā,shà,suō
+3	山	3	shān
+3	衫		shān
+3	烧		shāo
+3	勺	3	sháo,shuò,zhuó,dì
+3	声	3	shēng,qìng
+3	实	3	shí
+3	史		shǐ
+3	世		shì
+3	适	3	shì,kuò
+3	收	3	shōu
+3	受	3	shòu,dào
+3	瘦		shòu
+3	叔		shū
+3	束		shù
+3	树	3	shù
+3	数		shù,shǔ,shuò
+3	刷		shuā,shuà
+3	双		shuāng
+3	算		suàn
+3	糖		táng
+3	特	3	tè
+3	梯		tī,tí
+3	提		tí,dī,chí,shí,dǐ
+3	甜		tián
+3	挺	3	tǐng,tíng
+3	突		tū
+3	图	3	tú
+3	腿		tuǐ
+3	碗		wǎn
+3	卫		wèi
+3	闻	3	wén
+3	屋		wū
+3	务	3	wù
+3	物	3	wù
+3	戏		xì,hū
+3	夏	3	xià,jiǎ
+3	鲜		xiān,xiǎn
+3	相	3	xiāng,xiàng
+3	香	3	xiāng
+3	箱		xiāng
+3	响	3	xiǎng
+3	向	3	xiàng
+3	像		xiàng
+3	鞋		xié,wā
+3	心	3	xīn
+3	信	3	xìn,shēn
+3	行	3	xíng,háng,héng,xìng,hàng
+3	熊		xióng
+3	须	3	xū
+3	需		xū,nuò,rú,ruǎn
+3	选	3	xuǎn
+3	牙	3	yá,yà
+3	言	3	yán,yàn,yín
+3	演		yǎn,yàn
+3	羊	3	yáng
+3	阳	3	yáng
+3	养	3	yǎng
+3	业	3	yè
+3	页	3	yè
+3	姨		yí
+3	议		yì
+3	易		yì
+3	音	3	yīn
+3	银		yín
+3	饮	3	yǐn,yìn
+3	应	3	yīng,yìng
+3	迎		yíng,yìng
+3	用	3	yòng
+3	邮		yóu
+3	又	3	yòu
+3	于	3	yú,wéi,yū,xū
+3	羽		yǔ,hù
+3	育	3	yù,zhòu,yō
+3	遇		yù,yóng,ǒu
+3	园		yuán,wán
+3	员		yuán,yùn,yún
+3	愿		yuàn
+3	越		yuè,huó
+3	咱	3	zán,zá,zǎ,zan
+3	脏		zàng,zāng
+3	澡		zǎo,cāo
+3	择		zé,zhái
+3	展		zhǎn
+3	张	3	zhāng
+3	照		zhào
+3	者	3	zhě
+3	直	3	zhí
+3	纸	3	zhǐ
+3	终		zhōng
+3	种	3	zhǒng,chóng,zhòng
+3	重	3	zhòng,chóng,tóng
+3	主	3	zhǔ,zhù
+3	助	3	zhù,chú
+3	注		zhù,zhòu
+3	总	3	zǒng
+3	嘴		zuǐ
+4	按		àn
+4	案		àn
+4	傲		ào,áo
+4	巴	4	bā
+4	败		bài
+4	棒		bàng
+4	保	4	bǎo
+4	抱	4	bào,pāo,pǒu
+4	背	4	bèi,bēi
+4	倍		bèi,péi
+4	笨		bèn
+4	鼻		bí
+4	毕		bì
+4	标	4	biāo
+4	饼		bǐng
+4	并	4	bìng,bīng
+4	播		bō,bǒ
+4	博		bó
+4	膊		bó,pò,liè
+4	部	4	bù,pǒu
+4	擦		cā
+4	猜		cāi
+4	材		cái
+4	彩		cǎi
+4	餐	4	cān,sūn
+4	操		cāo
+4	厕		cè,si
+4	察		chá,cuì
+4	产	4	chǎn
+4	厂	4	chǎng,hǎn,yán,ān
+4	晨	4	chén
+4	诚		chéng
+4	乘		chéng,shèng
+4	程	4	chéng
+4	厨		chú
+4	础		chǔ
+4	窗		chuāng,cōng
+4	吹	4	chuī,chuì
+4	此	4	cǐ
+4	粗		cū
+4	村	4	cūn
+4	存		cún
+4	达	4	dá,tì,tà
+4	待		dài,dāi
+4	袋		dài
+4	戴		dài
+4	弹		dàn,tán
+4	刀	4	dāo,diāo
+4	导	4	dǎo
+4	倒	4	dào,dǎo
+4	登		dēng,dé
+4	低	4	dī
+4	底		dǐ,de
+4	递		dì
+4	掉	4	diào,nuó
+4	订		dìng
+4	堵		dǔ,zhě,dū
+4	肚		dù,dǔ
+4	度	4	dù,duó,zhái
+4	断	4	duàn
+4	队	4	duì
+4	顿		dùn,dú
+4	尔		ěr
+4	翻		fān
+4	烦	4	fán
+4	反	4	fǎn,fàn
+4	费		fèi
+4	份	4	fèn,bīn
+4	奋		fèn,kǎng
+4	丰		fēng
+4	否	4	fǒu,pǐ
+4	肤		fū
+4	符		fú
+4	幅		fú,bī
+4	福		fú,fù
+4	父	4	fù,fǔ
+4	付		fù
+4	负		fù
+4	傅		fù,fū
+4	富		fù
+4	改	4	gǎi
+4	赶		gǎn,qián
+4	敢	4	gǎn
+4	钢		gāng,gàng
+4	膏		gāo,gào
+4	胳		gē,gé,gā
+4	格		gé,luò,hè,gē
+4	各	4	gè,gě
+4	功		gōng
+4	供		gōng,gòng
+4	购		gòu
+4	够	4	gòu
+4	估		gū,gù
+4	姑		gū
+4	鼓		gǔ
+4	挂	4	guà
+4	观	4	guān,guàn
+4	管	4	guǎn
+4	光		guāng,guàng
+4	广	4	guǎng,yǎn,ān
+4	逛		guàng,kuáng
+4	规		guī
+4	咳		ké,hāi,hái,gāi
+4	寒		hán
+4	喊	4	hǎn,kàn,jiān
+4	汗		hàn,hán,gān
+4	航		háng
+4	何		hé,hè
+4	盒		hé,ān
+4	贺		hè
+4	厚		hòu
+4	呼		hū,xiāo,xū,hè,xià
+4	忽	4	hū
+4	虎	4	hǔ,hù
+4	互		hù
+4	户		hù
+4	划	4	huà,huá,guò,guǒ,huai
+4	怀		huái,fù
+4	悔		huǐ
+4	伙		huǒ,huo
+4	货		huò
+4	获		huò
+4	圾		jī,jí,jié
+4	积		jī,zhǐ
+4	基	4	jī
+4	及	4	jí
+4	即		jí
+4	籍		jí,jiè
+4	计	4	jì
+4	纪		jì,jǐ
+4	技	4	jì,qí
+4	际	4	jì
+4	济	4	jì,jǐ
+4	既		jì,xì
+4	继		jì
+4	寄	4	jì
+4	价		jià,jie,jiè
+4	减		jiǎn
+4	建	4	jiàn
+4	键		jiàn
+4	江	4	jiāng
+4	将	4	jiāng,jiàng,qiāng
+4	奖		jiǎng
+4	降		jiàng,xiáng,xiàng
+4	郊		jiāo
+4	骄		jiāo
+4	巾		jīn
+4	金	4	jīn,jìn
+4	仅		jǐn,fù,nú,jìn
+4	尽		jǐn,jìn
+4	紧		jǐn
+4	禁		jìn,jīn
+4	京	4	jīng
+4	惊		jīng,liáng
+4	精		jīng,qíng,jìng
+4	景		jǐng,yǐng
+4	警		jǐng
+4	竞		jìng
+4	竟		jìng
+4	镜		jìng
+4	究	4	jiū,jiù
+4	举	4	jǔ
+4	拒		jù,jǔ
+4	具		jù
+4	剧		jù
+4	距		jù
+4	聚		jù
+4	绝		jué
+4	烤		kǎo
+4	科	4	kē,kè
+4	棵		kē,kuǎn,kě
+4	克	4	kè
+4	肯		kěn
+4	恐		kǒng
+4	苦		kǔ,gǔ,hù
+4	况	4	kuàng
+4	困	4	kùn
+4	垃		lā,la
+4	拉	4	lā,lá,lǎ,là,la
+4	辣		là
+4	懒		lǎn
+4	浪		làng,láng
+4	厉		lì
+4	丽		lì,lí
+4	励		lì
+4	利	4	lì
+4	例	4	lì,liè
+4	俩	4	liǎ,liǎng
+4	连	4	lián
+4	联	4	lián
+4	谅		liàng
+4	量	4	liàng,liáng
+4	列		liè,lì
+4	林		lín
+4	龄		líng
+4	另	4	lìng
+4	流	4	liú
+4	乱		luàn
+4	论	4	lùn,lún
+4	落		luò,là,lào,luō
+4	律		lǜ
+4	虑		lǜ,bì
+4	麻	4	má,mā
+4	馒		mán
+4	漫		màn
+4	帽		mào
+4	貌		mào,mò
+4	美	4	měi
+4	梦		mèng
+4	迷		mí,mì
+4	密		mì
+4	免		miǎn,wèn,wǎn
+4	秒		miǎo
+4	民	4	mín
+4	命		mìng
+4	默		mò
+4	母		mǔ,mú,wǔ,wú
+4	慕		mù
+4	耐		nài,néng
+4	恼		nǎo
+4	闹		nào
+4	内	4	nèi,nà,ruì
+4	嗯		ń,ńg,ňg,ǹg,ň,ǹ
+4	娘		niáng
+4	农	4	nóng
+4	弄	4	nòng,lòng
+4	暖		nuǎn,xuān
+4	偶		ǒu
+4	排	4	pái,pǎi,bài
+4	牌	4	pái
+4	判		pàn
+4	乓		pāng
+4	陪		péi
+4	批		pī,pí
+4	皮		pí
+4	脾		pí,pái,bì,pì
+4	篇	4	piān
+4	频		pín
+4	品	4	pǐn
+4	聘		pìn,pìng
+4	乒		pīng
+4	评		píng
+4	泼		pō
+4	破		pò
+4	葡		pú,bèi
+4	普	4	pǔ
+4	戚		qī,cù
+4	弃		qì
+4	签		qiān
+4	歉		qiàn
+4	强	4	qiáng,jiàng,qiǎng
+4	敲		qiāo
+4	桥		qiáo
+4	巧		qiǎo
+4	切		qiè,qiē,qì
+4	亲		qīn,qìng
+4	琴		qín
+4	青	4	qīng,jīng
+4	庆		qìng
+4	取	4	qǔ,qū
+4	缺		quē,kuǐ
+4	却		què
+4	确	4	què
+4	染		rǎn
+4	扰		rǎo,yòu
+4	任	4	rèn,rén,lìn
+4	扔	4	rēng,rèng
+4	仍		réng
+4	入	4	rù
+4	散		sàn,sǎn,sān
+4	森		sēn
+4	伤		shāng
+4	稍		shāo,shào
+4	社	4	shè
+4	摄		shè
+4	申		shēn
+4	深	4	shēn
+4	甚		shèn,shén
+4	省	4	shěng,xǐng,xiǎn
+4	剩		shèng
+4	失		shī,yì
+4	拾		shí,shè,jiè
+4	食	4	shí,sì,yì
+4	使	4	shǐ
+4	氏		shì,zhī,jīng
+4	示	4	shì,qí,zhì,shí
+4	式	4	shì,tè
+4	柿		shì
+4	释		shì
+4	匙		shi,chí
+4	首		shǒu
+4	授		shòu
+4	售		shòu,shú
+4	输	4	shū
+4	熟	4	shú,shóu
+4	暑		shǔ
+4	术	4	shù,zhú,shú
+4	帅		shuài
+4	顺	4	shùn
+4	硕		shuò
+4	死		sǐ
+4	松		sōng
+4	嗽		sòu,shuò,shù
+4	速		sù
+4	塑		sù
+4	酸		suān
+4	随	4	suí
+4	孙		sūn
+4	台	4	tái,tāi,yí,sì
+4	抬		tái,chī
+4	态	4	tài
+4	谈	4	tán
+4	汤	4	tāng,shāng
+4	躺		tǎng,tàng
+4	趟		tàng,zhēng,zhèng,chéng,tāng
+4	萄		táo
+4	讨	4	tǎo
+4	套	4	tào,tǎo
+4	堂	4	táng
+4	填		tián,tiǎn,chén,zhèn
+4	厅		tīng
+4	庭	4	tíng
+4	停	4	tíng
+4	通	4	tōng,tòng
+4	童		tóng,zhōng
+4	桶		tǒng
+4	痛	4	tòng
+4	土	4	tǔ,dù,chǎ,tú
+4	推	4	tuī
+4	脱		tuō,tuì
+4	袜		wà,mò
+4	危		wēi
+4	微		wēi
+4	围		wéi
+4	味	4	wèi,mèi
+4	温	4	wēn,yùn
+4	污		wū
+4	无	4	wú,mó
+4	误	4	wù
+4	吸		xī
+4	悉		xī
+4	惜		xī
+4	细		xì
+4	咸		xián,jiǎn,jiān
+4	险		xiǎn
+4	线	4	xiàn
+4	羡		xiàn,yán,yí
+4	乡		xiāng
+4	详		xiáng
+4	项		xiàng
+4	象	4	xiàng
+4	消		xiāo
+4	效		xiào
+4	辛		xīn
+4	醒		xǐng,chéng,jīng
+4	幸		xìng,niè
+4	性	4	xìng
+4	兄	4	xiōng,kuàng
+4	修		xiū
+4	羞		xiū
+4	秀		xiù
+4	许	4	xǔ,hǔ
+4	序		xù
+4	续		xù
+4	血	4	xuè,xiě
+4	压	4	yā,yà
+4	亚	4	yà
+4	烟		yān,yīn
+4	严		yán
+4	研	4	yán,yàn,xíng
+4	盐		yán
+4	厌		yàn
+4	验	4	yàn
+4	扬		yáng
+4	洋		yáng,xiáng,yǎng
+4	邀		yāo
+4	钥		yào,yuè
+4	叶		yè,xié
+4	夜	4	yè
+4	疑		yí,níng
+4	艺		yì
+4	忆		yì
+4	译		yì
+4	谊		yì
+4	引		yǐn
+4	印	4	yìn,yì
+4	赢		yíng
+4	永	4	yǒng
+4	勇		yǒng
+4	优		yōu,yóu
+4	幽		yōu
+4	尤		yóu
+4	由	4	yóu,yāo
+4	油	4	yóu,yòu
+4	愉		yú,tōu,yǔ
+4	与	4	yǔ,yù,yú
+4	预		yù
+4	原	4	yuán
+4	约	4	yuē,yāo
+4	阅		yuè
+4	云	4	yún
+4	允		yǔn,yuán
+4	杂		zá,duǒ
+4	仔		zǎi,zǐ,zī
+4	暂		zàn
+4	则		zé
+4	责		zé
+4	增	4	zēng,zèng,céng
+4	章	4	zhāng,zhàng
+4	账		zhàng
+4	招		zhāo,qiáo,sháo
+4	折		zhé,shé,zhē,tí
+4	针		zhēn
+4	争		zhēng
+4	整		zhěng
+4	证		zhèng
+4	之	4	zhī,zhū,zhì
+4	支	4	zhī,zhì,qí
+4	汁		zhī,xié,shí
+4	值		zhí
+4	职		zhí
+4	植		zhí
+4	止	4	zhǐ
+4	址		zhǐ
+4	指	4	zhǐ,zhī,zhí
+4	至	4	zhì,dié
+4	志	4	zhì
+4	质		zhì
+4	众	4	zhòng,yín
+4	洲		zhōu
+4	祝		zhù,zhòu,chù
+4	著		zhù,zhe,zhuó,chú,zhāo,zháo
+4	专	4	zhuān
+4	转	4	zhuǎn,zhuàn,zhuǎi
+4	赚		zhuàn,zuàn
+4	装	4	zhuāng
+4	资	4	zī
+4	族		zú,sǒu,còu,zòu
+4	组	4	zǔ
+4	尊		zūn
+4	座	4	zuò
+5	哎		āi
+5	唉		āi,ài,ǎi
+5	暗		àn
+5	熬		áo,āo
+5	版	5	bǎn
+5	扮	5	bàn,fěn,fēn,huǒ
+5	伴	5	bàn,pàn
+5	膀		bǎng,pāng,páng,bàng,pǎng
+5	傍		bàng,páng,bēng,péng
+5	薄		báo,bó,bò,bù
+5	宝	5	bǎo
+5	暴		bào,pù,bó
+5	贝	5	bèi
+5	彼		bǐ
+5	币	5	bì,yìn
+5	闭	5	bì
+5	避		bì
+5	拨		bō
+5	玻		bō
+5	补	5	bǔ
+5	布	5	bù
+5	裁		cái
+5	采	5	cǎi,cài
+5	藏		cáng,zàng,zāng
+5	册	5	cè,zhà
+5	测	5	cè
+5	曾		céng,zēng
+5	叉	5	chā,chá,chǎ,chà
+5	插		chā,zhǎ
+5	拆		chāi,chè,chì,cā
+5	倡		chàng,chāng
+5	朝		cháo,zhāo,zhū
+5	吵	5	chǎo,chāo,miǎo,chào
+5	炒		chǎo
+5	彻		chè
+5	沉	5	chén
+5	称	5	chēng,chèn,chèng
+5	承	5	chéng,zhěng,zhèng
+5	橙		chéng,dèng,chén
+5	池		chí,tuó,chè
+5	尺	5	chǐ,chě
+5	齿		chǐ
+5	翅		chì
+5	冲	5	chōng,chòng
+5	充	5	chōng
+5	虫	5	chóng,huǐ
+5	宠		chǒng
+5	抽	5	chōu
+5	丑	5	chǒu
+5	臭	5	chòu,xiù
+5	触		chù
+5	传	5	chuán,zhuàn
+5	创	5	chuàng,chuāng
+5	辞		cí
+5	刺		cì,cī,qì
+5	促		cù,chuò
+5	催		cuī
+5	措		cuò,zé,cì
+5	代	5	dài
+5	胆	5	dǎn,tán,tǎn,dá
+5	旦	5	dàn
+5	淡		dàn,yàn,tán
+5	挡	5	dǎng,dàng
+5	档		dàng
+5	蹈		dǎo
+5	敌	5	dí,huá
+5	蝶		dié,tiē
+5	冻	5	dòng
+5	洞		dòng,tóng
+5	斗	5	dòu,dǒu,zhǔ
+5	豆	5	dòu
+5	独	5	dú
+5	堆		duī,zuī
+5	吨	5	dūn,tún,tǔn
+5	盾		dùn,shǔn,yǔn
+5	躲		duǒ
+5	乏		fá
+5	罚		fá
+5	番		fān,pān,fán,bō,pó,pán,pàn,pí
+5	繁		fán,pó,pán
+5	返		fǎn
+5	泛		fàn,fěng,fá
+5	范	5	fàn
+5	防	5	fáng
+5	仿		fǎng,páng
+5	访	5	fǎng
+5	肥		féi,bǐ
+5	纷		fēn
+5	疯	5	fēng
+5	扶		fú,pú
+5	佛	5	fú,fó,bó,bì
+5	府	5	fǔ
+5	腐		fǔ
+5	妇	5	fù
+5	副		fù,pì
+5	盖		gài,gě
+5	搞	5	gǎo,qiāo,kào
+5	革		gé,jí
+5	隔		gé,rǒng,jī
+5	恭		gōng
+5	贡	5	gòng
+5	沟		gōu
+5	构	5	gòu
+5	古	5	gǔ,gù,kū
+5	固		gù
+5	冠		guān,guàn
+5	瑰		guī
+5	柜	5	guì,jǔ
+5	滚		gǔn
+5	锅		guō
+5	裹		guǒ
+5	哈	5	hā,hǎ,hà,hē,hé,tà,shà
+5	含	5	hán,hàn
+5	憾		hàn,dàn
+5	衡		héng
+5	猴		hóu
+5	胡	5	hú
+5	湖	5	hú
+5	蝴		hú
+5	糊		hú,hū,hù
+5	华	5	huá,huà,huā
+5	滑		huá,gǔ
+5	缓		huǎn
+5	灰		huī
+5	挥	5	huī
+5	恢		huī
+5	汇		huì
+5	惠		huì
+5	慧		huì
+5	祸		huò
+5	肌		jī,jì
+5	疾		jí
+5	集		jí
+5	辑		jí
+5	挤	5	jǐ
+5	迹		jì,jī
+5	佳		jiā
+5	嘉		jiā
+5	甲	5	jiǎ
+5	驾		jià
+5	架	5	jià
+5	艰	5	jiān
+5	捡		jiǎn
+5	剪		jiǎn
+5	荐		jiàn
+5	渐		jiàn,jiān
+5	践		jiàn
+5	浆		jiāng,jiàng
+5	浇		jiāo
+5	阶		jiē
+5	届		jiè
+5	谨		jǐn
+5	敬		jìng
+5	救		jiù,jiū
+5	局	5	jú
+5	橘		jú
+5	巨	5	jù,qú
+5	捐		juān,yuán
+5	卷		juǎn,juàn,quán,quān,gǔn,jùn
+5	军	5	jūn
+5	均	5	jūn,yùn
+5	靠	5	kào
+5	颗		kē
+5	控		kòng,kōng,qiāng
+5	扣		kòu
+5	库		kù
+5	宽	5	kuān
+5	款		kuǎn,xīn
+5	狂		kuáng,jué
+5	亏	5	kuī,yú
+5	昆		kūn,hún,kùn
+5	扩		kuò
+5	括	5	kuò,guā
+5	览		lǎn
+5	郎		láng,làng
+5	劳	5	láo
+5	姥		lǎo,mǔ
+5	泪	5	lèi
+5	类	5	lèi
+5	厘		lí,chán
+5	梨		lí
+5	璃		lí
+5	立	5	lì,wèi
+5	恋		liàn
+5	良	5	liáng,liǎng
+5	粮		liáng
+5	疗	5	liáo
+5	烈	5	liè
+5	临		lín
+5	灵		líng
+5	铃		líng
+5	领	5	lǐng
+5	令	5	lìng,líng,lǐng,lián
+5	浏		liú
+5	龙	5	lóng
+5	漏		lòu,lóu
+5	陆	5	lù,liù
+5	录	5	lù
+5	碌		lù,liù,luò
+5	逻		luó
+5	络		luò,lào
+5	率		lǜ,shuài,lüè
+5	骂	5	mà
+5	矛		máo
+5	玫		méi
+5	媒		méi,mèi
+5	魅		mèi
+5	秘	5	mì,bì,bié
+5	眠		mián,miǎn,mǐn
+5	描		miáo,mào
+5	敏		mǐn
+5	摸		mō,mó
+5	模		mó,mú
+5	陌		mò
+5	漠		mò
+5	某	5	mǒu,méi
+5	木		mù
+5	幕		mù,màn
+5	奈		nài
+5	念	5	niàn
+5	浓		nóng
+5	哦		ó,é,ò
+5	欧		ōu
+5	派	5	pài,mài,bài,pā
+5	培		péi,pǒu,pī
+5	赔		péi
+5	配	5	pèi
+5	盆	5	pén
+5	碰	5	pèng
+5	匹	5	pǐ
+5	骗		piàn
+5	拼	5	pīn,bìng
+5	凭		píng
+5	屏		píng,bǐng,bìng,bīng
+5	婆		pó
+5	齐	5	qí,jì
+5	企		qǐ
+5	器		qì
+5	浅		qiǎn,jiān
+5	欠	5	qiàn
+5	墙		qiáng
+5	抢		qiǎng,qiāng
+5	悄		qiāo,qiǎo,qiào
+5	茄		jiā,qié
+5	勤		qín,qí
+5	穷		qióng
+5	曲	5	qū,qǔ
+5	趋		qū
+5	权	5	quán
+5	劝	5	quàn
+5	群		qún
+5	燃		rán
+5	绕		rào,rǎo
+5	忍	5	rěn,rèn
+5	荣		róng
+5	软		ruǎn
+5	润		rùn
+5	弱		ruò
+5	洒		sǎ,xǐ,xiǎn,sěn,cuǐ,xùn
+5	傻		shǎ
+5	厦		shà,xià
+5	晒	5	shài
+5	删		shān
+5	扇		shàn,shān
+5	善		shàn
+5	擅		shàn
+5	赏		shǎng
+5	蛇		shé,yí,tuó,chí
+5	舍	5	shě,shè,shì
+5	设	5	shè
+5	伸		shēn
+5	神	5	shén,shēn
+5	慎		shèn,zhèn
+5	升	5	shēng
+5	胜	5	shèng,xīng,qìng,shēng
+5	诗	5	shī
+5	施		shī,yì,shǐ
+5	湿		shī
+5	石	5	shí,dàn
+5	驶		shǐ
+5	似	5	shì,sì
+5	势	5	shì
+5	饰		shì
+5	守	5	shǒu,shòu
+5	殊		shū
+5	蔬		shū,shǔ
+5	属		shǔ,zhǔ
+5	鼠		shǔ
+5	述		shù
+5	摔		shuāi
+5	税		shuì,tuō,tuì,tuàn
+5	私	5	sī
+5	搜		sōu,xiāo,sòu,shǎo
+5	俗		sú
+5	肃		sù
+5	素	5	sù
+5	宿	5	sù,xiǔ,xiù,qī
+5	碎		suì
+5	损		sǔn
+5	缩		suō,sù
+5	索		suǒ
+5	锁		suǒ
+5	桃		táo,tiāo,zhào
+5	替		tì
+5	挑	5	tiāo,tiǎo,táo,diào,tiáo,tiao
+5	贴		tiē
+5	统		tǒng
+5	投		tóu,dòu
+5	途		tú
+5	兔		tù,tú,chān
+5	团	5	tuán,qiú
+5	退	5	tuì
+5	拖	5	tuō,chǐ
+5	弯		wān
+5	威		wēi
+5	违		wéi
+5	唯		wéi,wěi
+5	维		wéi
+5	伟	5	wěi
+5	尾		wěi,yǐ
+5	未	5	wèi
+5	胃	5	wèi
+5	慰		wèi
+5	稳		wěn
+5	卧		wò
+5	握		wò,òu
+5	伍		wǔ
+5	武	5	wǔ
+5	雾		wù
+5	夕	5	xī,yì
+5	析	5	xī,sī
+5	席	5	xí
+5	闲	5	xián
+5	显	5	xiǎn
+5	县	5	xiàn
+5	限		xiàn,wěn
+5	献		xiàn
+5	厢		xiāng
+5	享		xiǎng
+5	橡		xiàng
+5	销		xiāo
+5	肖		xiào,xiāo
+5	协		xié
+5	胁		xié
+5	斜		xié,xiá,chá,yé
+5	欣		xīn
+5	形	5	xíng
+5	型		xíng
+5	虚		xū
+5	绪		xù
+5	宣	5	xuān
+5	寻	5	xún,xín
+5	询		xún
+5	训	5	xùn
+5	迅		xùn
+5	押		yā,xiá,jiǎ
+5	鸭		yā
+5	呀		ya,yā,xiā
+5	延		yán
+5	沿		yán,yǎn,yàn
+5	腰		yāo
+5	摇		yáo
+5	咬	5	yǎo,jiāo,yāo,jiǎo
+5	依	5	yī,yǐ
+5	移		yí,chǐ,yì
+5	遗		yí,wèi
+5	乙	5	yǐ,yì,jué
+5	亿	5	yì
+5	义	5	yì
+5	益	5	yì
+5	营		yíng
+5	映	5	yìng,yǎng
+5	硬		yìng,gěng
+5	拥		yōng
+5	悠		yōu
+5	犹		yóu,yòu
+5	幼		yòu,yào
+5	余	5	yú,tú,xú,yù
+5	娱		yú
+5	玉	5	yù
+5	域		yù
+5	喻		yù,yú
+5	寓		yù
+5	豫		yù,xiè,shū
+5	圆	5	yuán
+5	源		yuán
+5	怨		yuàn,yùn
+5	载	5	zài,zǎi
+5	赞		zàn
+5	糟		zāo
+5	造	5	zào,cào,cāo
+5	赠		zèng
+5	炸		zhà,zhá
+5	摘		zhāi
+5	窄		zhǎi
+5	占	5	zhàn,zhān,tiē
+5	战		zhàn
+5	涨		zhǎng,zhàng
+5	掌		zhǎng
+5	召	5	zhào,shào
+5	哲		zhé
+5	珍		zhēn
+5	诊		zhěn
+5	阵		zhèn
+5	震		zhèn,shēn
+5	征		zhēng
+5	挣		zhēng,zhèng
+5	政	5	zhèng,zhēng
+5	织	5	zhī
+5	执		zhí
+5	制	5	zhì
+5	治	5	zhì,chí
+5	致	5	zhì,zhuì
+5	智		zhì,zhī
+5	置		zhì
+5	猪	5	zhū
+5	竹	5	zhú
+5	逐		zhú,dí,zhòu,tún
+5	煮		zhǔ
+5	筑		zhù,zhú
+5	抓	5	zhuā
+5	状	5	zhuàng
+5	撞		zhuàng
+5	追	5	zhuī,duī,tuī
+5	咨		zī
+5	姿		zī,zì
+5	紫		zǐ
+5	综		zōng,zèng
+5	阻		zǔ,zhù
+5	醉		zuì
+5	遵		zūn
+6	碍		ài
+6	岸	6	àn
+6	昂	6	áng,yàng
+6	拔	6	bá,bō,bié,fá,bèi
+6	摆	6	bǎi
+6	拜		bài,bái
+6	榜		bǎng,bēng,bàng,páng,péng
+6	胞		bāo,páo,pào
+6	爆		bào,bó
+6	悲	6	bēi
+6	辈		bèi
+6	奔	6	bēn,bèn,fèn
+6	逼		bī
+6	壁		bì
+6	臂		bì,bei
+6	编	6	biān
+6	兵	6	bīng
+6	脖		bó,bō
+6	捕		bǔ
+6	财	6	cái
+6	踩		cǎi,kuí
+6	残		cán
+6	仓	6	cāng
+6	侧	6	cè,zè,zhāi
+6	策	6	cè
+6	柴		chái,cī,zhài,zì
+6	肠	6	cháng
+6	偿		cháng
+6	畅	6	chàng
+6	抄	6	chāo,suō,chào,chǎo
+6	嘲		cháo,zhāo
+6	潮		cháo
+6	撤		chè
+6	臣	6	chén
+6	尘	6	chén
+6	趁		chèn,zhēn,chén,niǎn,zhěn
+6	撑		chēng
+6	呈	6	chéng,kuáng,chěng
+6	惩		chéng
+6	崇		chóng
+6	愁	6	chóu,qiǎo,jiū
+6	筹		chóu
+6	储		chǔ
+6	串	6	chuàn,guàn,quàn
+6	闯	6	chuǎng
+6	垂		chuí,zhuì
+6	纯	6	chún
+6	瓷		cí
+6	匆	6	cōng
+6	醋		cù,zuò
+6	脆		cuì
+6	寸	6	cùn,cǔn
+6	挫		cuò,zuò
+6	搭		dā,tà
+6	呆	6	dāi,bǎo,ái
+6	贷		dài
+6	耽		dān
+6	诞	6	dàn
+6	岛	6	dǎo
+6	稻		dào
+6	德	6	dé
+6	滴		dī
+6	抵	6	dǐ,zhǐ,qí
+6	帝		dì
+6	吊	6	diào
+6	钓		diào
+6	跌		diē,dié,tú
+6	顶	6	dǐng
+6	栋		dòng
+6	逗		dòu,zhù,tóu,qí
+6	督		dū
+6	毒		dú,dài
+6	渡		dù
+6	端		duān
+6	蹲		dūn,zún,cún,zūn,cǔn,cuán,qǔn
+6	夺	6	duó
+6	额		é
+6	恶	6	è,ě,wù,wū
+6	帆	6	fān,fán,fàn
+6	凡	6	fán
+6	犯	6	fàn
+6	妨	6	fáng,fāng
+6	肪		fáng
+6	肺	6	fèi,pèi
+6	氛	6	fēn
+6	粉		fěn
+6	愤		fèn
+6	峰		fēng
+6	蜂		fēng
+6	奉	6	fèng
+6	浮		fú
+6	辅	6	fǔ
+6	赋		fù
+6	覆		fù
+6	尬		gà
+6	肝	6	gān
+6	尴		gān
+6	岗	6	gǎng,gāng
+6	港		gǎng,hòng
+6	稿		gǎo
+6	割		gē
+6	攻	6	gōng
+6	宫		gōng
+6	巩	6	gǒng
+6	孤	6	gū
+6	股	6	gǔ
+6	骨	6	gǔ,gū,gú
+6	拐	6	guǎi
+6	官	6	guān
+6	贯	6	guàn
+6	罐		guàn
+6	归	6	guī
+6	龟	6	guī,jūn,qiū
+6	轨	6	guǐ
+6	跪		guì
+6	棍		gùn,hùn,āo,gǔn
+6	涵		hán,hàn
+6	罕	6	hǎn,hàn
+6	旱	6	hàn
+6	毫		háo
+6	豪		háo
+6	耗		hào,máo,mào
+6	核		hé,hú,gāi,kài
+6	嘿		hēi,mò,mù
+6	痕		hén,gèn
+6	狠		hěn,yán,kěn,hǎng
+6	恨	6	hèn
+6	横		héng,hèng,guāng,guàng,huáng,huàng
+6	宏	6	hóng
+6	虹		hóng,jiàng,hòng,gòng
+6	洪		hóng
+6	壶		hú
+6	幻	6	huàn
+6	患		huàn
+6	皇	6	huáng,wǎng
+6	绘		huì
+6	混		hùn,gǔn,hún,kūn
+6	惑		huò
+6	击	6	jī
+6	饥	6	jī
+6	吉	6	jí
+6	寂		jì
+6	夹	6	jiā,gā,jiá
+6	嫁		jià
+6	稼		jià
+6	尖	6	jiān
+6	肩	6	jiān,xián
+6	监		jiān,jiàn
+6	兼		jiān
+6	剑		jiàn
+6	鉴		jiàn
+6	箭		jiàn
+6	酱		jiàng
+6	胶		jiāo,xiáo
+6	椒		jiāo
+6	焦		jiāo,qiáo
+6	杰	6	jié
+6	洁		jié,jí
+6	捷		jié,qiè,chā
+6	截		jié
+6	戒	6	jiè
+6	劲	6	jìn,jìng
+6	井	6	jǐng,jìng
+6	颈		jǐng,gěng
+6	径	6	jìng
+6	纠	6	jiū
+6	舅		jiù
+6	菊		jú
+6	矩		jǔ
+6	俱		jù,jū
+6	惧		jù
+6	菌		jūn,jùn
+6	刊	6	kān
+6	砍		kǎn
+6	抗	6	kàng,gāng
+6	枯		kū,gū
+6	酷		kù
+6	夸	6	kuā,kuà,kuǎ
+6	馈		kuì
+6	阔		kuò
+6	啦		la,lā
+6	赖		lài
+6	兰	6	lán
+6	拦	6	lán
+6	栏		lán
+6	烂		làn
+6	狼		láng,lǎng,làng,hǎng
+6	廊		láng
+6	朗		lǎng
+6	牢	6	láo,lào,lóu
+6	雷	6	léi,lèi
+6	粒		lì
+6	怜		lián,líng,lǐng
+6	链		liàn
+6	梁		liáng
+6	晾		liàng
+6	劣	6	liè
+6	淋		lín,lìn
+6	笼		lóng,lǒng
+6	露		lù,lòu
+6	轮	6	lún
+6	履		lǚ
+6	略		lüè
+6	蚂		mǎ,mà,mā
+6	嘛		ma,má
+6	埋		mái,mán
+6	迈	6	mài
+6	麦	6	mài
+6	盲	6	máng
+6	贸	6	mào
+6	眉		méi
+6	梅		méi
+6	煤		méi
+6	弥		mí
+6	蜜		mì
+6	棉		mián
+6	勉		miǎn
+6	妙	6	miào,miǎo
+6	灭	6	miè
+6	摩		mó,mā,mí
+6	寞		mò
+6	纳	6	nà
+6	泥	6	ní,nì,nǐ,niè,nìng
+6	拟	6	nǐ
+6	扭	6	niǔ,chǒu,zhǒu,zhòu
+6	怒		nù
+6	诺		nuò
+6	盼	6	pàn,fén
+6	庞		páng
+6	抛	6	pāo
+6	泡	6	pào,pāo,páo
+6	佩	6	pèi
+6	喷		pēn,pèn
+6	捧		pěng,fèng
+6	披	6	pī
+6	疲		pí
+6	飘		piāo
+6	贫	6	pín
+6	坡	6	pō
+6	迫	6	pò,pǎi
+6	扑	6	pū,pì
+6	朴	6	pǔ,piáo,pò,pū,pō
+6	铺		pù,pū
+6	欺		qī
+6	棋		qí,jī
+6	旗		qí
+6	启	6	qǐ
+6	恰		qià
+6	牵		qiān
+6	谦		qiān
+6	潜		qián
+6	枪	6	qiāng
+6	腔		qiāng,kòng
+6	瞧	6	qiáo
+6	倾		qīng
+6	屈		qū,jué,què,jú
+6	渠		qú,jù
+6	娶		qǔ,jū,shū
+6	圈	6	quān,juān,juàn,quán,juǎn
+6	券	6	quàn,xuàn
+6	壤		rǎng
+6	绒		róng
+6	融		róng
+6	柔		róu
+6	撒		sā,sǎ
+6	塞		sāi,sài,sè
+6	嗓		sǎng
+6	丧	6	sàng,sāng
+6	杀	6	shā
+6	刹		shā,chà
+6	鲨		shā
+6	筛		shāi
+6	闪	6	shǎn
+6	尚	6	shàng,cháng
+6	舌	6	shé,guā
+6	射		shè,yè,yì
+6	涉		shè,dié
+6	审	6	shěn
+6	甥		shēng
+6	盛		shèng,chéng
+6	狮		shī
+6	寿	6	shòu
+6	薯		shǔ
+6	竖		shù
+6	漱		shù
+6	衰		shuāi,suō,cuī
+6	瞬		shùn
+6	艘		sōu
+6	塔		tǎ,dā,da
+6	踏		tà,tā
+6	汰	6	tài
+6	坛	6	tán
+6	探		tàn,xián
+6	碳		tàn
+6	烫		tàng
+6	掏		tāo,táo
+6	逃		táo
+6	淘		táo
+6	添		tiān,tiàn
+6	田		tián
+6	铜		tóng
+6	筒		tǒng,dòng,tóng
+6	偷		tōu
+6	透		tòu,shū
+6	徒		tú
+6	吐	6	tǔ,tù
+6	吞	6	tūn,tiān
+6	托	6	tuō
+6	挖		wā
+6	娃		wá,wā,guì
+6	哇		wa,wā,guī,huá,wá
+6	歪		wāi,wǎi
+6	顽		wán
+6	亡	6	wáng,wú
+6	王		wáng,wàng,yù
+6	委	6	wěi,wēi,wèi
+6	谓	6	wèi
+6	沃	6	wò
+6	乌	6	wū,wù
+6	晰		xī
+6	媳		xí
+6	吓	6	xià,hè,hà
+6	嫌		xián
+6	陷		xiàn
+6	祥		xiáng
+6	宵		xiāo
+6	歇		xiē,yà
+6	谐		xié
+6	携		xié
+6	械		xiè
+6	薪		xīn
+6	胸		xiōng
+6	雄	6	xióng
+6	袖		xiù
+6	叙		xù
+6	蓄		xù
+6	旋		xuán,xuàn
+6	旬	6	xún,jūn
+6	循		xún
+6	讯	6	xùn
+6	讶	6	yà
+6	淹		yān,yǎn
+6	炎	6	yán,yàn,tán
+6	艳		yàn
+6	宴		yàn
+6	央	6	yāng,yīng
+6	仰	6	yǎng,áng
+6	氧		yǎng
+6	痒		yǎng,yáng
+6	遥		yáo
+6	野		yě,shù
+6	液		yè,shì
+6	仪	6	yí
+6	蚁		yǐ
+6	异	6	yì,yí
+6	抑	6	yì
+6	疫		yì
+6	姻		yīn
+6	隐		yǐn
+6	英	6	yīng,yāng
+6	婴		yīng
+6	颖		yǐng
+6	涌		yǒng,chōng
+6	忧	6	yōu,yòu
+6	予	6	yǔ,yú,zhù
+6	浴		yù
+6	欲		yù
+6	裕		yù
+6	誉		yù
+6	援		yuán,huàn
+6	跃		yuè
+6	晕	6	yūn,yùn
+6	匀	6	yún,jūn,yùn
+6	孕	6	yùn
+6	灾	6	zāi
+6	遭		zāo
+6	噪		zào
+6	燥		zào,sào
+6	扎	6	zhā,zā,zhá,zhǎ
+6	宅	6	zhái,chè,dù
+6	粘		zhān,nián
+6	崭		zhǎn
+6	仗	6	zhàng
+6	障		zhàng,zhāng
+6	枕		zhěn,chén
+6	镇		zhèn
+6	睁		zhēng
+6	症		zhèng,zhēng
+6	枝	6	zhī,qí
+6	脂		zhī,zhǐ
+6	侄		zhí
+6	殖		zhí,shi,shì
+6	秩		zhì
+6	肿	6	zhǒng
+6	州	6	zhōu
+6	粥		zhōu,yù
+6	骤		zhòu
+6	珠		zhū
+6	株		zhū
+6	诸		zhū
+6	砖		zhuān
+6	妆	6	zhuāng
+6	庄	6	zhuāng,péng
+6	壮	6	zhuàng
+6	椎		chuí,zhuī
+6	捉		zhuō
+6	棕		zōng
+6	踪		zōng
+6	粽		zòng
+6	奏		zòu,còu
+6	祖		zǔ,jiē
+6	钻		zuān,zuàn
+6	罪		zuì
+7	哀		āi
+7	挨	7	āi,ái
+7	癌	7	ái,yán
+7	蔼		ǎi
+7	艾		ài,yì
+7	隘		ài,è
+7	暧		ài,nuǎn
+7	凹		āo,wā
+7	奥		ào,yù,yōu
+7	扒		bā,pá,bài,bié
+7	叭		bā,pā,ba
+7	芭		bā,pā
+7	疤	7	bā
+7	靶		bǎ,bà
+7	坝	7	bà
+7	罢	7	bà,ba
+7	霸		bà,pò
+7	掰	7	bāi
+7	柏		bǎi,bó,bò
+7	扳	7	bān,pān
+7	颁	7	bān
+7	斑		bān
+7	拌	7	bàn,pān
+7	绊	7	bàn
+7	瓣		bàn
+7	绑	7	bǎng
+7	谤		bàng
+7	磅	7	bàng,páng,pāng
+7	煲	7	bāo
+7	褒		bāo
+7	雹		báo
+7	堡		bǎo,bǔ,pù
+7	豹		bào
+7	卑	7	bēi,bǐ,bì,pí,bān
+7	碑	7	bēi
+7	狈		bèi
+7	惫		bèi
+7	焙		bèi
+7	崩		bēng
+7	绷	7	bēng,běng,bèng
+7	迸		bèng
+7	蹦	7	bèng
+7	鄙		bǐ
+7	庇		bì,pí,pǐ
+7	毙		bì
+7	痹		bì
+7	碧		bì
+7	蔽		bì,biē,piē
+7	弊	7	bì
+7	鞭		biān
+7	贬	7	biǎn
+7	扁	7	biǎn,piān,biān,pián
+7	辨	7	biàn,biǎn,bàn,piàn
+7	辩	7	biàn
+7	辫		biàn
+7	飙		biāo
+7	憋	7	biē
+7	彬		bīn,bān
+7	滨		bīn
+7	缤		bīn
+7	濒		bīn
+7	丙	7	bǐng,bìng
+7	秉		bǐng
+7	柄		bǐng
+7	波	7	bō,bēi,bì
+7	剥	7	bō,bāo,pū
+7	伯	7	bó,bǎi,mò,bà
+7	驳		bó
+7	勃	7	bó
+7	舶		bó
+7	搏	7	bó
+7	簸		bǒ,bò
+7	卜	7	bo,bǔ,pū
+7	哺		bǔ,bū,fǔ
+7	怖	7	bù
+7	睬		cǎi
+7	惭		cán
+7	惨	7	cǎn
+7	灿	7	càn
+7	璨		càn
+7	苍		cāng
+7	沧		cāng
+7	舱		cāng
+7	糙		cāo
+7	嘈		cáo
+7	槽		cáo,zāo
+7	蹭	7	cèng,céng
+7	岔	7	chà
+7	诧		chà
+7	掺	7	càn,chān,shǎn
+7	搀	7	chān
+7	馋	7	chán
+7	禅		chán,shàn
+7	缠	7	chán
+7	铲	7	chǎn
+7	阐	7	chǎn
+7	颤		chàn,zhàn
+7	昌	7	chāng,chàng
+7	猖		chāng
+7	敞		chǎng,chèng,zhèng
+7	钞		chāo
+7	巢		cháo,chào
+7	扯	7	chě
+7	澈		chè
+7	辰		chén
+7	陈	7	chén
+7	澄		chéng,dèng
+7	逞		chěng,yíng
+7	秤	7	chèng,chēng,píng
+7	痴	7	chī
+7	弛		chí
+7	驰		chí
+7	侈		chǐ
+7	耻	7	chǐ
+7	斥		chì,chè,zhè
+7	赤	7	chì
+7	憧		chōng,zhuàng
+7	仇	7	chóu,qiú,jū
+7	绸	7	chóu
+7	畴	7	chóu
+7	酬	7	chóu
+7	稠	7	chóu,tiáo,diào
+7	瞅	7	chǒu
+7	锄	7	chú
+7	橱		chú
+7	畜		chù,xù
+7	矗		chù
+7	揣	7	chuāi,chuǎi,chuài,duǒ,zhuī,tuán
+7	踹	7	chuài,shuàn,duàn,chuǎn
+7	川		chuān
+7	喘	7	chuǎn
+7	幢	7	chuáng,zhuàng
+7	炊		chuī
+7	捶	7	chuí,duǒ
+7	锤	7	chuí
+7	唇		chún,zhēn,zhèn
+7	淳		chún,zhūn,zhǔn
+7	醇		chún
+7	蠢	7	chǔn
+7	戳	7	chuō
+7	绰		chuò,chāo
+7	疵		cī,zī,zhài,jì
+7	慈	7	cí
+7	磁		cí
+7	雌		cí
+7	伺		cì,sì
+7	赐	7	cì
+7	囱		cōng,chuāng
+7	葱	7	cōng,chuāng
+7	丛	7	cóng
+7	凑	7	còu
+7	簇		cù,chuò,còu
+7	窜	7	cuàn
+7	摧		cuī,zuì,cuò
+7	璀		cuǐ
+7	悴		cuì
+7	粹	7	cuì,suì
+7	翠		cuì
+7	搓	7	cuō,cuǒ,chāi
+7	磋		cuō
+7	瘩		dā,da,dá
+7	歹		dǎi,è,dāi
+7	逮	7	dǎi,dài,dì
+7	怠		dài,yí
+7	丹		dān
+7	惮		dàn
+7	党	7	dǎng
+7	荡	7	dàng
+7	叨		dāo,dáo,tāo
+7	捣		dǎo
+7	祷		dǎo
+7	盗	7	dào
+7	悼		dào
+7	蹬	7	dēng,dèng
+7	凳		dèng
+7	瞪	7	dèng
+7	堤	7	dī,tí,dǐ,shí,wéi
+7	迪		dí
+7	涤		dí
+7	笛		dí
+7	嘀		dí,zhé,dī
+7	蒂		dì
+7	缔		dì
+7	颠	7	diān
+7	巅		diān
+7	甸		diān,diàn,tián,shèng,yìng
+7	垫	7	diàn
+7	淀	7	diàn
+7	惦		diàn
+7	奠	7	diàn,tíng,dìng,zhèng,zūn
+7	殿		diàn
+7	刁		diāo
+7	叼	7	diāo
+7	凋		diāo
+7	雕	7	diāo
+7	爹	7	diē
+7	迭		dié,yì,dá
+7	谍		dié
+7	叠	7	dié
+7	碟	7	dié,shé
+7	丁	7	dīng,zhēng
+7	叮		dīng
+7	盯	7	dīng,chéng
+7	钉	7	dīng,dìng
+7	鼎		dǐng,zhēn
+7	董	7	dǒng,zhǒng
+7	兜	7	dōu
+7	抖	7	dǒu
+7	陡	7	dǒu
+7	赌	7	dǔ
+7	睹		dǔ
+7	杜		dù,dǔ,tú
+7	妒	7	dù
+7	兑	7	duì,ruì,duó
+7	敦		dūn,duī,tuán,diāo,dùn,dào,zhǔn,tūn,duì,tún
+7	盹		dǔn,zhūn
+7	炖	7	dùn,tún
+7	钝		dùn
+7	哆		duō,chǐ,zhà,chì,duò,diě
+7	舵		duò
+7	堕		duò,huī
+7	惰		duò,tuó
+7	讹		é
+7	鹅	7	é
+7	厄		è,ě
+7	遏	7	è
+7	噩		è
+7	鳄		è
+7	恩	7	ēn
+7	饵		ěr
+7	伐	7	fá
+7	阀		fá
+7	贩		fàn
+7	坊		fāng,fáng
+7	芳		fāng
+7	纺		fǎng
+7	绯		fēi
+7	匪		fěi,fēi,fēn
+7	诽		fěi
+7	废	7	fèi
+7	沸	7	fèi,fú
+7	芬		fēn
+7	吩		fēn,pèn
+7	坟	7	fén
+7	焚		fén,fèn
+7	粪	7	fèn
+7	锋	7	fēng
+7	逢	7	féng,péng,páng
+7	讽		fěng,fèng
+7	凤	7	fèng
+7	缝	7	fèng,féng
+7	孵		fū
+7	敷	7	fū
+7	伏	7	fú,fù
+7	俘		fú
+7	袱		fú
+7	辐	7	fú
+7	抚	7	fǔ
+7	斧		fǔ
+7	俯		fǔ
+7	咐		fù,fú
+7	赴	7	fù
+7	腹	7	fù
+7	缚		fù
+7	丐		gài
+7	钙	7	gài
+7	溉		gài,xiè
+7	甘	7	gān,hān
+7	杆	7	gān,gǎn,gàn
+7	竿		gān,gàn,gǎn
+7	纲	7	gāng
+7	缸	7	gāng
+7	杠		gāng,gàng,gōng
+7	戈		gē
+7	疙		gē,yì
+7	鸽		gē
+7	搁	7	gē,gé
+7	阁		gé
+7	骼		gé
+7	耕	7	gēng
+7	耿		gěng
+7	哽		gěng,yǐng,yìng,ńg,ń
+7	弓	7	gōng
+7	躬		gōng
+7	拱	7	gǒng,jú
+7	勾	7	gōu,gòu
+7	钩	7	gōu
+7	苟		gǒu,gōu
+7	咕		gū,gu
+7	菇		gū
+7	辜		gū
+7	谷	7	gǔ,lù,yù
+7	雇	7	gù,hù
+7	寡		guǎ
+7	卦		guà
+7	乖	7	guāi
+7	棺		guān,guàn
+7	灌	7	guàn,huàn
+7	闺		guī
+7	诡		guǐ
+7	鬼	7	guǐ
+7	桂		guì
+7	骇		hài
+7	酣		hān,hàn
+7	憨		hān
+7	函	7	hán
+7	捍		hàn,xiàn,gǎn
+7	撼	7	hàn
+7	瀚		hàn
+7	夯		hāng,bèn
+7	浩		hào,gǎo,gé
+7	呵	7	hē,hā,ā,a,kē,huō,á,ǎ,à
+7	禾	7	hé
+7	阂		hé
+7	荷		hé,hè,hē
+7	赫		hè,shì
+7	鹤		hè
+7	哼	7	hēng,hng
+7	恒	7	héng
+7	轰	7	hōng
+7	哄	7	hǒng,hōng,hòng
+7	烘	7	hōng
+7	弘	7	hóng
+7	喉		hóu
+7	吼	7	hǒu
+7	狐		hú
+7	唬		hǔ,xiāo,guó,xià,háo
+7	哗		huā,huá
+7	猾		huá
+7	徊		huái,huí
+7	槐		huái
+7	唤	7	huàn
+7	焕	7	huàn
+7	痪		huàn,tuǎn
+7	荒	7	huāng,huǎng,kāng,huáng
+7	慌	7	huāng,huǎng,huang
+7	凰	7	huáng
+7	煌	7	huáng
+7	恍		huǎng,guāng
+7	晃	7	huǎng,huàng
+7	谎	7	huǎng
+7	辉	7	huī
+7	徽		huī
+7	毁	7	huǐ,huì
+7	卉		huì
+7	讳		huì
+7	贿		huì
+7	秽		huì
+7	昏	7	hūn,hùn
+7	荤	7	hūn,xūn
+7	浑		hún
+7	魂	7	hún
+7	豁	7	huō,huò,huá
+7	霍		huò,hè,suǒ
+7	讥		jī
+7	缉		jī,qī
+7	畸		jī,qí
+7	稽	7	jī,qǐ
+7	汲		jí,jī
+7	棘		jí
+7	嫉		jí
+7	脊		jí,jǐ
+7	忌	7	jì
+7	剂	7	jì
+7	祭	7	jì,zhài
+7	暨	7	jì,jiè
+7	颊		jiá
+7	贾		jiǎ,gǔ
+7	奸		jiān,gān
+7	歼		jiān
+7	煎	7	jiān,jiàn,jiǎn
+7	拣	7	jiǎn
+7	柬		jiǎn
+7	俭	7	jiǎn
+7	贱	7	jiàn
+7	舰		jiàn
+7	溅	7	jiàn,jiān
+7	姜	7	jiāng
+7	僵	7	jiāng
+7	疆		jiāng,jiàng
+7	桨	7	jiǎng
+7	匠	7	jiàng
+7	娇		jiāo
+7	跤		jiāo,qiāo
+7	礁		jiāo
+7	侥		jiǎo,yáo
+7	狡		jiǎo,xiào
+7	绞	7	jiǎo
+7	矫		jiǎo,jiáo
+7	搅	7	jiǎo
+7	缴	7	jiǎo,zhuó
+7	轿		jiào
+7	酵		jiào
+7	皆	7	jiē
+7	揭	7	jiē,qì,hé
+7	劫	7	jié
+7	竭	7	jié
+7	诫		jiè
+7	津		jīn
+7	筋	7	jīn,qián
+7	锦		jǐn
+7	晋		jìn
+7	浸		jìn,qīn
+7	茎	7	jīng
+7	荆		jīng
+7	晶	7	jīng
+7	兢		jīng
+7	鲸	7	jīng
+7	阱		jǐng
+7	憬		jǐng
+7	窘		jiǒng
+7	揪	7	jiū
+7	灸		jiǔ
+7	拘		jū,gōu,jǔ,jú
+7	鞠		jū,qū,qiōng
+7	咀		jǔ,zuǐ
+7	沮		jǔ,jū,jù,jiān,zǔ
+7	炬		jù
+7	倦		juàn
+7	诀		jué
+7	抉		jué
+7	倔	7	jué,juè
+7	掘	7	jué,kū
+7	崛	7	jué,yù
+7	嚼	7	jué,jiáo,jiào
+7	君		jūn
+7	钧		jūn
+7	俊	7	jùn,shùn,dūn
+7	峻	7	jùn
+7	骏		jùn
+7	竣		jùn
+7	凯		kǎi
+7	慨	7	kǎi
+7	楷		kǎi,jiē,jiè
+7	勘		kān
+7	堪	7	kān,chěn
+7	坎		kǎn,kàn
+7	侃	7	kǎn
+7	槛	7	kǎn,jiàn
+7	慷		kāng
+7	扛	7	káng,gāng
+7	苛		kē,hē
+7	磕	7	kē,kě
+7	壳	7	ké,qiào
+7	坷		kě,kē,jiōng
+7	垦		kěn,yín
+7	恳	7	kěn
+7	啃	7	kěn
+7	坑	7	kēng,kàng
+7	吭		kēng,háng,hàng
+7	孔	7	kǒng
+7	抠	7	kōu
+7	窟		kū
+7	垮	7	kuǎ
+7	挎	7	kuà,kū,kōu
+7	跨	7	kuà,kù,kuā,kuǎ
+7	筐	7	kuāng
+7	旷		kuàng
+7	框	7	kuāng,kuàng,kuáng
+7	眶		kuàng
+7	窥		kuī
+7	魁		kuí,kuǐ,kuài
+7	溃		kuì,huì
+7	愧	7	kuì
+7	捆	7	kǔn,hún
+7	廓		kuò
+7	喇		lǎ,lá,lā,la
+7	腊		là,xī
+7	蜡	7	là,qù,zhà,jí
+7	睐		lài
+7	婪		lán,lǎn
+7	澜		lán
+7	揽	7	lǎn
+7	缆		lǎn
+7	滥		làn
+7	捞	7	lāo
+7	唠		láo,lào
+7	涝	7	lào
+7	酪		lào,luò,lù
+7	勒	7	lēi,lè,lei
+7	垒		lěi
+7	磊		lěi
+7	蕾		lěi
+7	棱		léng,lēng,líng,lèng,chēng
+7	愣	7	lèng
+7	狸		lí
+7	黎		lí
+7	鲤		lǐ
+7	吏		lì
+7	隶		lì,dài,yì,dì
+7	莉		lì,lí,chí
+7	莅		lì
+7	帘		lián,chén
+7	莲		lián
+7	廉	7	lián
+7	敛		liǎn
+7	辽		liáo
+7	僚		liáo,liǎo,lǎo
+7	寥		liáo
+7	潦		lǎo,liáo,lào,láo,liǎo
+7	咧	7	liě,liē,liè,lié,lie
+7	猎	7	liè,xī,què
+7	裂	7	liè,liě
+7	拎	7	līn,līng
+7	麟		lín
+7	吝		lìn
+7	赁	7	lìn
+7	陵		líng
+7	聆	7	líng
+7	岭		lǐng,líng
+7	溜	7	liū,liù,liú
+7	瘤	7	liú
+7	柳		liǔ
+7	遛	7	liú,liù
+7	咙		lóng
+7	胧		lóng
+7	聋	7	lóng
+7	隆	7	lóng,lōng
+7	窿		lóng
+7	拢		lǒng
+7	垄		lǒng
+7	搂	7	lǒu,lōu
+7	陋	7	lòu
+7	炉		lú
+7	卤		lǔ,xī
+7	虏		lǔ
+7	鲁		lǔ
+7	赂		lù
+7	鹿	7	lù,lǘ
+7	孪		luán
+7	卵	7	luǎn,kūn
+7	抡	7	lūn,lún
+7	伦		lún
+7	啰		luō,luó,luo
+7	罗		luó,luō
+7	萝	7	luó
+7	螺		luó
+7	裸	7	luǒ
+7	侣		lǚ
+7	屡	7	lǚ
+7	缕	7	lǚ
+7	滤		lǜ
+7	掠		lüè,lüě
+7	脉	7	mài,mò
+7	蛮		mán
+7	瞒	7	mán
+7	蔓	7	màn,mán,wàn
+7	芒		máng,huāng,huǎng,wáng
+7	氓		máng,méng
+7	茫	7	máng,huǎng
+7	莽		mǎng,máng
+7	髦		máo
+7	茂		mào
+7	枚	7	méi
+7	霉		méi
+7	昧	7	mèi,wěn,mò
+7	寐		mèi
+7	媚		mèi
+7	闷	7	mèn,mēn
+7	萌		méng,míng
+7	蒙	7	méng,mēng,měng
+7	盟	7	méng,mèng,míng
+7	朦		méng,mǎng
+7	猛	7	měng
+7	眯	7	mī,mí,mǐ,mì
+7	谜	7	mí,mèi
+7	觅		mì
+7	泌	7	mì,bì
+7	绵		mián
+7	缅		miǎn
+7	腼		miǎn
+7	苗	7	miáo
+7	瞄		miáo
+7	渺		miǎo
+7	藐		miǎo,mò
+7	庙	7	miào
+7	蔑	7	miè
+7	鸣	7	míng
+7	铭		míng
+7	谬		miù
+7	膜	7	mó
+7	磨	7	mó,mò
+7	蘑		mó
+7	魔	7	mó
+7	抹	7	mǒ,mā,mò
+7	茉		mò
+7	沫		mò
+7	莫	7	mò,mù
+7	墨	7	mò,mèi
+7	谋	7	móu
+7	牡		mǔ
+7	亩	7	mǔ
+7	拇		mǔ
+7	姆		mǔ
+7	沐		mù
+7	牧	7	mù
+7	募	7	mù,bó
+7	墓	7	mù
+7	睦		mù
+7	暮		mù
+7	呐		nà,nè,na,nuò,ne
+7	乃	7	nǎi,ǎi
+7	囊		náng,nāng
+7	挠	7	náo
+7	馁		něi
+7	嫩	7	nèn
+7	逆	7	nì
+7	匿		nì,tè
+7	腻	7	nì
+7	溺		nì,ruò,niào
+7	黏	7	nián
+7	撵	7	niǎn
+7	酿		niàng,niáng
+7	尿	7	niào,suī
+7	捏	7	niē
+7	宁	7	níng,nìng,zhù
+7	拧		níng,nǐng,nìng
+7	凝	7	níng
+7	泞		nìng,zhù
+7	纽	7	niǔ
+7	钮	7	niǔ
+7	奴		nú
+7	虐		nüè
+7	挪	7	nuó
+7	殴		ōu
+7	呕		ǒu,ōu,òu
+7	趴	7	pā
+7	帕		pà,mò
+7	徘		pái
+7	湃		pài,bá
+7	攀	7	pān
+7	叛		pàn
+7	畔	7	pàn
+7	螃		páng,bǎng
+7	刨	7	páo,bào
+7	袍		páo,bào
+7	炮	7	pào,bāo,páo
+7	胚		pēi
+7	沛		pèi
+7	抨		pēng,bēng
+7	烹	7	pēng
+7	棚	7	péng
+7	蓬	7	péng,pèng
+7	鹏		péng
+7	澎		pēng,péng
+7	篷		péng
+7	膨		péng,pèng
+7	劈	7	pī,pǐ
+7	屁		pì
+7	辟	7	pì,bì,mǐ,pī
+7	媲		pì,bī,pí
+7	僻		pì
+7	譬		pì
+7	偏	7	piān
+7	撇		piē,piě,biē
+7	坪		píng
+7	萍		píng
+7	泊	7	pō,bó,pò
+7	颇	7	pǒ,pō
+7	粕		pò
+7	魄	7	pò,bó,tuò
+7	剖		pōu,pǒ
+7	仆		pū,pú
+7	菩		pú,bèi,bó
+7	谱	7	pǔ
+7	瀑		pù,bào,bó
+7	曝	7	pù,bào
+7	沏	7	qī,qiè
+7	栖		qī,xī
+7	凄		qī
+7	漆	7	qī,qiè
+7	蹊		qī,xī
+7	歧		qí
+7	祈		qí,guǐ
+7	崎		qí,qǐ,yī
+7	乞	7	qǐ,qì
+7	岂		qǐ,kǎi
+7	迄		qì
+7	泣		qì,lì,sè
+7	契	7	qì,xiè,qiè,jié
+7	砌		qì,qiè
+7	掐	7	qiā
+7	洽		qià,hé
+7	迁	7	qiān
+7	虔		qián
+7	遣		qiǎn,qiàn
+7	谴		qiǎn
+7	嵌		qiàn,hǎn,kàn
+7	呛	7	qiāng,qiàng
+7	跷		qiāo
+7	侨		qiáo
+7	憔		qiáo
+7	俏		qiào,xiào,xiāo
+7	峭		qiào
+7	窍		qiào
+7	翘	7	qiào,qiáo
+7	撬	7	qiào
+7	怯		qiè
+7	窃		qiè
+7	惬		qiè
+7	锲		qiè
+7	钦		qīn
+7	侵	7	qīn,qǐn
+7	禽		qín
+7	寝		qǐn
+7	擎	7	qíng
+7	顷		qǐng
+7	丘		qiū
+7	囚		qiú
+7	岖		qū
+7	驱	7	qū
+7	躯		qū
+7	诠	7	quán
+7	拳	7	quán
+7	犬		quǎn
+7	瘸	7	qué
+7	雀		què,qiāo,qiǎo
+7	攘		rǎng,ràng,níng,xiǎng
+7	嚷	7	rǎng,rāng
+7	饶	7	ráo
+7	惹	7	rě,ruò
+7	仁	7	rén
+7	韧		rèn
+7	饪	7	rèn
+7	溶		róng
+7	冗		rǒng
+7	揉	7	róu
+7	乳		rǔ
+7	辱		rǔ
+7	锐		ruì
+7	瑞		ruì
+7	若	7	ruò,ré,rè,rě
+7	萨		sà
+7	桑	7	sāng
+7	骚	7	sāo
+7	嫂		sǎo
+7	涩		sè
+7	啬		sè
+7	僧		sēng,céng
+7	纱	7	shā
+7	煽		shān
+7	膳		shàn
+7	赡		shàn
+7	裳		shang,cháng
+7	捎	7	shāo,shào,shǎo,xiāo,qiào
+7	梢		shāo,shào,xiāo,sào
+7	哨	7	shào,sāo,xiāo,xiào,sào
+7	奢		shē
+7	慑		shè
+7	呻		shēn
+7	绅		shēn
+7	肾	7	shèn
+7	渗	7	shèn
+7	牲	7	shēng
+7	绳		shéng
+7	圣	7	shèng,kū
+7	尸		shī
+7	蚀		shí
+7	矢		shǐ
+7	屎	7	shǐ,xī
+7	侍		shì
+7	逝	7	shì
+7	嗜		shì
+7	誓		shì
+7	兽		shòu
+7	抒		shū
+7	枢		shū
+7	梳	7	shū
+7	疏	7	shū
+7	赎	7	shú
+7	署	7	shǔ
+7	曙		shǔ
+7	恕		shù
+7	墅	7	shù,yě
+7	耍	7	shuǎ
+7	甩	7	shuǎi
+7	拴	7	shuān,quán
+7	涮	7	shuàn,shuā
+7	霜	7	shuāng
+7	爽	7	shuǎng,shuāng
+7	烁		shuò
+7	丝	7	sī
+7	撕	7	sī,xī
+7	寺	7	sì,shì
+7	祀		sì
+7	饲		sì
+7	肆	7	sì,tì
+7	怂		sǒng
+7	耸	7	sǒng
+7	讼	7	sòng
+7	诵		sòng
+7	颂		sòng
+7	苏	7	sū
+7	酥	7	sū
+7	溯		sù,shuò
+7	蒜	7	suàn
+7	髓		suǐ
+7	隧		suì,zhuì
+7	邃		suì
+7	唆		suō,shuà
+7	梭		suō,xùn
+7	嗦		suo,suō
+7	琐		suǒ
+7	塌	7	tā,dā
+7	拓	7	tuò,tà,zhí
+7	蹋		tà
+7	胎	7	tāi
+7	泰		tài
+7	贪	7	tān
+7	摊	7	tān
+7	滩	7	tān
+7	瘫	7	tān
+7	痰	7	tán
+7	潭		tán,xún,yǐn,dàn
+7	坦	7	tǎn
+7	毯		tǎn
+7	叹	7	tàn,yǐ,yòu
+7	炭	7	tàn
+7	唐		táng
+7	塘		táng
+7	膛		táng,tāng
+7	倘		tǎng,cháng
+7	淌	7	tǎng,chàng,chǎng
+7	涛		tāo
+7	滔		tāo
+7	陶	7	táo,yáo,dào
+7	腾	7	téng
+7	藤		téng
+7	剔		tī,tì
+7	屉		tì
+7	剃	7	tì
+7	涕		tì
+7	惕		tì
+7	嚏		tì
+7	腆		tiǎn
+7	舔	7	tiǎn,tān
+7	眺		tiào
+7	帖		tiē,tiě,tiè
+7	廷		tíng
+7	亭		tíng
+7	艇		tǐng
+7	捅	7	tǒng
+7	凸	7	tū
+7	秃	7	tū
+7	涂	7	tú,chú,yé
+7	屠		tú
+7	颓		tuí
+7	豚		tún,dūn,dùn
+7	臀	7	tún
+7	驮	7	tuó,duò
+7	妥	7	tuǒ
+7	椭		tuǒ
+7	唾		tuò
+7	蛙		wā,jué
+7	瓦	7	wǎ,wà
+7	湾		wān
+7	丸	7	wán
+7	挽	7	wǎn
+7	惋		wǎn
+7	婉		wǎn
+7	腕		wàn
+7	汪		wāng,wǎng,hóng
+7	枉		wǎng,kuáng
+7	妄		wàng,wáng
+7	旺	7	wàng
+7	帷		wéi
+7	伪	7	wěi
+7	纬		wěi
+7	萎		wēi,wěi,wèi
+7	畏	7	wèi,wēi,wěi
+7	蔚		wèi,yù
+7	瘟		wēn,wò,yūn
+7	纹	7	wén,wèn
+7	蚊		wén
+7	吻	7	wěn
+7	紊		wěn,wèn
+7	翁		wēng,wěng
+7	涡		wō,guō
+7	窝	7	wō
+7	幄		wò
+7	呜		wū
+7	诬		wū
+7	侮		wǔ
+7	捂	7	wǔ,wú
+7	兀		wù,wū
+7	勿	7	wù,mò
+7	悟	7	wù
+7	晤		wù
+7	昔		xī,cuò
+7	牺	7	xī
+7	奚		xī
+7	稀	7	xī
+7	犀		xī
+7	锡		xī
+7	溪	7	xī,qī
+7	熙		xī,yí
+7	熄		xī
+7	膝		xī
+7	嬉		xī,xǐ
+7	袭	7	xí
+7	徙		xǐ,sī
+7	隙		xì
+7	虾	7	xiā,há
+7	瞎	7	xiā
+7	侠		xiá
+7	峡	7	xiá
+7	狭	7	xiá
+7	瑕		xiá
+7	辖	7	xiá
+7	霞		xiá
+7	仙	7	xiān,xiǎn
+7	纤	7	xiān,qiàn
+7	掀	7	xiān,hén
+7	贤		xián
+7	弦	7	xián
+7	衔	7	xián
+7	宪	7	xiàn,xiòng
+7	馅		xiàn
+7	镶	7	xiāng
+7	翔		xiáng
+7	巷	7	xiàng,hàng
+7	萧		xiāo
+7	潇		xiāo
+7	嚣		xiāo,áo
+7	淆		xiáo
+7	晓		xiǎo
+7	孝		xiào
+7	啸		xiào
+7	邪	7	xié,yá,yé,xú,shé
+7	挟		xié,jiā
+7	泄	7	xiè,yì
+7	泻	7	xiè
+7	卸	7	xiè
+7	屑		xiè
+7	懈	7	xiè
+7	蟹		xiè
+7	芯		xīn,xìn
+7	馨	7	xīn
+7	衅		xìn
+7	猩		xīng
+7	腥	7	xīng
+7	刑	7	xíng
+7	凶	7	xiōng
+7	汹		xiōng
+7	朽		xiǔ
+7	绣	7	xiù
+7	锈	7	xiù
+7	嗅	7	xiù
+7	吁	7	xū,yū,yù
+7	墟		xū
+7	徐		xú
+7	旭		xù
+7	恤		xù
+7	酗		xù
+7	絮		xù,chù,nǜ,nà
+7	婿		xù
+7	喧		xuān,xuǎn
+7	暄		xuān
+7	玄	7	xuán,xuàn
+7	悬	7	xuán
+7	炫		xuàn
+7	削	7	xuē,xiāo,qiào,shào
+7	靴		xuē
+7	穴	7	xué,jué
+7	勋		xūn
+7	熏	7	xūn,xùn
+7	巡	7	xún,yán,shùn
+7	汛		xùn
+7	驯	7	xùn,xún
+7	逊		xùn
+7	丫		yā
+7	鸦		yā
+7	芽	7	yá
+7	崖		yá
+7	涯	7	yá
+7	哑	7	yǎ,yā
+7	雅	7	yǎ,yā,yá
+7	揠		yà
+7	岩		yán
+7	阎		yán
+7	檐		yán,dān
+7	衍	7	yǎn,yán
+7	掩	7	yǎn,yàn
+7	咽	7	yàn,yān,yè,yuān
+7	雁		yàn
+7	焰		yàn
+7	燕		yàn,yān
+7	殃		yāng
+7	秧		yāng
+7	杨		yáng
+7	漾		yàng
+7	妖		yāo,jiǎo
+7	肴		yáo
+7	窑	7	yáo
+7	谣		yáo
+7	耀	7	yào
+7	椰		yē
+7	冶		yě
+7	夷		yí
+7	怡		yí
+7	矣	7	yǐ,xián
+7	倚	7	yǐ,jī,yī
+7	屹		yì,gē
+7	亦	7	yì
+7	役	7	yì
+7	绎	7	yì
+7	弈		yì
+7	逸		yì
+7	裔		yì
+7	溢	7	yì
+7	毅		yì
+7	翼	7	yì
+7	荫		yīn,yìn
+7	殷		yīn,yān,yǐn
+7	吟		yín,yǐn,jìn
+7	瘾	7	yǐn
+7	鹰	7	yīng
+7	荧		yíng
+7	盈	7	yíng
+7	莹		yíng
+7	蝇		yíng
+7	佣		yōng,yòng
+7	庸	7	yōng,yóng
+7	恿		yǒng,tōng
+7	踊		yǒng
+7	佑		yòu
+7	诱	7	yòu
+7	淤		yū
+7	渔		yú
+7	逾		yú,dòu
+7	愚	7	yú
+7	舆	7	yú
+7	屿	7	yǔ
+7	宇	7	yǔ
+7	驭		yù
+7	郁	7	yù
+7	狱		yù
+7	御	7	yù,yà
+7	愈	7	yù
+7	冤	7	yuān
+7	渊		yuān
+7	缘	7	yuán
+7	辕		yuán
+7	曰	7	yuē
+7	岳		yuè
+7	悦	7	yuè
+7	耘		yún
+7	陨		yǔn
+7	酝		yùn
+7	韵		yùn
+7	蕴	7	yùn
+7	熨	7	yùn,yù,wèi
+7	砸	7	zá
+7	栽	7	zāi,zài
+7	宰	7	zǎi
+7	攒	7	zǎn,cuán
+7	赃		zāng
+7	葬	7	zàng
+7	凿	7	záo,zuò
+7	枣	7	zǎo
+7	藻		zǎo
+7	皂		zào
+7	灶	7	zào
+7	躁	7	zào
+7	泽		zé
+7	贼	7	zéi
+7	渣	7	zhā
+7	闸	7	zhá
+7	眨		zhǎ
+7	诈	7	zhà
+7	榨	7	zhà
+7	债	7	zhài
+7	寨		zhài,sè,qiān
+7	沾	7	zhān,tiān,diàn,chān
+7	瞻		zhān
+7	斩	7	zhǎn
+7	盏	7	zhǎn
+7	辗		niǎn,zhǎn
+7	绽	7	zhàn
+7	湛		zhàn,chén,dān,tán,jìn,yǐn,chěn,yín,shèn
+7	蘸	7	zhàn
+7	彰	7	zhāng
+7	杖		zhàng
+7	帐		zhàng
+7	胀	7	zhàng
+7	爪		zhǎo,zhuǎ
+7	沼		zhǎo
+7	兆		zhào
+7	罩	7	zhào
+7	肇		zhào
+7	遮	7	zhē
+7	辙		zhé
+7	贞		zhēn
+7	侦		zhēn
+7	斟		zhēn
+7	振	7	zhèn,zhēn,zhěn
+7	筝		zhēng
+7	蒸	7	zhēng
+7	拯		zhěng
+7	郑		zhèng
+7	芝		zhī
+7	肢		zhī,shì
+7	旨	7	zhǐ
+7	帜	7	zhì
+7	峙		zhì,shì
+7	挚		zhì
+7	掷		zhì,zhī
+7	窒		zhì,dié
+7	滞	7	zhì
+7	稚		zhì
+7	忠	7	zhōng
+7	衷	7	zhōng,zhòng
+7	仲		zhòng
+7	舟		zhōu
+7	轴		zhóu,zhòu
+7	帚		zhǒu
+7	宙	7	zhòu
+7	昼		zhòu
+7	皱	7	zhòu
+7	朱		zhū,shū
+7	烛	7	zhú,chóng
+7	拄	7	zhǔ
+7	嘱	7	zhǔ
+7	瞩		zhǔ
+7	贮		zhù
+7	驻	7	zhù
+7	柱		zhù,zhǔ
+7	蛀		zhù
+7	铸		zhù
+7	拽	7	zhuāi,zhuài,yè
+7	撰	7	zhuàn,xuǎn,suàn
+7	桩	7	zhuāng
+7	坠	7	zhuì
+7	缀		zhuì
+7	赘		zhuì
+7	拙		zhuō
+7	灼		zhuó
+7	茁		zhuó,zhú
+7	卓	7	zhuó,zhuō
+7	浊		zhuó
+7	酌		zhuó
+7	兹	7	zī,cí
+7	滋	7	zī,cí,xuán
+7	籽	7	zǐ
+7	宗	7	zōng
+7	纵	7	zòng
+7	揍	7	zòu,còu
+7	琢		zuó,zhuó
