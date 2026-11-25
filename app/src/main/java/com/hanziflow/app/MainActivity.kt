@@ -167,13 +167,15 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
     },confirmButton={TextButton({vm.add(w);onClose()}){Text("В повторение")}},dismissButton={TextButton(onClose){Text("Закрыть")}})
 }
 @Composable private fun LevelScope(vm:HanziViewModel,cumulative:Boolean,onScope:(Boolean)->Unit){
+    var chooseLevel by remember{mutableStateOf(false)}
+    Box{TextButton({chooseLevel=true}){Text("Выбрать "+hskLabel(vm.level)+" ▾")};DropdownMenu(expanded=chooseLevel,onDismissRequest={chooseLevel=false}){(1..7).forEach{n->DropdownMenuItem(text={Text(hskLabel(n))},onClick={vm.updateLevel(n);chooseLevel=false})}}}
     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){
         TextButton({vm.updateLevel((hskBand(vm.level)-1).coerceAtLeast(1))},enabled=hskBand(vm.level)>1){Text("‹ Уровень")}
         Text(hskLabel(vm.level),modifier=Modifier.padding(top=12.dp),fontWeight=FontWeight.Bold)
         TextButton({vm.updateLevel((hskBand(vm.level)+1).coerceAtMost(7))},enabled=hskBand(vm.level)<7){Text("Уровень ›")}
     }
     Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
-        FilterChip(selected=!cumulative,onClick={onScope(false)},label={Text("Новые")})
+        FilterChip(selected=!cumulative,onClick={onScope(false)},label={Text("Только новые")})
         FilterChip(selected=cumulative,onClick={onScope(true)},label={Text("Все до уровня")})
     }
 }
@@ -355,13 +357,15 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
     var all by rememberSaveable{mutableStateOf(false)}
     val due=vm.words.filter{w->vm.reviews[w.id]?.due?.let{!it.isAfter(LocalDate.now())}==true}
     val pool=if(all)vm.words.filter{vm.reviews.containsKey(it.id)} else due
-    val w=pool.firstOrNull()
+    var cardIndex by rememberSaveable(all){mutableIntStateOf(0)}
+    val w=if(all)pool.getOrNull(cardIndex.coerceAtMost((pool.size-1).coerceAtLeast(0))) else pool.firstOrNull()
     Text("К повторению: ${due.size} · сохранено: ${vm.reviews.size}")
     Row{FilterChip(selected=!all,onClick={all=false},label={Text("На сегодня")});Spacer(Modifier.width(8.dp));FilterChip(selected=all,onClick={all=true},label={Text("Все сохранённые")})}
     WideButton("Добавить 10 новых слов уровня"){vm.addDailyWords()}
     listOf(listOf("Чтение","На слух"),listOf("Перевод","Диктант")).forEach{row->Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){row.forEach{value->FilterChip(selected=mode==value,onClick={mode=value},label={Text(value)},modifier=Modifier.weight(1f))}}}
     if(w==null){Text("Нет карточек в этом разделе. Добавьте слова из словаря или кнопкой выше. Оценённые карточки появятся снова в назначенный день.")}
     else key(w.id,mode){
+        if(all){Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){TextButton({cardIndex=(cardIndex-1).coerceAtLeast(0)},enabled=cardIndex>0&&!vm.reviewBusy){Text("Назад")};Text("${cardIndex.coerceAtMost(pool.lastIndex)+1}/${pool.size}",Modifier.padding(top=12.dp));TextButton({cardIndex=(cardIndex+1).coerceAtMost(pool.lastIndex)},enabled=cardIndex<pool.lastIndex&&!vm.reviewBusy){Text("Далее")}}}
         var reveal by rememberSaveable{mutableStateOf(false)}
         var input by rememberSaveable{mutableStateOf("")}
         val meaning=w.russian.ifBlank{vm.curriculum?.englishById?.get(w.id)?.let{"EN: $it"}?:"Значение пока не добавлено"}

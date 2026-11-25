@@ -1,8 +1,9 @@
-# Project status — 0.2.0-alpha, 2026-11-25
+# Project status — 0.3.0-alpha
 
-- 0.1.0-alpha CI passed (run 45625738536); installed and tested by user, 22/55 checks confirmed. 0.1.1 fixes committed, device/CI status not confirmed here.
-- 0.2.0 imports full HSK 2025 vocabulary (11000), recognition characters (3088), writing subset (1200) and grammar index (593), verified counts and cross-source comparisons; 3088 pinyin lists.
-- New/cumulative scope selection, dictionary search, hanzi reading/writing filters, grammar index and source labels; original practice preserved. Data parsed and indexed off main thread; LazyColumn renders visible rows. In-memory compact syllabus index, not a complete paginated SQLite dictionary.
-- Existing review IDs preserved; new records have stable hsk25-N IDs. Existing database schema unchanged.
-- 49 matched original Russian glosses; 10,734 English CC-CEDICT gloss records with separate CC BY-SA 4.0 notice. Russian translations and detailed grammar lessons incomplete; no licensed full textbook or workbook bundle, no copied official example sentences.
-- Data checks added to CI. 0.2.0 build and real-device QA pending. See CONTENT_COVERAGE.md.
+- 0.2.0 CI success run 45688552552; user QA reports 63 pass, 13 fail, 19 untested.
+- Preserved all 11,000 words, 3,088 characters, 1,200 writing entries, 593 grammar index entries. HSK2 and grammar count reports not reproduced; clearer level selection and separate cumulative/new grammar counts.
+- 300 original HSK1 Russian glosses plus previous matching glosses on other levels. Not native-editor reviewed. Remaining translations not complete.
+- Added four review presentation modes with shared SRS, due/all saved views, next/previous on all saved, batch add ten words, serialized writes, explicit success/error.
+- Added daily three-step lesson, four original dialogues and one local user-supplied dialogue, listening drill, and device-only Android speech-to-text comparison for HSK characters/words and custom sentences. Not phoneme or tone scoring; Android 12+ and suitable local Mandarin recognizer required.
+- No textbook dialogue extraction, licensed native audio, OCR, stroke grading, full grammar lessons, adaptive AI tutor or official mocks yet.
+- New build and device QA pending. Research matrix: docs/COMPETITOR_REVIEW.md.

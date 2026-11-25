@@ -1,5 +1,7 @@
 package com.hanziflow.app
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -15,11 +17,12 @@ class LocalSpeechCheck(private val context:Context){
     var busy by mutableStateOf(false);private set
     var heard by mutableStateOf("");private set
     var feedback by mutableStateOf("");private set
-    fun cancel(){val e=engine;engine=null;busy=false;e?.cancel();e?.destroy()}
+    fun cancel(){val e=engine;engine=null;busy=false;if(e!=null){runCatching{e.cancel()};runCatching{e.destroy()}}}
     fun close()=cancel()
     fun reset(){cancel();heard="";feedback=""}
     fun start(target:String){
         reset()
+        if(context.checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED){feedback="Разрешите доступ к микрофону.";return}
         if(Build.VERSION.SDK_INT<31){feedback="Локальное распознавание требуется Android 12 или новее.";return}
         if(!SpeechRecognizer.isOnDeviceRecognitionAvailable(context)){feedback="На устройстве нет локального распознавания. Установите китайский языковой пакет системной службы речи.";return}
         try{

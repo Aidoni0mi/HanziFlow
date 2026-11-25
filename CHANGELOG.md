@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0-alpha
+- Add 300 original HSK1 Russian glosses and count validation.
+- Add daily lesson, dialogues, listening drills and local speech text comparison.
+- Improve SRS persistence, add review modes and explicit level selector.
+- New build and device QA pending.
+
 ## 0.2.0-alpha — 2026-11-25
 - Import 11,000 syllabus word records, 3,088 hanzi with pinyin, 1,200 writing flags, 593 grammar headings; verify all band counts.
 - Add new/cumulative filters, dictionary search, recognition/writing lists and grammar index.

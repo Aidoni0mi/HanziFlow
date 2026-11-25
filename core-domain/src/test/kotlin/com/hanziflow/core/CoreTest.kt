@@ -3,6 +3,13 @@ import kotlin.test.*
 import kotlin.math.*
 import java.time.LocalDate
 class CoreTest {
+    @Test fun speechTextComparison(){
+        assertEquals(speechChars("你好，世界！"),speechChars("你好世界"))
+        assertTrue(compareSpeech("你好","你好！").startsWith("Распознанный текст совпал"))
+        assertTrue(compareSpeech("你好","你号").contains("Различий при сравнении текста: 1"))
+        assertTrue(compareSpeech("我学习汉语","我学汉语").contains("Различий при сравнении текста: 1"))
+        assertTrue(compareSpeech("你好","").contains("Недостаточно"))
+    }
     @Test fun pitch() { val pcm=ShortArray(16000){(12000*sin(2*PI*220*it/16000)).toInt().toShort()}; val r=Pitch.analyze(pcm); assertTrue(abs(r.frames.mapNotNull{it.hz}.average()-220)<3); assertTrue(Pitch.analyze(ShortArray(16000)).contour.isEmpty()) }
     @Test fun shortSyllableInsideLongRecording() {
         val pcm=ShortArray(48000)

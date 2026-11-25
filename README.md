@@ -1,6 +1,6 @@
 # HanziFlow — Chinese Mastery
 
-**0.2.0-alpha / engineering checkpoint, 2026-11-25.** Full HSK 2025 syllabus lists: 11,000 words, 3,088 recognition characters, 1,200 writing characters, 593 grammar headings. Levels filter new and cumulative material. English CC-CEDICT glosses for 10,734 entries; 49 matched original Russian glosses. Russian glosses and detailed grammar lessons are incomplete. No copyrighted books included. Android 0.2.0 build pending.
+**0.3.0-alpha / engineering checkpoint, 2026-11-25.** Full HSK 2025 syllabus lists: 11,000 words, 3,088 recognition characters, 1,200 writing characters, 593 grammar headings. Levels filter new and cumulative material. English CC-CEDICT glosses for 10,734 entries; 300 original HSK1 Russian glosses plus existing matched starter entries. Russian glosses and detailed grammar lessons are incomplete. No copyrighted books included. Android 0.2.0 verified; 0.3.0 pending. Includes daily lessons, dialogues, review modes and local speech text comparison on compatible Android 12+ devices.
 
 ## Run on a development computer
 

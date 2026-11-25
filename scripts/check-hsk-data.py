@@ -28,3 +28,8 @@ assert len(english) == 10734
 assert len({int(r["serial"]) for r in english}) == 10734
 assert all(1 <= int(r["serial"]) <= 11000 and r["english"] for r in english)
 print("PASS: 10734 independently licensed English gloss records")
+
+ru = load("ru-hsk1.tsv")
+assert len(ru) == 300
+assert all(r["serial"] == v[i]["serial"] and r["label"] == v[i]["label"] and r["russian"] for i,r in enumerate(ru))
+print("PASS: 300 original Russian HSK1 glosses aligned by ID and label")
