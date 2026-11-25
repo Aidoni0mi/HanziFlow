@@ -1,6 +1,6 @@
 # HanziFlow — Chinese Mastery
 
-**0.1.0-alpha / engineering checkpoint, 2026-11-25.** Android source code, not a verified APK or a complete HSK course. Russian-first. Target HSK 4 (3.0). Levels 1–9 are goal selectors only. The initial 30 words, 5 grammar entries, 1 reader text and 5 quiz items are original practice content awaiting editorial and syllabus verification. No textbook files included.
+**0.1.1-alpha / engineering checkpoint, 2026-11-25.** Android source code, not a verified APK or a complete HSK course. Russian-first. Target HSK 4 (3.0). Levels 1–9 are goal selectors only. The 50 words, 10 grammar entries, 5 reader texts, 16 character cards and 5 quiz items are original practice content awaiting editorial and syllabus verification. No textbook files included.
 
 ## Run on a development computer
 
@@ -12,7 +12,7 @@
 
 ## GitHub
 
-Canonical repository: https://github.com/Aidoni0mi/HanziFlow. Public visibility explicitly confirmed by owner. Do not commit personal books, recordings or secrets. Initial source import completed; Android CI and APK are not yet verified. Visit Actions → Android verification → successful run → Artifacts to download HanziFlow-debug. No public redistribution license has been selected.
+Canonical repository: https://github.com/Aidoni0mi/HanziFlow. Public visibility explicitly confirmed by owner. Do not commit personal books, recordings or secrets. Initial source import completed; 0.1.0 Android CI and APK verified (run 45625738536); 0.1.1 verification pending. Visit Actions → Android verification → successful run → Artifacts to download HanziFlow-debug. No public redistribution license has been selected.
 
 ## Verified in this environment
 

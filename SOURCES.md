@@ -32,3 +32,6 @@ Record immutable source/version, checksum, dates, license and review status for 
 
 ### Exam deployment
 As of 2026-11-25 CTI announces worldwide launch on 2026-12-13; second trial took place on 2026-09-20. Local availability at a specific Almaty center, speaking requirement, fees, exact timings and pass thresholds are not verified here. Check CTI and the test center before populating official exam config. HSK 7–9 represented as one combined exam, separate learner goals. The app deliberately avoids unverified score tables.
+
+## Additional phonetics reference (0.1.1)
+- Education University of Hong Kong, Corpus-based Mandarin Pronunciation Learning System, Mandarin Phonology, https://corpus.eduhk.hk/mandarin_pronunciation/?page_id=33 — checked 2026-11-25. Chao-style five-point tone and contextual neutral tone teaching reference. Only factual descriptions used; no copied diagrams/audio. Original schematic illustrations in app, not measured reference data.

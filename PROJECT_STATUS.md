@@ -1,18 +1,13 @@
-# Project status — 0.1.0-alpha, 2026-11-25
+# Project status — 0.1.1-alpha, 2026-11-25
 
-**Not release-ready.** Source snapshot and local Git history created. GitHub account Aidoni0mi lookup successful; no create-repository API exposed, remote created by owner; source published to Aidoni0mi/HanziFlow via GitHub API. Environment: Java 21.0.12, Kotlin CLI 1.9.0, Git 2.47.3; no Gradle, Android SDK, adb, emulator; network DNS failure. No APK, GitHub Actions result not yet verified. Android/Compose type checking and runtime behavior unverified. Kotlin-only syntax scan without Android dependencies is not a build.
+**0.1.0-alpha CI passed** (run 45625738536, Kotlin tests, APK, Lint, dependency report). APK installed and user reported 22 of 55 checks working. Remaining 33 checks are unconfirmed, not automatically defects.
 
-## Implemented in source
-- Compose Russian UI, five tabs, light/dark/system, HSK 1–9 goal selectors (default 4), date/time plan and summary.
-- 30 original dictionary records with Russian, pinyin, traditional, POS and example; exact/substring search including tone-mark-stripped pinyin; longest-match reader and unknown fallback. Not a complete dictionary or context model.
-- Local PDF/TXT import, private copy, size/header checks, page rendering / TXT tap, resume page, edition manual tag and delete. PDF rendering only, no OCR.
-- SQLite review cards/history/book metadata/quiz; scheduler and due list. No Room yet.
-- Three-second microphone capture on user request, playback, local pitch computation, schematic/actual overlay, qualitative hints, basic sandhi function. No model confidence, phoneme assessment, ASR, multi-syllable alignment, real reference contours, or saved audio history.
-- Five original grammar points, five-item quiz, one self-practice speaking prompt, starter 30-day distribution. No full official exam or scoring. No full adaptive plan/diagnostics.
-- GitHub Actions workflow and JVM tests supplied; workflow not executed.
+## User QA findings
+- User reports missing fourth/neutral tone visualization/examples and repetitive reading/grammar/characters.
+- Existing fourth-tone numeric template was present; neutral template intentionally empty; cause of fourth-tone display issue not reproduced on device.
+- 0.1.1 adds independent padded pedagogical diagrams for four lexical tones plus context-specific neutral tone; 16 TTS targets; short-syllable F0 gate and regression tests.
+- 50 original dictionary records, 5 selectable readings, 10 grammar entries, 16 character cards; daily rotation and manual browsing. No verified HSK mapping, no official textbook copying, no OCR or handwriting.
+- CI and device test for 0.1.1 pending. No claim of phonetic accuracy or native recordings.
 
-## Executed tests (Kotlin CLI)
-`bash scripts/core-check.sh` passed 13 labeled checks: 5 steady synthetic pitches (90, 140, 220, 360, 480 Hz, absolute difference of the mean estimated F0 from target under 3 Hz in each test), silence, empty signal, rise, fall, longest-match/Unicode, four basic sandhi assertions, SRS and sprint. Real speech, microphone, performance, Android unit/instrumentation, UI, DB migrations, import and offline device tests **not run**. No human accuracy claim.
-
-## Main remaining risks
-Unverified Compose/API compile, audio lifecycle and TTS device availability, native PDF parsing, dictionary ambiguity, editorial/level mappings, large data performance, limited normalization, no human validation. Source code has no public redistribution license selected; no third-party books or personal recordings included. See ROADMAP and CONTENT_COVERAGE for all deferred items.
+## Remaining
+Confirm levels, dictionary search and SRS, playback and measured F0, library, statistics, persistence, offline mode. No complete HSK course or full mocks. No human accuracy validation. See CONTENT_COVERAGE.md and ROADMAP.md. Public repository, no redistribution license selected.

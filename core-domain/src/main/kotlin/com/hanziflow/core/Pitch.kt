@@ -29,7 +29,11 @@ object Pitch {
             frames += PitchFrame(t,sampleRate/(lag+delta), (1-cm[lag]).coerceIn(0.0,1.0))
         }
         val voiced = frames.filter { it.hz != null }; val fraction = voiced.size.toDouble()/frames.size.coerceAtLeast(1)
-        if(voiced.size < 12 || fraction < .12) return PitchResult(frames,emptyList(),fraction,"Недостаточно устойчивого голоса. Повторите слог в тихом помещении.")
+        val longestRun = voiced.fold(Triple(0,0,Double.NEGATIVE_INFINITY)) { acc, frame ->
+            val run = if(frame.seconds-acc.third <= .031) acc.first+1 else 1
+            Triple(run,max(acc.second,run),frame.seconds)
+        }.second
+        if(voiced.size < 8 || longestRun < 8) return PitchResult(frames,emptyList(),fraction,"Недостаточно устойчивого голоса. Повторите слог в тихом помещении.")
         val hz = voiced.map { it.hz!! }.sorted(); val median = hz[hz.size/2]; val first=voiced.first().seconds; val span=(voiced.last().seconds-first).coerceAtLeast(.01)
         val contour = voiced.map { ContourPoint((it.seconds-first)/span,12*ln(it.hz!!/median)/ln(2.0)) }
         return PitchResult(frames,contour,fraction,"F0 измерена. Это акустическая подсказка, не оценка произношения.")

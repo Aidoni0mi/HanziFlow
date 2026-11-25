@@ -16,11 +16,13 @@ No official vocabulary/character/grammar list has been imported or individually 
 
 | Original practice (not verified official HSK) | Count |
 |---|---:|
-| Chinese–Russian starter entries | 30 |
-| Grammar explanations | 5 |
-| Reading passages | 1 |
+| Chinese–Russian starter entries | 50 |
+| Grammar explanations | 10 |
+| Reading passages | 5 |
+| Character practice cards | 16 |
 | Quiz questions | 5 |
 | Tone targets (including neutral) | 5 |
+| TTS practice examples across tones | 16 |
 | Standalone HSKK-style self-practice prompts | 1 |
 | Human reference recordings | 0 |
 | Full HSK/HSKK mocks | 0 |
