@@ -1,4 +1,4 @@
-# HSK 2025 content coverage — 0.3.0-alpha
+# HSK 2025 content coverage — 0.3.1-alpha
 
 Lists follow the November 2025 examination syllabus, not GF0025-2021. Cross-checked two independent machine-readable compilations; not manually checked line by line against official PDF. Seven bands, with HSK 7–9 combined. All counts cumulative except new words.
 
@@ -19,4 +19,4 @@ Lists follow the November 2025 examination syllabus, not GF0025-2021. Cross-chec
 - 50 existing original seed articles remain separately accessible for review history; five reading passages, 16 original character cards, ten grammar explanations, five quiz items and 16 tone examples remain.
 - No official textbooks, workbook files, official past papers, native audio or full mocks are bundled; local PDF/TXT import stays separate.
 - Content files and license notices in app/src/main/assets/hsk2025. Counts verified at import and by scripts/check-hsk-data.py.
-- 0.2.0 Android build and Lint passed; 0.3.0 pending. Four original dialogue lessons added; private textbook dialogue may be pasted and stored locally.
+- Published 0.3.0 Android build and Lint passed in run 45698885382. Current 0.3.1 source also passes local APK assembly and Lint; device QA and new CI are pending. Four original dialogue lessons are bundled; private textbook dialogue may be pasted or loaded from a small UTF-8 TXT, stored privately and deleted locally.

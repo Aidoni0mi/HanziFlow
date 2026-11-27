@@ -23,15 +23,55 @@ class Segmenter(words: List<Word>) {
 }
 enum class Grade { AGAIN, HARD, GOOD, EASY }
 data class Review(val repetitions: Int = 0, val lapses: Int = 0, val interval: Long = 0, val ease: Double = 2.5, val due: LocalDate = LocalDate.now())
+private const val MIN_EASE = 1.3
+private const val MAX_EASE = 3.5
+private const val DEFAULT_EASE = 2.5
+private const val MAX_INTERVAL_DAYS = 3650L
+
+/**
+ * Restores a persisted review without allowing one damaged legacy row to break the whole queue.
+ * The database schema has been stable since 0.1, so this also defines the compatibility boundary
+ * for older installations.
+ */
+fun restoreReview(
+    repetitions: Int,
+    lapses: Int,
+    interval: Long,
+    ease: Double,
+    due: String,
+    today: LocalDate,
+): Review = Review(
+    repetitions = repetitions.coerceAtLeast(0),
+    lapses = lapses.coerceAtLeast(0),
+    interval = interval.coerceIn(0, MAX_INTERVAL_DAYS),
+    ease = ease.takeIf(Double::isFinite)?.coerceIn(MIN_EASE, MAX_EASE) ?: DEFAULT_EASE,
+    due = runCatching { LocalDate.parse(due) }.getOrDefault(today),
+)
+
 /** Small SM-2-inspired variant, not FSRS. Again returns tomorrow; in-session retries are separate. */
 fun schedule(old: Review, grade: Grade, today: LocalDate): Review {
-    if (grade == Grade.AGAIN) return Review(0, old.lapses+1, 1, (old.ease-0.2).coerceAtLeast(1.3), today.plusDays(1))
-    val ease = (old.ease + when(grade) { Grade.HARD -> -0.15; Grade.EASY -> 0.15; else -> 0.0 }).coerceIn(1.3,3.5)
+    val current = restoreReview(old.repetitions, old.lapses, old.interval, old.ease, old.due.toString(), today)
+    if (grade == Grade.AGAIN) return Review(
+        repetitions = 0,
+        lapses = if (current.lapses == Int.MAX_VALUE) Int.MAX_VALUE else current.lapses + 1,
+        interval = 1,
+        ease = (current.ease - 0.2).coerceAtLeast(MIN_EASE),
+        due = today.plusDays(1),
+    )
+    val ease = (current.ease + when(grade) { Grade.HARD -> -0.15; Grade.EASY -> 0.15; else -> 0.0 }).coerceIn(MIN_EASE,MAX_EASE)
     val interval = when {
-        old.repetitions == 0 -> if(grade == Grade.EASY) 4L else 1L
-        old.repetitions == 1 -> if(grade == Grade.HARD) 2L else if(grade == Grade.EASY) 7L else 3L
-        else -> (old.interval * when(grade) { Grade.HARD -> 1.2; Grade.EASY -> ease*1.3; else -> ease }).roundToLong().coerceIn(1,3650)
-    }; return Review(old.repetitions+1,old.lapses,interval,ease,today.plusDays(interval))
+        current.repetitions == 0 -> if(grade == Grade.EASY) 4L else 1L
+        current.repetitions == 1 -> if(grade == Grade.HARD) 2L else if(grade == Grade.EASY) 7L else 3L
+        else -> {
+            val multiplier = when(grade) { Grade.HARD -> 1.2; Grade.EASY -> ease*1.3; else -> ease }
+            val calculated = (current.interval * multiplier).roundToLong()
+            // Rounding 2 * 1.2 used to keep a repeatedly hard card at two days forever.
+            val minimumGrowth = (current.interval + 1).coerceAtMost(MAX_INTERVAL_DAYS)
+            calculated.coerceIn(minimumGrowth, MAX_INTERVAL_DAYS)
+        }
+    }
+    val repetitions = if (current.repetitions == Int.MAX_VALUE) Int.MAX_VALUE else current.repetitions + 1
+    return Review(repetitions,current.lapses,interval,ease,today.plusDays(interval))
 }
 /** Lexical tone input already disambiguated; punctuation/prosodic boundaries must be passed as separate groups.
  * Yi exceptions (ordinals, isolated numbers) are caller supplied. 3rd tone half contour is not a tone category. */

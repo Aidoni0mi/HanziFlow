@@ -14,11 +14,28 @@ class Store(context: Context): SQLiteOpenHelper(context,"hanziflow.db",null,1) {
         db.execSQL("CREATE TABLE quiz(id INTEGER PRIMARY KEY AUTOINCREMENT, correct INTEGER NOT NULL, total INTEGER NOT NULL, day TEXT NOT NULL)")
     }
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) { error("Migration $oldVersion -> $newVersion required") }
-    fun reviews(): Map<String,Review> = readableDatabase.rawQuery("SELECT id,reps,lapses,interval,ease,due FROM review",null).use { c -> buildMap { while(c.moveToNext()) put(c.getString(0),Review(c.getInt(1),c.getInt(2),c.getLong(3),c.getDouble(4),LocalDate.parse(c.getString(5)))) } }
+    fun reviews(): Map<String,Review> {
+        val today=LocalDate.now()
+        return readableDatabase.rawQuery("SELECT id,reps,lapses,interval,ease,due FROM review",null).use { c -> buildMap {
+            while(c.moveToNext()) put(c.getString(0),restoreReview(c.getInt(1),c.getInt(2),c.getLong(3),c.getDouble(4),c.getString(5),today))
+        } }
+    }
     fun add(id:String) { writableDatabase.execSQL("INSERT OR IGNORE INTO review VALUES(?,0,0,0,2.5,?)",arrayOf(id,LocalDate.now().toString())) }
-    fun addAll(ids:List<String>){val d=writableDatabase;d.beginTransaction();try{ids.forEach{add(it)};d.setTransactionSuccessful()}finally{d.endTransaction()}}
+    fun addAll(ids:List<String>){
+        val db=writableDatabase;val today=LocalDate.now().toString();db.beginTransaction()
+        try{db.compileStatement("INSERT OR IGNORE INTO review VALUES(?,0,0,0,2.5,?)").use{statement->ids.distinct().forEach{id->statement.clearBindings();statement.bindString(1,id);statement.bindString(2,today);statement.executeInsert()}};db.setTransactionSuccessful()}finally{db.endTransaction()}
+    }
     fun grade(id:String, grade:Grade) {
-        val db=writableDatabase; db.beginTransaction(); try { val r=schedule(reviews()[id]?:Review(),grade,LocalDate.now()); db.execSQL("INSERT OR REPLACE INTO review VALUES(?,?,?,?,?,?)",arrayOf(id,r.repetitions,r.lapses,r.interval,r.ease,r.due.toString())); db.execSQL("INSERT INTO history(word,grade,day) VALUES(?,?,?)",arrayOf(id,grade.name,LocalDate.now().toString())); db.setTransactionSuccessful() } finally { db.endTransaction() }
+        val db=writableDatabase;val today=LocalDate.now();db.beginTransaction()
+        try {
+            val old=db.rawQuery("SELECT reps,lapses,interval,ease,due FROM review WHERE id=?",arrayOf(id)).use{c->
+                if(c.moveToFirst())restoreReview(c.getInt(0),c.getInt(1),c.getLong(2),c.getDouble(3),c.getString(4),today) else Review(due=today)
+            }
+            val r=schedule(old,grade,today)
+            db.execSQL("INSERT OR REPLACE INTO review VALUES(?,?,?,?,?,?)",arrayOf(id,r.repetitions,r.lapses,r.interval,r.ease,r.due.toString()))
+            db.execSQL("INSERT INTO history(word,grade,day) VALUES(?,?,?)",arrayOf(id,grade.name,today.toString()))
+            db.setTransactionSuccessful()
+        } finally { db.endTransaction() }
     }
     fun books(): List<Book> = readableDatabase.rawQuery("SELECT id,name,kind,page,version FROM book ORDER BY rowid DESC",null).use { c -> buildList { while(c.moveToNext()) add(Book(c.getString(0),c.getString(1),c.getString(2),c.getInt(3),c.getString(4))) } }
     fun addBook(b: Book) = writableDatabase.execSQL("INSERT INTO book VALUES(?,?,?,?,?)",arrayOf(b.id,b.name,b.kind,b.page,b.version))

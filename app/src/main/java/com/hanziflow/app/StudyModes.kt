@@ -14,6 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.hanziflow.core.parseDialogueLines
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 private data class Line(val han:String,val py:String,val ru:String)
@@ -82,21 +85,36 @@ private val dialogues=listOf(
 }
 @Composable fun DialogueStudy(vm:HanziViewModel){
     val ctx=LocalContext.current;val prefs=remember(ctx){ctx.getSharedPreferences("personal_dialogue",0)}
+    val scope=rememberCoroutineScope()
     var index by rememberSaveable{mutableIntStateOf(0)}
     var custom by rememberSaveable{mutableStateOf(false)}
     var pasted by rememberSaveable{mutableStateOf(prefs.getString("text","").orEmpty())}
     var show by rememberSaveable{mutableStateOf(true)}
+    val picker=rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()){uri->uri?.let{
+        scope.launch{
+            try{pasted=readLocalDialogueText(ctx,it).take(12000);custom=true;vm.message("TXT загружен локально. Нажмите «Сохранить», чтобы оставить диалог на устройстве")}
+            catch(e:CancellationException){throw e}
+            catch(e:Exception){vm.message(e.message?:"Не удалось прочитать TXT")}
+        }
+    }}
     val d=dialogues[index]
-    val lines=if(custom)pasted.lines().filter{it.isNotBlank()}.take(100).map{Line(it,"","")}else d.lines
+    val lines=if(custom)parseDialogueLines(pasted).map{Line(it.chinese,it.pinyin,it.russian)}else d.lines
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(10.dp)){
         Text("Диалоги",style=MaterialTheme.typography.headlineSmall)
         Text("Авторские диалоги · не тексты официальных учебников")
         Row{OutlinedButton({index=(index+dialogues.size-1)%dialogues.size;custom=false}){Text("Назад")};Spacer(Modifier.weight(1f));OutlinedButton({index=(index+1)%dialogues.size;custom=false}){Text("Далее")}}
         StudyButton(if(custom)"Авторские диалоги" else "Мой диалог из учебника"){custom=!custom}
-        if(custom){OutlinedTextField(pasted,{pasted=it.take(12000)},label={Text("Вставьте реплики, по одной на строку")},modifier=Modifier.fillMaxWidth(),minLines=4);StudyButton("Сохранить на устройстве"){prefs.edit().putString("text",pasted).apply();vm.message("Диалог сохранён")}}
+        if(custom){
+            Text("Текст остаётся в приватном хранилище приложения и не входит в APK или репозиторий.",style=MaterialTheme.typography.bodySmall)
+            OutlinedTextField(pasted,{pasted=it.take(12000)},label={Text("Реплика или: китайский ⇥ pinyin ⇥ русский")},modifier=Modifier.fillMaxWidth(),minLines=4)
+            StudyButton("Загрузить TXT с устройства"){picker.launch(arrayOf("text/plain"))}
+            StudyButton("Сохранить только на устройстве"){prefs.edit().putString("text",pasted).apply();vm.message("Диалог сохранён локально")}
+            if(prefs.contains("text"))TextButton({prefs.edit().remove("text").apply();pasted="";vm.message("Локальный диалог удалён")}){Text("Удалить сохранённый диалог")}
+        }
         else Text(d.title,style=MaterialTheme.typography.titleLarge)
         StudyButton(if(show)"Скрыть текст" else "Показать текст"){show=!show}
         StudyButton("Прослушать диалог"){vm.speak(lines.joinToString("。"){it.han})}
+        if(custom&&lines.isEmpty())Text("Добавьте хотя бы одну непустую реплику.")
         lines.forEachIndexed{i,l->Card(Modifier.fillMaxWidth()){Column(Modifier.padding(12.dp)){
             Text("Реплика ${i+1}")
             if(show){Text(l.han,fontSize=24.sp);if(l.py.isNotBlank())Text(l.py);if(l.ru.isNotBlank())Text(l.ru)}

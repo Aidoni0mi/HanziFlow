@@ -12,4 +12,4 @@
 | 7 AI & personalization | Not implemented | Optional, consent, backend secrets, no core dependency, evaluation |
 | 8 Release | Blocked | Android build, device test, unit/integration/UI/database/import/audio/regression suite, documented APK |
 
-Immediate next gate: create empty private GitHub repository, push bundle history, run CI, resolve actual compiler/lint errors, test APK on Android. No phase declared passed solely because code exists. Then source/license and CTI syllabus ingestion, HSK 4 editorial review. Sunday mock will only become a full mock once verified exam engine and enough questions exist.
+Immediate next gate: run CI for the 0.3.1 changes, install that exact APK on Android, and execute `docs/QA_0_3_REGRESSION.md`, beginning with the 13 previous failures and 19 untested checks. No phase is declared passed solely because code or an automated build exists. After device regression, continue native Russian editorial review beyond HSK 1 and verified HSK 4 lesson development. Sunday mock will only become a full mock once a verified exam engine and enough original questions exist.
