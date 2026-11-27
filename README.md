@@ -14,11 +14,11 @@ Each life-situation line can be spoken by an installed offline Mandarin TTS voic
 
 ## GitHub
 
-Canonical repository: https://github.com/Aidoni0mi/HanziFlow. Public visibility explicitly confirmed by owner. Do not commit personal books, recordings or secrets. Published 0.3.0 commit `697aab1` passed Android CI and produced an APK in run 45698885382. The 0.4.0 candidate requires its own successful CI run before publication. Visit Actions → Android verification → successful run → Artifacts to download HanziFlow-debug. No public redistribution license has been selected.
+Canonical repository: https://github.com/Aidoni0mi/HanziFlow. Public visibility explicitly confirmed by owner. Do not commit personal books, recordings or secrets. Published 0.3.0 commit `697aab1` passed Android CI in run 45698885382. The 0.4.0 implementation passed push run 46061710393 and pull-request run 46061715516; both produced a HanziFlow-debug artifact. Physical-device QA remains required before publication. No public redistribution license has been selected.
 
 ## Verified in this environment
 
-On 2026-11-28 the current 0.4.0 source passed 27 JUnit tests, both data validators, debug APK assembly and Android Lint with Gradle 8.9 and Android API 35. Fresh GitHub CI and physical-device QA are still required. See `PROJECT_STATUS.md` and `docs/QA_0_3_REGRESSION.md`.
+On 2026-11-28 the current 0.4.0 source passed 27 JUnit tests, both data validators, debug APK assembly and Android Lint locally and in GitHub Actions. Physical-device QA is still required. See `PROJECT_STATUS.md` and `docs/QA_0_3_REGRESSION.md`.
 
 ## Documentation
 

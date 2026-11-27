@@ -4,6 +4,7 @@
 
 - User device QA for 0.2.0: **63 passed / 13 failed / 19 untested** out of 95 checks.
 - Automated baseline for commit `697aab1`: GitHub Actions run `45698885382` passed data validation, Kotlin unit tests, debug APK assembly, and Android Lint.
+- Automated 0.4.0 implementation: push run `46061710393` and pull-request run `46061715516` passed both validators, 27 Kotlin tests, debug APK assembly, and Android Lint; use the pull-request run's `HanziFlow-debug` artifact for device QA.
 - Automated success does not change a device item to passed. The items below remain pending until observed on Android.
 
 ## Retest the 13 previous failures first
