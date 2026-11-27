@@ -1,4 +1,4 @@
-# Android regression plan — 0.3.x alpha
+# Android regression plan — 0.4.x alpha
 
 ## Baselines
 
@@ -56,11 +56,23 @@
 - F0 feedback may describe a measured contour direction only when enough stable voiced frames exist.
 - Do not show a percentage or pass/fail pronunciation grade until a validated Mandarin learner-speech model and evaluation set exist.
 
+## Life-situation course — new in 0.4.0
+
+- The course list shows 16 original situations; “all” and “up to my level” filters update without losing or duplicating entries.
+- Every situation opens one four-line dialogue and one two-line story. Across the course, all 96 lines display Hanzi, tone-marked pinyin, and Russian translation.
+- Normal and 0.7× Mandarin TTS work for an individual line; full-text playback follows the visible line order.
+- Opening “read aloud” selects the intended line and resets recognition and recording results when the line changes.
+- On Android 12+ with an installed on-device Mandarin recognizer, recognized text and cautious comparison feedback appear after an explicit microphone action.
+- A separate recording uses a five-to-fifteen-second window based on line length, can be played back, and displays the full measured F0 phrase contour without presenting syllable alignment or a pronunciation score.
+- Denied permission, missing offline TTS/recognition packages, silence, noisy input, cancellation, and leaving the screen all recover without a crash or a retained microphone session.
+- The course remains usable in airplane mode after required Mandarin system voice and recognition packages have been installed.
+
 ## Release gate
 
-A 0.3.x APK can be called device-verified only after:
+A 0.4.x APK can be called device-verified only after:
 
 1. The current commit passes the same CI gates as run `45698885382`.
 2. The 13 previous failures are retested on Android.
 3. The 19 untested checks have recorded observations.
-4. No private textbook, workbook, recording, signing key, or credential appears in the Git diff or artifacts.
+4. The life-situation and guided-reading checks above have recorded observations.
+5. No private textbook, workbook, recording, signing key, or credential appears in the Git diff or artifacts.

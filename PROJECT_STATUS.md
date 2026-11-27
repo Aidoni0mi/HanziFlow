@@ -1,4 +1,4 @@
-# Project status — 0.3.1-alpha
+# Project status — 0.4.0-alpha
 
 - User device QA for 0.2.0 reported 63 pass, 13 fail and 19 untested. The retest plan is `docs/QA_0_3_REGRESSION.md`; source or CI checks do not mark device items passed.
 - Published 0.3.0 commit `697aab1` passed data validation, Kotlin tests, debug APK assembly and Android Lint in GitHub Actions run 45698885382.
@@ -7,7 +7,9 @@
 - Russian regression fixture confirms `учиться` maps to `学习`; a physical-device search retest is still required.
 - Four review presentation modes share a hardened SRS. Intervals grow monotonically, malformed legacy rows no longer break the queue, writes are serialized and batch additions are deduplicated.
 - Added daily three-step lesson, four original dialogues, paste/TXT local private-dialogue input, listening drill, and device-only Android speech-to-text comparison for HSK characters/words and custom sentences. Private dialogues can be deleted and are never bundled. Speech text comparison is not phoneme or tone scoring; Android 12+ and a suitable local Mandarin recognizer are required.
-- F0 feedback uses the longest continuous voiced segment and remains a qualitative acoustic hint, not a calibrated pronunciation score.
+- Isolated-tone F0 feedback uses the longest continuous voiced segment. Guided reading shows all stable voiced sections on one relative timeline and preserves pauses; neither mode performs syllable alignment or calibrated pronunciation scoring.
+- Added a scalable original life-situation course: 16 high-frequency situations, 32 dialogue/story texts and 96 lines. Every line carries Hanzi, tone-marked pinyin and Russian translation, with normal/slow TTS, a separate on-device speech-text comparison and qualitative F0 contour practice.
+- The bundled life-course TSV has its own parser, unit tests and CI validator. It contains no copied textbook passages, personal imports or recordings.
 - No textbook dialogue extraction, licensed native audio, OCR, stroke grading, full grammar lessons, adaptive AI tutor or official mocks yet.
-- Current source passed 14 JUnit tests, data validation, debug APK assembly and Android Lint locally on 2026-11-27. A new CI run and physical-device QA are still pending.
+- The current 0.4.0 source passed 27 JUnit tests, both data validators, debug APK assembly and Android Lint locally on 2026-11-28. Fresh CI and physical-device QA remain pending, including Mandarin TTS, local recognition, 5–15-second microphone recording and F0-analysis performance on a slower device.
 - No authorized Gemini connection or local Gemini client was available. `docs/GEMINI_HANDOFF.md` contains the public-safe independent-review brief; it excludes private books, recordings and secrets.

@@ -24,6 +24,8 @@ jobs:
           sdkmanager 'platform-tools' 'platforms;android-35' 'build-tools;35.0.0'
       - name: Verify HSK curriculum data
         run: python3 scripts/check-hsk-data.py
+      - name: Verify life-situation course data
+        run: python3 scripts/check-life-course.py
       - name: Run Kotlin unit tests
         run: gradle --no-daemon --stacktrace :core-domain:test
       - name: Build debug APK

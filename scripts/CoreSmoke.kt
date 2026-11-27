@@ -9,6 +9,7 @@ fun main() {
     check(Pitch.analyze(ShortArray(0)).contour.isEmpty()); println("PASS empty")
     val rise=Pitch.analyze(signal(130.0,230.0)); check(rise.contour.last().relativeSemitones>rise.contour.first().relativeSemitones+5); println("PASS rise")
     val fall=Pitch.analyze(signal(250.0,130.0)); check(fall.contour.last().relativeSemitones<fall.contour.first().relativeSemitones-5); println("PASS fall")
+    val tones=pinyinToneSyllables("Nǐ hǎo, lǜ chá! ni3hao3"); check(tones.map{it.tone}==listOf(3,3,4,2,3,3)); check(tones.map{it.plain}==listOf("ni","hao","lü","cha","ni","hao")); check(phraseToneTemplate("nǐ hǎo").let{it.first().time==0.0&&it.last().time==1.0}); println("PASS pinyin tone guide")
     check(speechChars("ＡＢＣ１２３")==speechChars("abc123")); check(bestSpeechHypothesis("我学习汉语",listOf("我学汉语","我学习汉语"))=="我学习汉语"); println("PASS speech matching")
     val split=ShortArray(sr*4)
     for(i in 4000 until 7200) split[i]=(12000*sin(2*PI*220*i/sr)).toInt().toShort()

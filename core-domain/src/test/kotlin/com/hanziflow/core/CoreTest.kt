@@ -34,6 +34,39 @@ class CoreTest {
         assertTrue(result.contour.size<allVoiced)
         assertTrue(result.contour.maxOf{it.relativeSemitones}-result.contour.minOf{it.relativeSemitones}<3.0)
     }
+    @Test fun phrasePitchContourKeepsAllVoicedRunsAndTheirGap() {
+        val result=PitchResult(
+            frames=listOf(
+                PitchFrame(0.0,null,0.0),
+                PitchFrame(0.10,200.0,.9),
+                PitchFrame(0.11,205.0,.9),
+                PitchFrame(0.12,210.0,.9),
+                PitchFrame(0.13,215.0,.9),
+                PitchFrame(0.30,null,0.0),
+                PitchFrame(0.90,300.0,.9),
+                PitchFrame(0.91,310.0,.9),
+                PitchFrame(0.92,320.0,.9),
+                PitchFrame(0.93,330.0,.9),
+                PitchFrame(1.3,null,0.0),
+            ),
+            contour=emptyList(),
+            voicedFraction=4.0/7.0,
+            message="",
+        )
+        val contour=Pitch.phraseContour(result)
+        assertEquals(8,contour.size)
+        assertEquals(0.0,contour.first().time,0.0001)
+        assertEquals(1.0,contour.last().time,0.0001)
+        assertTrue(contour[4].time-contour[3].time>.75)
+        assertTrue(contour.first().relativeSemitones<contour.last().relativeSemitones)
+    }
+    @Test fun phrasePitchContourNeedsEightValidVoicedFrames() {
+        assertTrue(Pitch.phraseContour(PitchResult(emptyList(),emptyList(),0.0,"")).isEmpty())
+        assertTrue(Pitch.phraseContour(PitchResult(listOf(PitchFrame(0.1,220.0,.9)),emptyList(),1.0,"")).isEmpty())
+        val sevenFrames=(0 until 7).map{PitchFrame(it/100.0,220.0,.9)}
+        assertTrue(Pitch.phraseContour(PitchResult(sevenFrames,emptyList(),1.0,"")).isEmpty())
+        assertTrue(Pitch.phraseContour(PitchResult(listOf(PitchFrame(0.1,Double.NaN,.9),PitchFrame(0.2,-1.0,.9)),emptyList(),1.0,"")).isEmpty())
+    }
     @Test fun toneFourTemplateFalls() {
         val contour=Pitch.template(4)
         assertTrue(contour.zipWithNext().all { (a,b)->a.relativeSemitones>b.relativeSemitones })

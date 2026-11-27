@@ -35,7 +35,7 @@ object VoiceRecorder {
     const val SR=16000
     @android.annotation.SuppressLint("MissingPermission")
     suspend fun record(seconds:Int=3):ShortArray=withContext(Dispatchers.IO) {
-        require(seconds in 1..5); val min=AudioRecord.getMinBufferSize(SR,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT); require(min>0){"Микрофон недоступен"}
+        require(seconds in 1..15); val min=AudioRecord.getMinBufferSize(SR,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT); require(min>0){"Микрофон недоступен"}
         val rec=AudioRecord(MediaRecorder.AudioSource.MIC,SR,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT,maxOf(min,4096)); val samples=ShortArray(SR*seconds); var offset=0
         try { check(rec.state==AudioRecord.STATE_INITIALIZED); rec.startRecording(); while(offset<samples.size) { coroutineContext.ensureActive(); val n=rec.read(samples,offset,minOf(1024,samples.size-offset)); check(n>0){"Ошибка записи: $n"}; offset+=n }; samples }
         finally { if(rec.recordingState==AudioRecord.RECORDSTATE_RECORDING) rec.stop(); rec.release() }

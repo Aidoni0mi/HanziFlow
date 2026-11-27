@@ -46,6 +46,32 @@ object Pitch {
         val contour = primary.map { ContourPoint((it.seconds-first)/span,12*ln(it.hz!!/median)/ln(2.0)) }
         return PitchResult(frames,contour,fraction,"F0 измерена по самому длинному устойчивому участку голоса. Это акустическая подсказка, не оценка произношения.")
     }
+    /**
+     * Builds a display-only F0 contour for a complete recorded utterance.
+     *
+     * Unlike [PitchResult.contour], this keeps every voiced frame and retains
+     * the relative time between them, so a UI can leave visible gaps for
+     * pauses. The contour is not aligned to pinyin syllables and is not a
+     * pronunciation or tone score.
+     */
+    fun phraseContour(result: PitchResult): List<ContourPoint> {
+        val voiced = result.frames.filter { frame ->
+            frame.hz?.let { it.isFinite() && it > 0.0 } == true
+        }
+        // Match the minimum evidence used by the syllable contour. A couple of
+        // isolated detections are commonly microphone noise, not a stable voice.
+        if (voiced.size < 8) return emptyList()
+        val frequencies = voiced.map { it.hz!! }.sorted()
+        val median = frequencies[frequencies.size / 2]
+        val first = voiced.first().seconds
+        val span = (voiced.last().seconds - first).coerceAtLeast(.01)
+        return voiced.map { frame ->
+            ContourPoint(
+                time = ((frame.seconds - first) / span).coerceIn(0.0, 1.0),
+                relativeSemitones = 12 * ln(frame.hz!! / median) / ln(2.0),
+            )
+        }
+    }
     fun template(tone: Int): List<ContourPoint> = when(tone) {
         1 -> listOf(0.0,0.0,0.0); 2 -> listOf(-3.0,-1.0,3.0); 3 -> listOf(1.0,-3.0,2.0); 4 -> listOf(3.0,0.0,-4.0); else -> emptyList()
     }.mapIndexed { i, x -> ContourPoint(i/2.0,x) }
