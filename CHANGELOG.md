@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.4.0-alpha — 2026-11-28
+- Add 16 original everyday situations covering introductions, home, family, study, work, transport, directions, shopping, cafes, health, emergencies, hotels, deliveries, banking, internet and leisure.
+- Add one dialogue and one short story for every situation: 32 texts and 96 structured lines with Hanzi, tone-marked pinyin and Russian translation.
+- Add guided reading with device Mandarin TTS at normal and slower speed, on-device speech-to-text comparison and a separate qualitative F0 contour view.
+- Keep speech-text matching and tone contour feedback explicitly separate; neither is a calibrated pronunciation or per-syllable tone score.
+- Validate the bundled situation course in CI; no copied textbook content or private user material is included.
+
+## 0.3.1-alpha — 2026-11-27
+- Add regression checks for all cumulative HSK word, recognition-character and grammar counts and the Russian `учиться` lookup fixture.
+- Add device-local personal-dialogue TXT loading, structured Chinese/pinyin/Russian rows, explicit local save and deletion.
+- Harden SRS interval growth, legacy-row restoration, duplicate batch addition and per-card database reads.
+- Compare up to five local speech-recognition alternatives, expose partial/error states and keep text similarity distinct from pronunciation scoring.
+- Build the F0 contour from one continuous voiced segment so pauses are not joined into a false tone shape.
+- Add unit coverage and a public-safe independent-review handoff; no private textbook material is bundled.
+
 ## 0.3.0-alpha
 - Add 300 original HSK1 Russian glosses and count validation.
 - Add daily lesson, dialogues, listening drills and local speech text comparison.

@@ -61,6 +61,8 @@ class HanziViewModel(app:Application):AndroidViewModel(app) {
     val starterWords=readWords(app)
     var curriculum by mutableStateOf<Curriculum?>(null); private set
     var curriculumError by mutableStateOf(""); private set
+    var lifeCourse by mutableStateOf<List<LifeSituation>>(emptyList()); private set
+    var lifeCourseError by mutableStateOf(""); private set
     private val starterSegmenter=Segmenter(starterWords)
     val words get()=curriculum?.reviewWords?:starterWords
     val segmenter get()=curriculum?.segmenter?:starterSegmenter
@@ -78,12 +80,18 @@ class HanziViewModel(app:Application):AndroidViewModel(app) {
     var samples by mutableStateOf<ShortArray?>(null); private set
     var pitch by mutableStateOf<PitchResult?>(null); private set
     private var audioJob:Job?=null
-    init { refresh(); loadCurriculum() }
+    init { refresh(); loadCurriculum(); loadLifeCourse() }
     fun loadCurriculum(){if(curriculum!=null)return;viewModelScope.launch {
         curriculumError=""
         try{curriculum=withContext(Dispatchers.IO){readCurriculum(getApplication<Application>(),starterWords)}}
         catch(e:CancellationException){throw e}
         catch(e:Exception){curriculumError="Не удалось загрузить учебную базу: "+(e.message?:"ошибка данных")}
+    }}
+    fun loadLifeCourse(){if(lifeCourse.isNotEmpty())return;viewModelScope.launch {
+        lifeCourseError=""
+        try{lifeCourse=withContext(Dispatchers.IO){readLifeCourse(getApplication<Application>())}}
+        catch(e:CancellationException){throw e}
+        catch(e:Exception){lifeCourseError="Не удалось загрузить жизненные ситуации: "+(e.message?:"ошибка данных")}
     }}
     fun updateLevel(n:Int){level=hskBand(n); prefs.edit().putInt("level",level).apply()}
     fun saveDate(value:String){ if(value.isNotBlank() && runCatching{LocalDate.parse(value)}.isFailure){notice="Введите дату в формате ГГГГ-ММ-ДД";return}; date=value;prefs.edit().putString("date",value).apply();notice="Дата сохранена" }
@@ -101,9 +109,9 @@ class HanziViewModel(app:Application):AndroidViewModel(app) {
     fun tag(b:Book,v:String){mutate{db.version(b.id,v)}}
     fun delete(b:Book){mutate{if(files.delete(b)) db.deleteBook(b.id) else error("File deletion failed")}}
     fun importBook(uri:Uri){if(loading)return; viewModelScope.launch { loading=true;try{val book=files.import(uri);try{withContext(Dispatchers.IO){db.addBook(book)}}catch(e:Exception){files.delete(book);throw e}; refresh();notice="Файл импортирован локально"}catch(e:CancellationException){throw e}catch(e:Exception){notice=e.message?:"Ошибка импорта"}finally{loading=false} }}
-    fun speak(text:String,speed:Float=1f){if(speechCheck.busy||recording)return;if(!speech.say(text,speed))notice="Установите офлайн-голос Mandarin Chinese в настройках Android."}
-    fun record(){if(recording||playing||speechCheck.busy)return; speech.stop(); samples=null;pitch=null;recording=true;audioJob=viewModelScope.launch{try{val pcm=VoiceRecorder.record();samples=pcm;pitch=withContext(Dispatchers.Default){Pitch.analyze(pcm)}}catch(e:CancellationException){throw e}catch(e:Exception){notice=e.message?:"Ошибка микрофона"}finally{recording=false}}}
-    fun play(){val pcm=samples?:return;if(recording||playing)return;playing=true;audioJob=viewModelScope.launch{try{VoiceRecorder.play(pcm)}catch(e:CancellationException){throw e}catch(e:Exception){notice="Ошибка воспроизведения"}finally{playing=false}}}
+    fun speak(text:String,speed:Float=1f){if(speechCheck.busy||recording||playing)return;if(!speech.say(text,speed))notice="Установите офлайн-голос Mandarin Chinese в настройках Android."}
+    fun record(seconds:Int=3){if(recording||playing||speechCheck.busy)return; speech.stop(); samples=null;pitch=null;recording=true;audioJob=viewModelScope.launch{try{val pcm=VoiceRecorder.record(seconds);samples=pcm;pitch=withContext(Dispatchers.Default){Pitch.analyze(pcm)}}catch(e:CancellationException){throw e}catch(e:Exception){notice=e.message?:"Ошибка микрофона"}finally{recording=false}}}
+    fun play(){val pcm=samples?:return;if(recording||playing||speechCheck.busy)return;speech.stop();playing=true;audioJob=viewModelScope.launch{try{VoiceRecorder.play(pcm)}catch(e:CancellationException){throw e}catch(e:Exception){notice="Ошибка воспроизведения"}finally{playing=false}}}
     fun stopAudio(){audioJob?.cancel();speech.stop();speechCheck.cancel()}
     fun erase(){stopAudio();samples=null;pitch=null}
     override fun onCleared(){stopAudio();speechCheck.close();speech.close();db.close();super.onCleared()}
@@ -139,8 +147,166 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
 @Composable private fun Learn(vm:HanziViewModel,sub:String,choose:(String)->Unit){
     if(sub=="Меню")Page("Учебные материалы"){
         Panel("Уровни") { for(group in (1..7).chunked(3)) Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){group.forEach{n->FilterChip(selected=vm.level==n,onClick={vm.updateLevel(n)},label={Text(hskLabel(n))},modifier=Modifier.weight(1f))}};Text("HSK 7–9 используют общий список. Словарь, иероглифы и грамматика фильтруются по цели; можно включить предыдущие уровни.") }
-        listOf("Урок дня","Словарь","Диалоги","Чтение","Грамматика","Иероглифы","Повторение","Библиотека").forEach{label->WideButton(label){choose(label)}}
-    }else Column(Modifier.fillMaxSize()){TextButton({choose("Меню")}){Text("‹ Учёба")};Box(Modifier.weight(1f)){when(sub){"Урок дня"->DailyStudy(vm);"Диалоги"->DialogueStudy(vm);"Словарь"->Dictionary(vm);"Чтение"->Reader(vm);"Грамматика"->GrammarScreen(vm);"Иероглифы"->HanziScreen(vm);"Повторение"->ReviewScreen(vm);"Библиотека"->Library(vm);else->Text("Раздел недоступен")}}}
+        listOf("Урок дня","Жизненные ситуации","Словарь","Диалоги","Чтение","Грамматика","Иероглифы","Повторение","Библиотека").forEach{label->WideButton(label){choose(label)}}
+    }else Column(Modifier.fillMaxSize()){TextButton({choose("Меню")}){Text("‹ Учёба")};Box(Modifier.weight(1f)){when(sub){"Урок дня"->DailyStudy(vm);"Жизненные ситуации"->LifeCourseScreen(vm);"Диалоги"->DialogueStudy(vm);"Словарь"->Dictionary(vm);"Чтение"->Reader(vm);"Грамматика"->GrammarScreen(vm);"Иероглифы"->HanziScreen(vm);"Повторение"->ReviewScreen(vm);"Библиотека"->Library(vm);else->Text("Раздел недоступен")}}}
+}
+
+@Composable private fun LifeCourseScreen(vm:HanziViewModel){
+    var situationId by rememberSaveable{mutableStateOf("")}
+    var textId by rememberSaveable{mutableStateOf("")}
+    var practiceOrder by rememberSaveable{mutableStateOf<Int?>(null)}
+    var showAll by rememberSaveable{mutableStateOf(true)}
+    DisposableEffect(Unit){onDispose{vm.stopAudio()}}
+    val situations=vm.lifeCourse
+    val situation=situations.firstOrNull{it.id==situationId}
+
+    if(situation==null){
+        Column(Modifier.fillMaxSize(),verticalArrangement=Arrangement.spacedBy(8.dp)){
+            Text("Жизненные ситуации",style=MaterialTheme.typography.headlineSmall,fontWeight=FontWeight.Bold)
+            Text("16 авторских сценариев: в каждом есть практический диалог и короткая история с иероглифами, pinyin и русским переводом.")
+            if(situations.isEmpty()){
+                if(vm.lifeCourseError.isBlank()){
+                    LinearProgressIndicator(Modifier.fillMaxWidth())
+                    Text("Загрузка курса…")
+                }else{
+                    Text(vm.lifeCourseError,color=MaterialTheme.colorScheme.error)
+                    WideButton("Повторить загрузку"){vm.loadLifeCourse()}
+                }
+            }else{
+                Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
+                    FilterChip(selected=showAll,onClick={showAll=true},label={Text("Все ситуации")})
+                    FilterChip(selected=!showAll,onClick={showAll=false},label={Text("До моего уровня")})
+                }
+                val shown=remember(situations,vm.level,showAll){
+                    if(showAll)situations else situations.filter{it.level<=vm.level}
+                }
+                Text("Показано ${shown.size} из ${situations.size}",style=MaterialTheme.typography.labelMedium)
+                LazyColumn(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(7.dp)){
+                    items(shown,key={it.id}){item->
+                        Card(onClick={
+                            vm.stopAudio();situationId=item.id
+                            textId=item.texts.firstOrNull{it.kind==LifeTextKind.DIALOGUE}?.id.orEmpty()
+                            practiceOrder=null
+                        },modifier=Modifier.fillMaxWidth()){
+                            Column(Modifier.padding(12.dp),verticalArrangement=Arrangement.spacedBy(3.dp)){
+                                Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){
+                                    Text(item.titleRu,style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.SemiBold)
+                                    Text("Уровень ${item.level}",style=MaterialTheme.typography.labelMedium)
+                                }
+                                Text(item.categoryRu,style=MaterialTheme.typography.bodySmall)
+                                Text("Диалог + история · ${item.texts.sumOf{it.lines.size}} строк",style=MaterialTheme.typography.bodySmall)
+                            }
+                        }
+                    }
+                    if(shown.isEmpty())item{Text("Для выбранного уровня ситуаций пока нет.")}
+                }
+            }
+        }
+        return
+    }
+
+    val active=situation.texts.firstOrNull{it.id==textId}?:situation.texts.first()
+    val practiceLine=active.lines.firstOrNull{it.order==practiceOrder}
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(10.dp)){
+        TextButton({vm.stopAudio();situationId="";textId="";practiceOrder=null}){Text("‹ Все ситуации")}
+        Text(situation.titleRu,style=MaterialTheme.typography.headlineSmall,fontWeight=FontWeight.Bold)
+        Text("${situation.categoryRu} · уровень курса ${situation.level}",style=MaterialTheme.typography.labelMedium)
+        Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
+            situation.texts.sortedBy{it.kind}.forEach{lesson->
+                FilterChip(
+                    selected=lesson.id==active.id,
+                    onClick={vm.stopAudio();textId=lesson.id;practiceOrder=null},
+                    label={Text(if(lesson.kind==LifeTextKind.DIALOGUE)"Диалог" else "История")}
+                )
+            }
+        }
+        Text(active.titleRu,style=MaterialTheme.typography.titleLarge)
+        Row(horizontalArrangement=Arrangement.spacedBy(6.dp)){
+            OutlinedButton({vm.speak(active.lines.joinToString(" "){it.hanzi})},enabled=!vm.recording&&!vm.playing&&!vm.speechCheck.busy,modifier=Modifier.weight(1f)){Text("Слушать всё")}
+            OutlinedButton({vm.speak(active.lines.joinToString(" "){it.hanzi},.7f)},enabled=!vm.recording&&!vm.playing&&!vm.speechCheck.busy,modifier=Modifier.weight(1f)){Text("Медленно")}
+        }
+        active.lines.forEach{line->
+            Card(Modifier.fillMaxWidth()){
+                Column(Modifier.padding(12.dp),verticalArrangement=Arrangement.spacedBy(5.dp)){
+                    Text("${line.order}. ${line.speaker}",style=MaterialTheme.typography.labelMedium,fontWeight=FontWeight.SemiBold)
+                    Text(line.hanzi,fontSize=24.sp,lineHeight=34.sp)
+                    Text(line.pinyin,color=MaterialTheme.colorScheme.primary)
+                    Text(line.russian)
+                    Row{
+                        TextButton({vm.speak(line.hanzi)},enabled=!vm.recording&&!vm.playing&&!vm.speechCheck.busy){Text("Слушать")}
+                        TextButton({practiceOrder=line.order},enabled=!vm.recording&&!vm.playing&&!vm.speechCheck.busy){Text("Читать вслух")}
+                    }
+                }
+            }
+        }
+        practiceLine?.let{line->LifeReadingPractice(vm,line){practiceOrder=null}}
+        Text("Озвучивание выполняет системный Mandarin TTS. Все тексты курса оригинальные и хранятся внутри приложения.",style=MaterialTheme.typography.bodySmall)
+    }
+}
+
+@Composable private fun LifeReadingPractice(vm:HanziViewModel,line:LifeLine,onClose:()->Unit){
+    val context=LocalContext.current
+    val check=vm.speechCheck
+    val recordSeconds=remember(line.hanzi){
+        val characters=line.hanzi.count{it in '\u3400'..'\u9FFF'}
+        ((characters+1)/2+2).coerceIn(5,15)
+    }
+    val speechPermission=rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()){granted->
+        if(granted&&!vm.recording&&!vm.playing){vm.erase();check.start(line.hanzi)}
+        else vm.message("Микрофон недоступен")
+    }
+    val tonePermission=rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()){granted->
+        if(granted&&!check.busy&&!vm.playing){check.cancel();vm.record(recordSeconds)}
+        else vm.message("Микрофон недоступен")
+    }
+    val reference=remember(line.pinyin){phraseToneTemplate(line.pinyin)}
+    val actual=remember(vm.pitch){vm.pitch?.let(Pitch::phraseContour).orEmpty()}
+    LaunchedEffect(line.hanzi){vm.erase();check.reset()}
+    DisposableEffect(Unit){onDispose{vm.stopAudio()}}
+    Panel("Чтение вслух"){
+        Text(line.hanzi,fontSize=27.sp,lineHeight=38.sp)
+        Text(line.pinyin,color=MaterialTheme.colorScheme.primary)
+        Text(line.russian)
+        Row{
+            TextButton({vm.speak(line.hanzi)},enabled=!vm.recording&&!vm.playing&&!check.busy){Text("Эталон TTS")}
+            TextButton({vm.speak(line.hanzi,.7f)},enabled=!vm.recording&&!vm.playing&&!check.busy){Text("0.7×")}
+            TextButton(onClose){Text("Закрыть")}
+        }
+        Button(onClick={
+            if(context.checkSelfPermission(Manifest.permission.RECORD_AUDIO)==PackageManager.PERMISSION_GRANTED){vm.erase();check.start(line.hanzi)}
+            else speechPermission.launch(Manifest.permission.RECORD_AUDIO)
+        },enabled=!check.busy&&!vm.recording&&!vm.playing,modifier=Modifier.fillMaxWidth()){
+            Text(if(check.busy)"Слушаю текст…" else "Прочитать и проверить текст")
+        }
+        if(check.busy)WideButton("Отменить распознавание"){check.cancel()}
+        if(check.heard.isNotBlank()){
+            Text("Распознано:",style=MaterialTheme.typography.labelMedium)
+            Text(check.heard,fontSize=22.sp)
+        }
+        if(check.feedback.isNotBlank())Text(check.feedback)
+        Text("Совпадение проверяет только распознанные иероглифы. Оно не измеряет правильность отдельных звуков или тонов.",style=MaterialTheme.typography.bodySmall)
+
+        HorizontalDivider()
+        Text("Контур высоты голоса",style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.SemiBold)
+        Text("Прочитайте выбранную строку примерно за $recordSeconds секунд. Запись остаётся в памяти приложения и никуда не отправляется.")
+        Button(onClick={
+            if(context.checkSelfPermission(Manifest.permission.RECORD_AUDIO)==PackageManager.PERMISSION_GRANTED){check.cancel();vm.record(recordSeconds)}
+            else tonePermission.launch(Manifest.permission.RECORD_AUDIO)
+        },enabled=!vm.recording&&!vm.playing&&!check.busy,modifier=Modifier.fillMaxWidth()){
+            Text(if(vm.recording)"Записываю…" else "Записать контур до $recordSeconds секунд")
+        }
+        if(vm.recording){
+            LinearProgressIndicator(Modifier.fillMaxWidth())
+            WideButton("Отменить запись"){vm.stopAudio()}
+        }
+        if(vm.samples!=null&&!vm.recording){WideButton(if(vm.playing)"Воспроизведение…" else "Прослушать свою запись"){vm.play()}}
+        ToneChart(reference,actual)
+        Text("Янтарный — схематический рисунок написанных тонов; бирюзовый — измеренная F0. Слоги по времени не выравниваются, поэтому график не является оценкой произношения.",style=MaterialTheme.typography.bodySmall)
+        vm.pitch?.let{result->
+            Text(if(actual.isEmpty())"Недостаточно устойчивого голоса для контура. Повторите в тихом помещении." else "F0 показана по всей записи с видимыми паузами между озвученными участками.")
+            Text("Озвученные кадры: ${(result.voicedFraction*100).toInt()}% (качество сигнала, не точность).",style=MaterialTheme.typography.bodySmall)
+        }?:Text("После записи появится измеренный контур.")
+    }
 }
 
 @Composable private fun WordDetails(vm:HanziViewModel,w:Word,onClose:()->Unit){
@@ -452,15 +618,16 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
 }
 @Composable private fun ToneChart(reference:List<ContourPoint>,actual:List<ContourPoint>){
     val grid=MaterialTheme.colorScheme.outlineVariant;val primary=MaterialTheme.colorScheme.primary;val ref=MaterialTheme.colorScheme.tertiary
+    val actualStep=remember(actual){actual.zipWithNext().map{(a,b)->b.time-a.time}.filter{it>1e-6}.sorted().let{it.getOrNull(it.size/2)}}
     Canvas(Modifier.fillMaxWidth().height(170.dp)){
         val range=maxOf(6.0,(actual+reference).maxOfOrNull{abs(it.relativeSemitones)}?:6.0)
         val pad=10.dp.toPx()
         fun point(p:ContourPoint)=Offset(pad+(p.time*(size.width-2*pad)).toFloat(),pad+((size.height-2*pad)*(.5-p.relativeSemitones/(2*range))).toFloat())
         for(i in 0..4){val y=pad+i*(size.height-2*pad)/4;drawLine(grid,Offset(pad,y),Offset(size.width-pad,y),1.dp.toPx())}
         for(i in 0..4){val x=pad+i*(size.width-2*pad)/4;drawLine(grid,Offset(x,pad),Offset(x,size.height-pad),1.dp.toPx())}
-        reference.zipWithNext().forEach{(u,v)->drawLine(ref,point(u),point(v),4.dp.toPx())}
+        reference.zipWithNext().forEach{(u,v)->if(v.time-u.time>1e-9)drawLine(ref,point(u),point(v),4.dp.toPx())}
         reference.forEach{drawCircle(ref,3.dp.toPx(),point(it))}
-        actual.zipWithNext().forEach{(u,v)->if(v.time-u.time<.12)drawLine(primary,point(u),point(v),2.dp.toPx())}
+        actual.zipWithNext().forEach{(u,v)->if(actualStep!=null&&v.time-u.time<=actualStep*3.0)drawLine(primary,point(u),point(v),2.dp.toPx())}
         actual.forEach{drawCircle(primary,1.5.dp.toPx(),point(it))}
     }
 }
@@ -471,5 +638,29 @@ private val dark=darkColorScheme(primary=Color(0xFF79D8C8),secondary=Color(0xFFB
     Text("Официальные форматы: chinesetest.cn · HSK 3.0, запуск объявлен на 13.12.2026. Локальный центр необходимо уточнить.")
 }
 @Composable private fun Profile(vm:HanziViewModel)=Page("Профиль и настройки"){
-    var date by rememberSaveable{mutableStateOf(vm.date)};Panel("Цель") {OutlinedTextField(date,{date=it},label={Text("Дата ГГГГ-ММ-ДД")},singleLine=true,modifier=Modifier.fillMaxWidth());WideButton("Сохранить дату"){vm.saveDate(date)};Text("Время в день: ${vm.minutes} мин");Slider(value=vm.minutes.toFloat(),onValueChange={vm.updateMinutes(it.toInt())},valueRange=15f..180f,steps=10);Text("30-дневная оценка нагрузки: ${sprint(vm.curriculum?.entries?.count{inScope(it.band,vm.level,false)}?:0,30).first()} новых слов в день. Не адаптивный план.")};Panel("Внешний вид"){listOf("system" to "Системная","light" to "Светлая","dark" to "Тёмная").forEach{(id,label)->Row{RadioButton(vm.theme==id,{vm.updateTheme(id)});Text(label,Modifier.padding(top=12.dp))}};Text("Интерфейс: русский. Английская и китайская локализации запланированы.")};Panel("Статистика") {Text("Карточек: ${vm.reviews.size}");Text("Текущие успешные серии (сумма): ${vm.reviews.values.sumOf{it.repetitions}}");Text("Ошибок повторения: ${vm.reviews.values.sumOf{it.lapses}}");Text("Последний тест: ${vm.lastQuiz}");Text("Импортированных файлов: ${vm.books.size}")};Panel("Конфиденциальность") {Text("Нет сетевого разрешения. Голос хранится в памяти до удаления или закрытия приложения. Книги сохраняются в приватной директории Android.");WideButton("Удалить голосовую запись"){vm.erase()};Text("HanziFlow 0.3.0-alpha · учебные режимы.");Text("Источники: ChineseTest / profesorm/hsk30 (CC BY 4.0); mozillazg/pinyin-data (MIT). Английские значения: CC-CEDICT (CC BY-SA 4.0), через chinese-typing-practice.com/data. Полные атрибуции: hsk2025/NOTICE.txt, PINYIN_LICENSE.txt и CEDICT_NOTICE.txt.")}
+    var date by rememberSaveable{mutableStateOf(vm.date)}
+    Panel("Цель") {
+        OutlinedTextField(date,{date=it},label={Text("Дата ГГГГ-ММ-ДД")},singleLine=true,modifier=Modifier.fillMaxWidth())
+        WideButton("Сохранить дату"){vm.saveDate(date)}
+        Text("Время в день: ${vm.minutes} мин")
+        Slider(value=vm.minutes.toFloat(),onValueChange={vm.updateMinutes(it.toInt())},valueRange=15f..180f,steps=10)
+        Text("30-дневная оценка нагрузки: ${sprint(vm.curriculum?.entries?.count{inScope(it.band,vm.level,false)}?:0,30).first()} новых слов в день. Не адаптивный план.")
+    }
+    Panel("Внешний вид"){
+        listOf("system" to "Системная","light" to "Светлая","dark" to "Тёмная").forEach{(id,label)->Row{RadioButton(vm.theme==id,{vm.updateTheme(id)});Text(label,Modifier.padding(top=12.dp))}}
+        Text("Интерфейс: русский. Английская и китайская локализации запланированы.")
+    }
+    Panel("Статистика") {
+        Text("Карточек: ${vm.reviews.size}")
+        Text("Текущие успешные серии (сумма): ${vm.reviews.values.sumOf{it.repetitions}}")
+        Text("Ошибок повторения: ${vm.reviews.values.sumOf{it.lapses}}")
+        Text("Последний тест: ${vm.lastQuiz}")
+        Text("Импортированных файлов: ${vm.books.size}")
+    }
+    Panel("Конфиденциальность") {
+        Text("Нет сетевого разрешения. Голос хранится в памяти до удаления или закрытия приложения. Книги и личные диалоги сохраняются в приватной директории Android.")
+        WideButton("Удалить голосовую запись"){vm.erase()}
+        Text("HanziFlow 0.4.0-alpha · учебные режимы.")
+        Text("Источники: ChineseTest / profesorm/hsk30 (CC BY 4.0); mozillazg/pinyin-data (MIT). Английские значения: CC-CEDICT (CC BY-SA 4.0), через chinese-typing-practice.com/data. Полные атрибуции: hsk2025/NOTICE.txt, PINYIN_LICENSE.txt и CEDICT_NOTICE.txt.")
+    }
 }

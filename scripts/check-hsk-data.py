@@ -9,16 +9,21 @@ def load(name):
 def counts(rows, key):
     c = Counter(int(r[key]) for r in rows if r[key])
     return [c[i] for i in range(1, 8)]
+def cumulative_counts(rows, key):
+    return [sum(bool(r[key]) and int(r[key]) <= level for r in rows) for level in range(1, 8)]
 v, h, g = (load(x) for x in ("vocabulary.tsv", "hanzi.tsv", "grammar.tsv"))
 assert counts(v, "level") == [300,200,500,1000,1600,1800,5600]
+assert cumulative_counts(v, "level") == [300,500,1000,2000,3600,5400,11000]
 assert [int(r["serial"]) for r in v] == list(range(1,11001))
 assert all(r["word"] and r["pinyin"] for r in v)
 assert counts(h, "recognition_level") == [246,125,284,441,431,413,1148]
+assert cumulative_counts(h, "recognition_level") == [246,371,655,1096,1527,1940,3088]
 assert len({r["hanzi"] for r in h}) == 3088
 assert all(r["readings"] for r in h)
 assert counts(h, "writing_level") == [0,100,150,150,150,150,500]
 assert all(not r["writing_level"] or int(r["writing_level"]) >= int(r["recognition_level"]) for r in h)
 assert counts(g, "level") == [70,78,96,95,70,50,134]
+assert cumulative_counts(g, "level") == [70,148,244,339,409,459,593]
 assert [int(r["serial"]) for r in g] == list(range(1,594))
 assert all(any(r[k] for k in ("content", "detail", "category", "type")) for r in g)
 print("PASS: 11000 vocabulary records, 3088 recognition characters, 1200 writing characters, 593 grammar headings")
@@ -32,4 +37,7 @@ print("PASS: 10734 independently licensed English gloss records")
 ru = load("ru-hsk1.tsv")
 assert len(ru) == 300
 assert all(r["serial"] == v[i]["serial"] and r["label"] == v[i]["label"] and r["russian"] for i,r in enumerate(ru))
+study = next(r for r in ru if r["label"] == "学习")
+assert "учиться" in study["russian"].casefold()
 print("PASS: 300 original Russian HSK1 glosses aligned by ID and label")
+print("PASS: cumulative QA counts and Russian dictionary lookup fixture")

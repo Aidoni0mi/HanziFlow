@@ -17,6 +17,9 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.ensureActive
 import kotlin.coroutines.coroutineContext
 import java.io.File
+import java.io.ByteArrayOutputStream
+import java.nio.ByteBuffer
+import java.nio.charset.CodingErrorAction
 import java.util.Locale
 import java.util.UUID
 
@@ -32,7 +35,7 @@ object VoiceRecorder {
     const val SR=16000
     @android.annotation.SuppressLint("MissingPermission")
     suspend fun record(seconds:Int=3):ShortArray=withContext(Dispatchers.IO) {
-        require(seconds in 1..5); val min=AudioRecord.getMinBufferSize(SR,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT); require(min>0){"Микрофон недоступен"}
+        require(seconds in 1..15); val min=AudioRecord.getMinBufferSize(SR,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT); require(min>0){"Микрофон недоступен"}
         val rec=AudioRecord(MediaRecorder.AudioSource.MIC,SR,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT,maxOf(min,4096)); val samples=ShortArray(SR*seconds); var offset=0
         try { check(rec.state==AudioRecord.STATE_INITIALIZED); rec.startRecording(); while(offset<samples.size) { coroutineContext.ensureActive(); val n=rec.read(samples,offset,minOf(1024,samples.size-offset)); check(n>0){"Ошибка записи: $n"}; offset+=n }; samples }
         finally { if(rec.recordingState==AudioRecord.RECORDSTATE_RECORDING) rec.stop(); rec.release() }
@@ -57,4 +60,26 @@ class LibraryFiles(private val context:Context) {
     suspend fun pdf(b:Book,page:Int):Pair<Bitmap,Int> =withContext(Dispatchers.IO){ ParcelFileDescriptor.open(file(b),ParcelFileDescriptor.MODE_READ_ONLY).use { fd-> PdfRenderer(fd).use { renderer-> renderer.openPage(page.coerceIn(0,renderer.pageCount-1)).use { p-> val width=minOf(1200,p.width*2); val height=(width.toDouble()*p.height/p.width).toInt().coerceIn(1,2400); val bitmap=Bitmap.createBitmap(width,height,Bitmap.Config.ARGB_8888); bitmap.eraseColor(android.graphics.Color.WHITE); p.render(bitmap,null,null,PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY); bitmap to renderer.pageCount } } } }
     suspend fun text(b:Book)=withContext(Dispatchers.IO){file(b).readText(Charsets.UTF_8)}
     fun delete(b:Book)=file(b).delete()
+}
+
+suspend fun readLocalDialogueText(context:Context,uri:Uri,maxBytes:Int=64*1024):String=withContext(Dispatchers.IO){
+    require(maxBytes>0){"Неверное ограничение размера"}
+    val bytes=ByteArrayOutputStream(minOf(maxBytes,8192))
+    context.contentResolver.openInputStream(uri)?.use{input->
+        val buffer=ByteArray(8192);var total=0
+        while(true){
+            coroutineContext.ensureActive()
+            val count=input.read(buffer)
+            if(count<0)break
+            total+=count
+            require(total<=maxBytes){"TXT диалога превышает 64 КБ"}
+            bytes.write(buffer,0,count)
+        }
+    }?:error("Файл недоступен")
+    Charsets.UTF_8.newDecoder()
+        .onMalformedInput(CodingErrorAction.REPORT)
+        .onUnmappableCharacter(CodingErrorAction.REPORT)
+        .decode(ByteBuffer.wrap(bytes.toByteArray()))
+        .toString()
+        .removePrefix("\uFEFF")
 }

@@ -1,4 +1,4 @@
-# HSK 2025 content coverage — 0.3.0-alpha
+# HSK 2025 content coverage — 0.4.0-alpha
 
 Lists follow the November 2025 examination syllabus, not GF0025-2021. Cross-checked two independent machine-readable compilations; not manually checked line by line against official PDF. Seven bands, with HSK 7–9 combined. All counts cumulative except new words.
 
@@ -18,5 +18,6 @@ Lists follow the November 2025 examination syllabus, not GF0025-2021. Cross-chec
 - Russian glosses are incomplete: All 300 HSK1 entries now have original Russian glosses, plus previously matched starter articles at other levels; these are not editorially validated. No machine-translated or invented mass translations. Traditional variants and examples are available only for matched articles. 10,734 of 11,000 entries have English CC-CEDICT meanings matched by headword and tone-marked pinyin (not verified sense-level matches). 266 lack matched English glosses. Grammar category labels have Russian translations; detailed explanations are separate.
 - 50 existing original seed articles remain separately accessible for review history; five reading passages, 16 original character cards, ten grammar explanations, five quiz items and 16 tone examples remain.
 - No official textbooks, workbook files, official past papers, native audio or full mocks are bundled; local PDF/TXT import stays separate.
+- The original life course contains 16 high-frequency situations. Each has one four-line dialogue and one two-line story: 32 texts and 96 lines total, all with Hanzi, tone-marked pinyin and Russian translation. This is a practical starter set, not a claim to cover every possible real-life event.
 - Content files and license notices in app/src/main/assets/hsk2025. Counts verified at import and by scripts/check-hsk-data.py.
-- 0.2.0 Android build and Lint passed; 0.3.0 pending. Four original dialogue lessons added; private textbook dialogue may be pasted and stored locally.
+- HSK counts are verified by `scripts/check-hsk-data.py`; the situation-course structure is verified separately by `scripts/check-life-course.py`. Published 0.3.0 Android build and Lint passed in run 45698885382. The 0.4.0 implementation passes both validators, 27 JUnit tests, APK assembly and Lint locally and in runs 46061710393 / 46061715516; device QA is still pending. Private textbook dialogue may be pasted or loaded from a small UTF-8 TXT, stored privately and deleted locally.
